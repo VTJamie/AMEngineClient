@@ -1,16 +1,16 @@
 module.exports = function (grunt) {
 
-    var webdestination = process.env.CATALINA_BACKBONEJQM_HOME;
+    var appname = "amengine", webdestination = process.env.CATALINA_HOME;
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            webapp: ['webapp/js/backbonejqm/**/*.js']
+            webapp: ['webapp/js/'+appname+'/**/*.js']
         },
         jslint: {// configure the task
 	    all: {
-            src: ['webapp/js/backbonejqm/**/*.js'],
+            src: ['webapp/js/'+appname+'/**/*.js'],
             exclude: ['**/ignore-*.js', '**/*-min.js'],
             directives: {// example directives
                 browser: true,
@@ -42,16 +42,16 @@ module.exports = function (grunt) {
         },
         replace: {
             loggingoff: {
-                src: ['webapp/js/backbonejqm/app.js'], // source files array (supports minimatch)
-                dest: 'webapp/js/backbonejqm/', // destination directory or file
+                src: ['webapp/js/'+appname+'/app.js'], // source files array (supports minimatch)
+                dest: 'webapp/js/'+appname+'/', // destination directory or file
                 replacements: [{
                     from: 'debug.setLevel(5);', // string replacement
                     to: 'debug.setLevel(0);'
                 }]
             },
             loggingon: {
-                src: ['webapp/js/backbonejqm/app.js'], // source files array (supports minimatch)
-                dest: 'webapp/js/backbonejqm/', // destination directory or file
+                src: ['webapp/js/'+appname+'/app.js'], // source files array (supports minimatch)
+                dest: 'webapp/js/'+appname+'/', // destination directory or file
                 replacements: [{
                     from: 'debug.setLevel(0);', // string replacement
                     to: 'debug.setLevel(5);'
