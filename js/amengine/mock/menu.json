@@ -1,0 +1,36 @@
+{
+    "s": true,
+    "menu": {
+        "m": [
+            {
+                "l": "Home",
+                "a": "HomeScreen",
+                "il": false,
+                "vt": [],
+                "sm": []
+            },
+            {
+                "l": "Login",
+                "a": "Authenticate",
+                "il": false,
+                "vt": [],
+                "sm": []
+            },
+            {
+                "l": "About",
+                "a": "About",
+                "il": false,
+                "vt": [],
+                "sm": []
+            },
+            {
+                "l": "Sign Up",
+                "a": "AMInterfacesSignUp",
+                "il": false,
+                "vt": [],
+                "sm": []
+            }
+        ]
+    },
+    "persist": {}
+}

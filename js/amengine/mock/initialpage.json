@@ -1,0 +1,32 @@
+{
+    "s": true,
+    "rt": "I",
+    "rb": {
+        "root": {
+            "id": "",
+            "n": "",
+            "gt": "t",
+            "nc": 1,
+            "c": [
+                {
+                    "id": "DisplayMessage",
+                    "t": "text",
+                    "l": "",
+                    "vis": true,
+                    "ctr": false,
+                    "e": false,
+                    "r": false,
+                    "v": "Welcome to AM Interfaces Inc.",
+                    "ml": 0,
+                    "ptf": false,
+                    "tbt": "tbttb"
+                }
+            ]
+        },
+        "id": "26496531-0671-4fb5-ae4f-8d10a618749a",
+        "n": "HomeScreen",
+        "d": false,
+        "dn": "Home"
+    },
+    "persist": {}
+}

@@ -1,0 +1,13 @@
+{
+    "name": "NavyMedicalMatrix",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "*",
+        "grunt-jslint": "*",
+        "grunt-contrib-copy": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-text-replace": "*",
+   "grunt-contrib-compass": "*"
+ }
+}

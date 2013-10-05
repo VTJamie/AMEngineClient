@@ -1,0 +1,5 @@
+{{#if IS_VISIBLE }}
+	<a data-role="button" data-mini="true" {{#ifCond BUTTON_TYPE "===" "BUTTON_TYPE_SUBMIT"}} data-theme="b" {{/ifCond}}>{{ LABEL }}</a>
+{{else}}
+	<a></a>
+{{/if}}

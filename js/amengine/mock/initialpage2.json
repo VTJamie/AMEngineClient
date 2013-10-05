@@ -1,0 +1,194 @@
+{
+    "s": true,
+    "rt": "I",
+    "rb": {
+        "root": {
+            "id": "",
+            "n": "Main",
+            "gt": "t",
+            "nc": 2,
+            "c": [
+                {
+                    "id": "",
+                    "n": "Fields",
+                    "gt": "t",
+                    "nc": 1,
+                    "c": [
+                        {
+                            "id": "FormName",
+                            "t": "text",
+                            "l": "Form Name",
+                            "vis": true,
+                            "ctr": false,
+                            "e": false,
+                            "r": false,
+                            "v": "Profile",
+                            "ml": 0,
+                            "ptf": false,
+                            "tbt": "tbttb"
+                        },
+                        {
+                            "id": "",
+                            "n": "Table - 1 Column",
+                            "gt": "t",
+                            "nc": 1,
+                            "c": [
+                                {
+                                    "id": "First Name",
+                                    "t": "text",
+                                    "l": "First Name",
+                                    "vis": true,
+                                    "ctr": true,
+                                    "e": true,
+                                    "r": true,
+                                    "v": "Jamie",
+                                    "ml": 0,
+                                    "ptf": false,
+                                    "tbt": "tbttb"
+                                },
+                                {
+                                    "id": "Middle Initial",
+                                    "t": "text",
+                                    "l": "Middle Initial",
+                                    "vis": true,
+                                    "ctr": true,
+                                    "e": true,
+                                    "r": false,
+                                    "v": "",
+                                    "ml": 0,
+                                    "ptf": false,
+                                    "tbt": "tbttb"
+                                },
+                                {
+                                    "id": "Last Name",
+                                    "t": "text",
+                                    "l": "Last Name",
+                                    "vis": true,
+                                    "ctr": true,
+                                    "e": true,
+                                    "r": false,
+                                    "v": "Abbott",
+                                    "ml": 0,
+                                    "ptf": false,
+                                    "tbt": "tbttb"
+                                },
+                                {
+                                    "id": "",
+                                    "n": "Table - 2 Columns",
+                                    "gt": "t",
+                                    "nc": 2,
+                                    "c": [
+                                        {
+                                            "id": "Username",
+                                            "t": "text",
+                                            "l": "Username",
+                                            "vis": true,
+                                            "ctr": true,
+                                            "e": true,
+                                            "r": false,
+                                            "v": "Jamie",
+                                            "ml": 0,
+                                            "ptf": false,
+                                            "tbt": "tbttb"
+                                        },
+                                        {
+                                            "id": "Status",
+                                            "t": "select",
+                                            "l": "Status",
+                                            "vis": true,
+                                            "ctr": true,
+                                            "e": true,
+                                            "r": false,
+                                            "si": [
+                                                {
+                                                    "v": "Active",
+                                                    "l": "Active",
+                                                    "s": true
+                                                },
+                                                {
+                                                    "v": "Pending",
+                                                    "l": "Pending",
+                                                    "s": false
+                                                },
+                                                {
+                                                    "v": "Declined",
+                                                    "l": "Declined",
+                                                    "s": false
+                                                }
+                                            ],
+                                            "st": "d"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "Owner",
+                                    "t": "select",
+                                    "l": "Owner",
+                                    "vis": true,
+                                    "ctr": true,
+                                    "e": true,
+                                    "r": false,
+                                    "si": [
+                                        {
+                                            "v": "655744bd-6142-4d45-a1df-299b4cdf0916",
+                                            "l": "sudhakar",
+                                            "s": false
+                                        },
+                                        {
+                                            "v": "230f0c69-4cbc-492f-b5f9-3fd905c69262",
+                                            "l": "Jamie",
+                                            "s": true
+                                        },
+                                        {
+                                            "v": "55c308b9-3d51-4c6b-9599-aefe81ee6641",
+                                            "l": "sysadmin",
+                                            "s": false
+                                        }
+                                    ],
+                                    "st": "d"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "",
+                            "n": "Button Group",
+                            "gt": "b",
+                            "c": [
+                                {
+                                    "id": "Submit",
+                                    "t": "button",
+                                    "l": "Save",
+                                    "vis": true,
+                                    "bt": "s",
+                                    "barc": false
+                                },
+                                {
+                                    "id": "Cancel",
+                                    "t": "button",
+                                    "l": "Cancel",
+                                    "vis": true,
+                                    "bt": "c",
+                                    "barc": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "",
+                    "n": "Forms",
+                    "gt": "t",
+                    "nc": 1,
+                    "c": []
+                }
+            ]
+        },
+        "id": "5da38a43-4730-4991-9f8e-0f289bed7525",
+        "n": "FormAddEdit",
+        "d": false,
+        "dn": "Jamie"
+    },
+    "persist": {
+        "usid": "89154e33-a289-4146-bd7a-ce0e74b48894"
+    }
+}

@@ -1,0 +1,15 @@
+{{#ifCond MENU_ITEM_ACTION "!==" ""}}
+	<a data-mini="true"
+		href="#{{ MENU_ITEM_ACTION }}{{#each MENU_ITEM_TRANSFER_VALUES}}/{{ MENU_ITEM_TRANSFER_VALUES_FIELD }}/{{ MENU_ITEM_TRANSFER_VALUES_VALUE }}{{/each}}" 
+	>
+		{{ MENU_ITEM_NAME }}
+	</a>
+{{else}}
+	{{#if MENU_ITEM_IS_LOGOUT }}
+		<a data-mini="true" > {{ MENU_ITEM_NAME }} </a>
+	{{else}}
+		<div data-mini="true" data-role="collapsible" class="amengine-nopadding">
+			<h3 data-mini="true" >{{ MENU_ITEM_NAME }}</h3>
+		</div>
+	{{/if}}
+{{/ifCond}}

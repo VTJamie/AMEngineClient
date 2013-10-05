@@ -1,0 +1,60 @@
+{
+    "s": true,
+    "rt": "I",
+    "rb": {
+        "root": {
+            "id": "",
+            "n": "Main",
+            "gt": "t",
+            "nc": 1,
+            "c": [
+                {
+                    "id": "BOGroups",
+                    "t": "grid",
+                    "l": "Business Objects",
+                    "vis": true,
+                    "dol": {
+                        "n": "BusinessObjectDefinitionEdit",
+                        "f": "BusinessObjectDefinitionID"
+                    },
+                    "detail": {
+                        "cl": [
+                            {
+                                "n": "GroupId",
+                                "v": false,
+                                "ct": "d"
+                            },
+                            {
+                                "n": "BO Name",
+                                "v": true,
+                                "ct": "d"
+                            }
+                        ],
+                        "p": 1,
+                        "ps": 25,
+                        "t": 1,
+                        "np": 1,
+                        "sr": 1,
+                        "d": [
+                            {
+                                "c": [
+                                    "48d6a940-f80a-47a3-b1d6-3642ca3fc285",
+                                    "User"
+                                ],
+                                "id": "48d6a940-f80a-47a3-b1d6-3642ca3fc285"
+                            }
+                        ],
+                        "del": true
+                    }
+                }
+            ]
+        },
+        "id": "c43ad904-8bf4-407d-b70d-171231524980",
+        "n": "ListBusinessObjects",
+        "d": false,
+        "dn": "Business Object Definitions"
+    },
+    "persist": {
+        "usid": "6b39ff42-1e4c-48b5-8303-f5888c03dc9d"
+    }
+}

@@ -1,0 +1,18 @@
+{{#if IS_VISIBLE }}
+	<div>
+		<label for="control-{{ ID }}">{{ LABEL }}</label>
+	</div>
+	<div>		
+		{{#if EDITABLE }}
+			{{#if PROTECTED_TEXT_FIELD }}
+				<input data-mini="true" id="control-{{ ID }}" type="password" />
+			{{else}}
+				<input data-mini="true" id="control-{{ ID }}" data-type="text" value="{{ CURRENT_VALUE }}" />
+			{{/if}}
+		{{else}}
+			<span>
+				{{ CURRENT_VALUE }}
+			</span>
+		{{/if}}	
+	</div>
+{{/if}}
