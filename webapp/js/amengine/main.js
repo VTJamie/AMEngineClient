@@ -5,8 +5,8 @@ require.config({
 	paths: {
 
 		// Common JS Libs
-        'jquery': '../libs/jquery/jquery.1.9.1',
-        'jquerymobile': '../libs/jquery/jquery.mobile-1.3.1',
+        'jquery': '../libs/jquery/jquery-1.10.2',
+        'jquerymobile': '../libs/jquery/jquery.mobile-1.3.2',
         'jquerymobile-alphascroll': '../customizedlibs/jquery/jquery.mobile.alphascroll',
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
         'underscore': '../libs/backbone/underscore-min',
@@ -16,7 +16,7 @@ require.config({
         'backbone-jquerymobilepage': '../customizedlibs/backbone/jqmPage',
         'backbone-jquerymobileheader': '../customizedlibs/backbone/jqmHeader',
         'backbone-jquerymobilefooter': '../customizedlibs/backbone/jqmFooter',
-        'marionette': '../libs/backbone/backbone.marionette.min',
+        'marionette': '../libs/backbone/backbone.marionette',
         'Handlebars': '../libs/hbs/Handlebars',
         'handlebars-config': '../customizedlibs/hbs/handlebars-config',
         'hbs': '../libs/require/hbs',
@@ -207,21 +207,20 @@ require.config({
 	}
 });
 
-require(['css!jquerymobile-css', 'css!jquerymobile-fluid960-css', 'css!amengine-css']);
+require(['css!jquerymobile-css']);
+
+//require(['css!jquerymobile-css', 'css!jquerymobile-fluid960-css', 'css!amengine-css']);
 
 //router and routecontroller must be specified in a sub config file
 require(['jquery', 'jquerymobile-config', 'jquerymobile', 'backbone', 'app', 'constantsrequestmodel'], function ($, jqConfig, jqM, Backbone, App, ConstantsRequestModel) {
 	"use strict";
 	ConstantsRequestModel.request(function () {
-		require(['router', 'routecontroller', 'pageview', 'menuview'], function (Router, Controller, PageView, MenuView) {
+		require(['router', 'routecontroller'], function (Router, Controller) {
 			debug.log("Creating Router");
 			new Router({
 				controller: new Controller()
 			});
-			var newpage = new PageView ();
-			App.mainPage = newpage;
-			App.mainContent.show(newpage);
-			newpage.getMenu().empty().append(MenuView.render());
+
 			App.start();
 		});
 	});

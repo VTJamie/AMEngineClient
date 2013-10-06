@@ -3,9 +3,9 @@ define(['jquery', 'backbone', 'backbone-jquerymobilepage', 'header', 'footer', '
     "use strict";
     var PageContainer = jqmPage.extend({
         initialize: function (options) {
-            this.panelComponent = new PanelView({panelid: 'panel-id'});
-            this.headerComponent = new Header();
-            this.footerComponent = new Footer();
+          //  this.panelComponent = new PanelView({panelid: 'panel-id'});
+          //  this.headerComponent = new Header();
+          //  this.footerComponent = new Footer();
             jqmPage.prototype.initialize.apply(this, arguments);
         },
         render: function () {
@@ -21,6 +21,7 @@ define(['jquery', 'backbone', 'backbone-jquerymobilepage', 'header', 'footer', '
             }
             return this.el;
         },
+        panelComponent: undefined,
         headerComponent: undefined,
         footerComponent: undefined,
         events: {
@@ -56,9 +57,9 @@ define(['jquery', 'backbone', 'backbone-jquerymobilepage', 'header', 'footer', '
             }
         },
         //      template: Template,
-        attributes: $.extend(jqmPage.prototype.attributes, {
+        attributes: $.extend({
             'data-theme': 'a'
-        })
+        }, jqmPage.prototype.attributes)
     });
     return PageContainer;
 });

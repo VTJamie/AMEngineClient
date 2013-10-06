@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
 
-    var appname = "amengine", webdestination = process.env.CATALINA_HOME;
+    var appname = "amengine", webdestination = process.env.CATALINA_HOME + "/webapps/" + appname;
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),

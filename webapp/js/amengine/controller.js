@@ -1,22 +1,22 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpagerequestmodel', 'initialpagerequestmodel', 'factory'], function ($, jqMobile, Backbone, Marionette, App, LandingPageRequestModel, InitialPageRequestModel, Factory) {"use strict";
+define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpagerequestmodel', 'initialpagerequestmodel', 'factory', 'pageview'], function ($, jqMobile, Backbone, Marionette, App, LandingPageRequestModel, InitialPageRequestModel, Factory, PageView) {"use strict";
 	var constants = {
 		RESPONSE_BODY: "RESPONSE_BODY",
 		ROOT_OBJECT: "ROOT_OBJECT",
 		SESSION_VALID: "SESSION_VALID"
 	}, Controller = Backbone.Marionette.Controller.extend({
 		openPage_LandingPage: function () {
-			$.mobile.loading('show', {
-				text: 'Loading next view...',
-				textVisible: true,
-				theme: 'a',
-				html: ""
-			});
+//			$.mobile.loading('show', {
+//				text: 'Loading next view...',
+//				textVisible: true,
+//				theme: 'a',
+//				html: ""
+//			});
 			LandingPageRequestModel.request(function (model) {
-				App.mainPage.loadContentView(model);
+			    App.loadPage(new PageView({model: model}));
 				App.vent.trigger('menu:reload');
-				$.mobile.loading('hide');
+			//	$.mobile.loading('hide');
 			});
 		},
 		openPage_OpenPage: function (pagename, pageparams) {
@@ -28,23 +28,22 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
 				splitparamdata.fields[splitparamstrings[idx]] = splitparamstrings[idx + 1];
 			}
 
-			$.mobile.loading('show', {
-				text: 'Loading next view...',
-				textVisible: true,
-				theme: 'a',
-				html: ""
-			});
+//			$.mobile.loading('show', {
+//				text: 'Loading next view...',
+//				textVisible: true,
+//				theme: 'a',
+//				html: ""
+//			});
 
 			InitialPageRequestModel.request(splitparamdata, function (model) {
 				if (model.get(constants.SESSION_VALID)) {
-					App.mainPage.loadContentView(model);
-					$('body').trigger('create');
+				    App.loadPage(new PageView({model: model}));
 				}
 				else {
 					App.vent.trigger('menu:reload');
 					debug.log("Failed to Load: " + pagename);
 				}
-				$.mobile.loading('hide');
+				//$.mobile.loading('hide');
 			});
 		}
 	});

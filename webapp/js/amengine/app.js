@@ -13,6 +13,7 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette'], function (jqM, 
 
             loadPage: function (page) {
                 if ($.mobile.pageContainer !== undefined) {
+
                     $.mobile.pageContainer.append(page.render());
                     if (typeof page.onShow === "function") {
                         page.onShow();
@@ -22,6 +23,7 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette'], function (jqM, 
                         page.afterjqMInit();
                     }
                 } else {
+
                     this.bodyRegion.show(page);
                     TheApplication.readyForJqM();
                     if (typeof page.afterjqMInit === "function") {

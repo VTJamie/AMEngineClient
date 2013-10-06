@@ -26,11 +26,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'menurequestmodel', 'menuitemview'
 				//$thisul.listview();
 				that.$el.trigger('create');
 			});
+
 			return this.el;
 		},
 		menuReload: function () {
 			this.render();
 		}
 	});
-	return new MenuView ();
+	return MenuView;
 });
