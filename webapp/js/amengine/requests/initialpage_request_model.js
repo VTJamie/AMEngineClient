@@ -21,6 +21,7 @@ define(['backbone', 'constantsrequestmodel', 'pageresponsebodymodel', 'baseobjec
 		        for(var p in data.fields){
 		        	dataobject[CM.get(C.FIELD_PREFIX) + p] = data.fields[p];
 		        }
+		        debug.log(dataobject);
 		        this.sendRequestWithPersist(dataobject, success);
 		    }
         });                

@@ -15,7 +15,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
 //			});
 			LandingPageRequestModel.request(function (model) {
 			    App.loadPage(new PageView({model: model}));
-				App.vent.trigger('menu:reload');
+				//App.vent.trigger('menu:reload');
 			//	$.mobile.loading('hide');
 			});
 		},
@@ -24,9 +24,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
 				OBJECT_NAME: pagename,
 				fields: {}
 			}, splitparamstrings = pageparams ? pageparams.split("/") : [];
+			debug.log(splitparamstrings);
 			for (var idx = 1; idx < splitparamstrings.length - 1; idx += 2) {
 				splitparamdata.fields[splitparamstrings[idx]] = splitparamstrings[idx + 1];
 			}
+
+			debug.log(splitparamdata);
 
 //			$.mobile.loading('show', {
 //				text: 'Loading next view...',

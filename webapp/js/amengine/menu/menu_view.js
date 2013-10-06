@@ -30,7 +30,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'menurequestmodel', 'menuitemview'
 			return this.el;
 		},
 		menuReload: function () {
-			this.render();
+		//	this.render();
 		}
 	});
 	return MenuView;
