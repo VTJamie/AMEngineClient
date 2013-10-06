@@ -16,14 +16,15 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
 		    PageContainer.prototype.render.apply(this, arguments);
 			var that = this,
 			$content =  this.getContent(),
-			$menu = this.getMenu();
+			$menu = this.getMenu(),
+			$header = this.getHeader();
 
 			$menu.append(new MenuView().render());
 
 			ControlViewCollection.getCurrentInstance().reset();
 
 			if(that.responseobject.get(constants.RESPONSE_BODY).get(constants.MENU_ARRAY) !== undefined) {
-                $content.append(new PageMenuView ({
+                $header.append(new PageMenuView ({
                     model: that.responseobject.get(constants.RESPONSE_BODY).get(constants.MENU_ARRAY)
                 }).render());
             }

@@ -26,7 +26,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'pagemenuitemview', 'hbs!pagemenut
 		attributes: {
 			'data-role': 'navbar',
 			'data-theme': 'a',			
-			'class': 'ui-bar'
+			'class': 'ui-bar amengine-nopadding'
 		}
 	});
 	return PageMenuView;
