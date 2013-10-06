@@ -12,7 +12,6 @@ define(['backbone', 'constantsrequestmodel', 'pageresponsebodymodel', 'baseobjec
             FIELD_PREFIX: "FIELD_PREFIX"
         }, 
         InitialPageRequestModel = BaseObjectRequestModel.extend({
-         //   url: 'js/amengine/mock/initialpage2.json',
             C: $.extend(C, BaseObjectRequestModel.prototype.C),
             request: function (data, success) {       
 		        var dataobject = {};
@@ -21,7 +20,6 @@ define(['backbone', 'constantsrequestmodel', 'pageresponsebodymodel', 'baseobjec
 		        for(var p in data.fields){
 		        	dataobject[CM.get(C.FIELD_PREFIX) + p] = data.fields[p];
 		        }
-		        debug.log(dataobject);
 		        this.sendRequestWithPersist(dataobject, success);
 		    }
         });                

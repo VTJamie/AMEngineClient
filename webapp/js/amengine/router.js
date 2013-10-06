@@ -7,7 +7,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette'], function ($, jqMobi
 		
 		initialize : function (options) {			
 			// Matches /117-a/b/c/open, passing "117-a/b/c" to this.open			
-			this.route(/^([a-zA-Z0-9]+)((?:\/[a-zA-Z0-9\-]+\/[a-zA-Z0-9\-]+)*)$/, "openPage_OpenPage", options.controller.openPage_OpenPage);
+			this.route(/^([%a-zA-Z0-9]+)((?:\/[%a-zA-Z0-9\-]+\/[%a-zA-Z0-9\-]+)*)$/, "openPage_OpenPage", options.controller.openPage_OpenPage);
 		},
 		appRoutes : {
 			'' : 'openPage_LandingPage'

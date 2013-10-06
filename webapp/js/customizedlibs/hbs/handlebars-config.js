@@ -65,5 +65,9 @@ define([
                 return options.inverse(this);
             }
         });
+
+        Handlebars.registerHelper('urlencode', function (value, options) {
+           return encodeURI(value);
+        });
         return Handlebars;
     });

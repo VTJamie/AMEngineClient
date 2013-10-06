@@ -65,7 +65,6 @@ require.config({
 		'factory': './utilities/controlorgroup_factory',
 		'urlutility': './utilities/url_utility',
 		'generalutility': './utilities/general_utility',
-		'Handlebar-helper': './libconfig/handlebar-helper',
 
 		//General Models
 		'basemodel': './models/base_model',
@@ -137,6 +136,11 @@ require.config({
 		'complexitemlistview': './controls/complexitemlist/complexitemlist_view',
 		'complexitemlisttemplate': './controls/complexitemlist/complexitemlist_template',
 		'complexitemlistmodel': './controls/complexitemlist/complexitemlist_model',
+		'complexitemlistdetailsmodel': './controls/complexitemlist/complexitemlist_details_model',
+		'complexitemlistcolumnitemcollection': './controls/complexitemlist/complexitemlist_columnitem_collection',
+        'complexitemlistcolumnitemmodel': './controls/complexitemlist/complexitemlist_columnitem_model',
+        'complexitemlistgriddatacollection': './controls/complexitemlist/complexitemlist_griddata_collection',
+        'complexitemlistgriddatamodel': './controls/complexitemlist/complexitemlist_griddata_model',
 
 		'gridview': './controls/grid/grid_view',
 		'gridtemplate': './controls/grid/grid_template',
@@ -191,7 +195,7 @@ require.config({
 			exports: 'Handlebars'
 		},
 		'hbs': {
-			deps: ['Handlebar-helper']
+			deps: ['handlebars-config']
 		},
 		'app': {
 			deps: ['jquery', 'jquerymobile', 'logging', 'underscore', 'backbone', 'marionette']

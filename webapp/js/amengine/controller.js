@@ -24,12 +24,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
 				OBJECT_NAME: pagename,
 				fields: {}
 			}, splitparamstrings = pageparams ? pageparams.split("/") : [];
-			debug.log(splitparamstrings);
+
 			for (var idx = 1; idx < splitparamstrings.length - 1; idx += 2) {
 				splitparamdata.fields[splitparamstrings[idx]] = splitparamstrings[idx + 1];
 			}
-
-			debug.log(splitparamdata);
 
 //			$.mobile.loading('show', {
 //				text: 'Loading next view...',
@@ -40,11 +38,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
 
 			InitialPageRequestModel.request(splitparamdata, function (model) {
 				if (model.get(constants.SESSION_VALID)) {
+				    debug.log("Loading", model);
 				    App.loadPage(new PageView({model: model}));
 				}
 				else {
-					App.vent.trigger('menu:reload');
-					debug.log("Failed to Load: " + pagename);
+					Backbone.history.navigate('', {trigger: true});
+					debug.log("Failed to Load: " + pagename, splitparamdata);
 				}
 				//$.mobile.loading('hide');
 			});

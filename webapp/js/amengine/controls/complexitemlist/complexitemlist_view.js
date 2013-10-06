@@ -10,6 +10,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!complexite
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
                 this.template = Template;
+                debug.log("ComplexItemListView", this.model.toJSON());
             }
     });
     return ComplexItemListView;
