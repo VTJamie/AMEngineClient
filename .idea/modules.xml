@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AMEngineClient.iml" filepath="$PROJECT_DIR$/AMEngineClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AMEngine.iml" filepath="$PROJECT_DIR$/AMEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ServletProxy/ServletProxy.iml" filepath="$PROJECT_DIR$/../ServletProxy/ServletProxy.iml" />
     </modules>
   </component>
