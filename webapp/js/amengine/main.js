@@ -207,7 +207,7 @@ require.config({
 	}
 });
 
-require(['css!jquerymobile-css']);
+require(['css!jquerymobile-css', 'css!amengine-css']);
 
 //require(['css!jquerymobile-css', 'css!jquerymobile-fluid960-css', 'css!amengine-css']);
 
