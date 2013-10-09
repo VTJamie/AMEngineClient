@@ -10,7 +10,7 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'persistmodel', 'basemode
             SESSION_VALID: "SESSION_VALID"
         }, BaseRequestModel = BaseModel.extend({
             parse: function (data) {
-                PersistModel.set(CM.get(constants.PERSIST));
+                PersistModel.set(data[CM.get(constants.PERSIST)]);
                 delete data[CM.get(constants.PERSIST)];
                 return BaseModel.prototype.parse.apply(this, [data]);
             },

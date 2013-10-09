@@ -29,6 +29,7 @@ module.exports = function (grunt) {
                 checkstyle: 'out/checkstyle.xml' // write a checkstyle-XML
             }
         }},
+        clean:  [webdestination],
         copy: {
             main: {
                 files: [{
@@ -61,11 +62,11 @@ module.exports = function (grunt) {
         watch: {
             all: {
                 files: ['webapp/**', '!**/*.scss'],
-                tasks: ['copy']
+                tasks: ['clean', 'copy']
             },
             css: {
                 files: ['webapp/**/*.scss'],
-                tasks: ['compass', 'copy']
+                tasks: ['clean', 'compass', 'copy']
             }
         },
         compass: {
@@ -90,6 +91,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Default task(s).
     grunt.registerTask('default', ['jshint', 'jslint', 'compass', 'replace:loggingoff', 'copy', 'replace:loggingon']);

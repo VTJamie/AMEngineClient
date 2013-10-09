@@ -35,7 +35,7 @@ define(['backbone', 'constantsrequestmodel', 'tablegroupmodel',
                 attrs[constants.GROUP_TYPE] === CM.get(constants.GROUP_TYPE_BUTTON)) {
                 return new ButtonGroupModel(attrs);
             } else {
-                debug.log('Group Dropped Through');
+                debug.log('Group Dropped Through', attrs);
             }
         }
     },

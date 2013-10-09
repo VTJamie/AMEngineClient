@@ -99,6 +99,7 @@ require.config({
         'submitrequestmodel': './requests/submit_request_model',
         'basefieldrequestmodel': './requests/basefield_request_model',
         'logoutrequestmodel': './requests/logout_request_model',
+        'complexlistitemeditrequestmodel': './requests/complexlistitemedit_request_model',
 
         //Controls
         'basecontrolview': './controls/basecontrol_view',

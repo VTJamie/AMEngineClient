@@ -39,8 +39,7 @@ define(['backbone', 'constantsrequestmodel', 'textmodel', 'selectmodel', 'button
                 } else if (attrs[CM.get(constants.GROUP_TYPE)] === constants.GROUP_TYPE_BUTTON || attrs[CM.get(constants.GROUP_TYPE)] === CM.get(constants.GROUP_TYPE_BUTTON) || attrs[constants.GROUP_TYPE] === constants.GROUP_TYPE_BUTTON || attrs[constants.GROUP_TYPE] === CM.get(constants.GROUP_TYPE_BUTTON)) {
                     return new ButtonGroupModel(attrs);
                 } else {
-                    debug.log('Group Dropped Through');
-                    debug.log(attrs);
+                    debug.log('Group Dropped Through', attrs);
                 }
             } else {
                 if (attrs[CM.get(constants.CONTROL_TYPE)] === constants.CONTROL_TYPE_TEXT || attrs[CM.get(constants.CONTROL_TYPE)] === CM.get(constants.CONTROL_TYPE_TEXT) || attrs[constants.CONTROL_TYPE] === constants.CONTROL_TYPE_TEXT || attrs[constants.CONTROL_TYPE] === CM.get(constants.CONTROL_TYPE_TEXT)) {
@@ -64,8 +63,7 @@ define(['backbone', 'constantsrequestmodel', 'textmodel', 'selectmodel', 'button
                 } else if (attrs[CM.get(constants.CONTROL_TYPE)] === constants.CONTROL_TYPE_FILTER_CRITERIA || attrs[CM.get(constants.CONTROL_TYPE)] === CM.get(constants.CONTROL_TYPE_FILTER_CRITERIA) || attrs[constants.CONTROL_TYPE] === constants.CONTROL_TYPE_FILTER_CRITERIA || attrs[constants.CONTROL_TYPE] === CM.get(constants.CONTROL_TYPE_FILTER_CRITERIA)) {
                     return new FilterCriteriaControlModel(attrs);
                 } else {
-                    debug.log('Control Dropped Through');
-                    debug.log(attrs);
+                    debug.log('Control Dropped Through', attrs);
                 }
             }
         }
