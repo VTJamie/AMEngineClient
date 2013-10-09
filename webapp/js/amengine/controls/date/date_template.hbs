@@ -1,9 +1,9 @@
 {{#if IS_VISIBLE }}
-	<label  for="control-{{ ID }}">{{ LABEL }}</label>
+    <label  for="control-{{ ID }}">{{ LABEL }}</label>
 
-	{{#if EDITABLE }}
-		<input id="control-{{ ID }}" data-type="date" value="{{ CURRENT_VALUE }}" />
-	{{else}}
-		{{ CURRENT_VALUE }}		
-	{{/if}}
+    {{#if EDITABLE }}
+        <input id="control-{{ ID }}" data-type="date" value="{{ CURRENT_VALUE }}" />
+    {{else}}
+        {{ CURRENT_VALUE }}
+    {{/if}}
 {{/if}}

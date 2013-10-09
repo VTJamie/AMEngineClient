@@ -1,12 +1,11 @@
 {{#ifCond MENU_ITEM_ACTION "!==" ""}}
-	<a data-mini="true" data-theme="a"
+    <a data-mini="true" data-theme="a"
        href="#{{ MENU_ITEM_ACTION }}{{#each DATA_OBJECT_MENU_FIELD_STATIC_COUPLINGS}}/{{#urlencode DATA_OBJECT_MENU_FIELD_STATIC_COUPLING_TARGET }}{{/urlencode}}/{{#urlencode DATA_OBJECT_MENU_FIELD_STATIC_COUPLING_VALUE }}{{/urlencode}}{{/each}}"
-	>
-	{{#output DATA_OBJECT_MENU_FIELD_DATA_COUPLINGS}}{{/output}}
-		{{ MENU_ITEM_NAME }}
-	</a>
-{{else}}	
-		<div  data-theme="a" data-mini="true" data-role="collapsible" class="amengine-nopadding">
-			<h3 data-mini="true" >{{ MENU_ITEM_NAME }}</h3>
-		</div>
+    >
+        {{ MENU_ITEM_NAME }}
+    </a>
+{{else}}
+        <div  data-theme="a" data-mini="true" data-role="collapsible" class="amengine-nopadding">
+            <h3 data-mini="true" >{{ MENU_ITEM_NAME }}</h3>
+        </div>
 {{/ifCond}}

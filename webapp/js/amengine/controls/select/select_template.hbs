@@ -1,24 +1,24 @@
 {{#if IS_VISIBLE }}
-	<div>
-		<label for="control-{{ ID }}">{{ LABEL }}</label>
-	</div>
-	<div>
-		{{#if EDITABLE }}
-		
-			<select id="control-{{ ID }}" data-mini="true">
-				{{#each SELECT_ITEMS }}
-					<option value="{{ SELECT_ITEM_VALUE }}" {{#if SELECT_ITEM_IS_SELECTED }} selected="selected" {{/if}}>
-						{{ SELECT_ITEM_LABEL }}
-					</option>				
-				{{/each}}
-			</select>
-		{{else}}
-			{{#each SELECT_ITEMS }}
-				{{#if SELECT_ITEM_IS_SELECTED }}	
-					{{ SELECT_ITEM_LABEL }},
-				{{/if}}
-			{{/each}}
-		{{/if}}
-	</div>
+    <div>
+        <label for="control-{{ ID }}">{{ LABEL }}</label>
+    </div>
+    <div>
+        {{#if EDITABLE }}
+
+            <select id="control-{{ ID }}" data-mini="true">
+                {{#each SELECT_ITEMS }}
+                    <option value="{{ SELECT_ITEM_VALUE }}" {{#if SELECT_ITEM_IS_SELECTED }} selected="selected" {{/if}}>
+                        {{ SELECT_ITEM_LABEL }}
+                    </option>
+                {{/each}}
+            </select>
+        {{else}}
+            {{#each SELECT_ITEMS }}
+                {{#if SELECT_ITEM_IS_SELECTED }}
+                    {{ SELECT_ITEM_LABEL }},
+                {{/if}}
+            {{/each}}
+        {{/if}}
+    </div>
 {{/if}}
 

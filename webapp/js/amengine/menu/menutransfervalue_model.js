@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
 define(['backbone', 'basemodel'], function (Backbone, BaseModel) {
-	"use strict";
+    "use strict";
     var C = {
         MENU_ITEM_TRANSFER_VALUES_FIELD: "MENU_ITEM_TRANSFER_VALUES_FIELD",
         MENU_ITEM_TRANSFER_VALUES_VALUE: "MENU_ITEM_TRANSFER_VALUES_VALUE"

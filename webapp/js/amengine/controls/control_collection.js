@@ -42,7 +42,7 @@ define(['backbone', 'constantsrequestmodel', 'textmodel', 'selectmodel', 'button
                     debug.log('Group Dropped Through');
                     debug.log(attrs);
                 }
-            } else {            	
+            } else {
                 if (attrs[CM.get(constants.CONTROL_TYPE)] === constants.CONTROL_TYPE_TEXT || attrs[CM.get(constants.CONTROL_TYPE)] === CM.get(constants.CONTROL_TYPE_TEXT) || attrs[constants.CONTROL_TYPE] === constants.CONTROL_TYPE_TEXT || attrs[constants.CONTROL_TYPE] === CM.get(constants.CONTROL_TYPE_TEXT)) {
                     return new TextControlModel(attrs);
                 } else if (attrs[CM.get(constants.CONTROL_TYPE)] === constants.CONTROL_TYPE_SELECT || attrs[CM.get(constants.CONTROL_TYPE)] === CM.get(constants.CONTROL_TYPE_SELECT) || attrs[constants.CONTROL_TYPE] === constants.CONTROL_TYPE_SELECT || attrs[constants.CONTROL_TYPE] === CM.get(constants.CONTROL_TYPE_SELECT)) {

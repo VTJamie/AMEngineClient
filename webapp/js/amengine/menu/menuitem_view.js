@@ -15,38 +15,38 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'logoutrequestmodel', 'hbs!
             },
             tagName: 'li',
             render: function () {    
-            	var that = this;        	
+                var that = this;
                 this.$el.html(this.template(this.model.toJSON()));
                 
                 if(this.model.get(constants.MENU_ITEM_ACTION) === "" && !this.model.get(constants.MENU_ITEM_IS_LOGOUT)){
-                	this.$el.addClass('amengine-nopadding');
-                	require(['submenuview'], function (SubMenuView){                      		          		
-                		that.$el.find(':jqmData(role=collapsible) > .ui-collapsible-content').append(new SubMenuView({model: that.model}).render());
-                		
-                		that.$el.parent().trigger('create');                		
-                	});
+                    this.$el.addClass('amengine-nopadding');
+                    require(['submenuview'], function (SubMenuView){
+                        that.$el.find(':jqmData(role=collapsible) > .ui-collapsible-content').append(new SubMenuView({model: that.model}).render());
+
+                        that.$el.parent().trigger('create');
+                    });
                 }
                 
                 this.$el.trigger("create");
                 return this.el;
             },
-            menuItemClicked: function (event) {            	
-            	if(this.model.get(constants.MENU_ITEM_IS_LOGOUT)){
-            		LogoutRequestModel.request(function(model){
-            			Backbone.history.navigate('', true);
-            			App.vent.trigger("menu:reload");
-            		});
-            		event.preventDefault();
-            	}
-            	else{
-            		if(this.model.get(constants.MENU_ITEM_ACTION) === ""){            			
-            			event.stopPropagation();
-            		}            	
-            	}
+            menuItemClicked: function (event) {
+                if(this.model.get(constants.MENU_ITEM_IS_LOGOUT)){
+                    LogoutRequestModel.request(function(model){
+                        Backbone.history.navigate('', true);
+                        App.vent.trigger("menu:reload");
+                    });
+                    event.preventDefault();
+                }
+                else{
+                    if(this.model.get(constants.MENU_ITEM_ACTION) === ""){
+                        event.stopPropagation();
+                    }
+                }
                 
             },
             attributes: {
-            	'data-mini': true
+                'data-mini': true
             }
         });
     return MenuListItem;

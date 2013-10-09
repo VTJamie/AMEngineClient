@@ -14,14 +14,14 @@ define(['backbone', 'constantsrequestmodel', 'pageresponsebodymodel', 'baseobjec
         InitialPageRequestModel = BaseObjectRequestModel.extend({
             C: $.extend(C, BaseObjectRequestModel.prototype.C),
             request: function (data, success) {       
-		        var dataobject = {};
-		      	dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_FULL_DEFINITION);
-		      	dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = data.OBJECT_NAME;
-		        for(var p in data.fields){
-		        	dataobject[CM.get(C.FIELD_PREFIX) + p] = data.fields[p];
-		        }
-		        this.sendRequestWithPersist(dataobject, success);
-		    }
+                var dataobject = {};
+                  dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_FULL_DEFINITION);
+                  dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = data.OBJECT_NAME;
+                for(var p in data.fields){
+                    dataobject[CM.get(C.FIELD_PREFIX) + p] = data.fields[p];
+                }
+                this.sendRequestWithPersist(dataobject, success);
+            }
         });                
     
     return new InitialPageRequestModel();

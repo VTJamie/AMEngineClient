@@ -1,39 +1,39 @@
 <table data-inset="true" data-role="table" data-mode="reflow" class="ui-responsive">
-	<thead>
-		<tr class="ui-bar-b">
-		
-		{{#if GRID_VIEW_DATA_OBJECT_LAUNCH }}
-			<th></th>
-		{{/if}}
-		{{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST}}
-			{{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
-				<th data-priority="{{ @index }}">{{ GRID_VIEW_COLUMN_NAME }}</th>
-			{{/if}}
-		{{/each}}
-		</tr>
-	</thead>
-	<tbody>	
-		{{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA }}
-		
-			<tr class="grid-data-row {{#isOdd @index}}ui-bar-c{{else}}ui-bar-d{{/isOdd}}" data-id="{{ ID }}">
-				{{#ifCond ../GRID_VIEW_DATA_OBJECT_LAUNCH "!==" undefined}}
-					<td>
-						<a href="#{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_OBJECT_NAME }}/{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_TARGET_FIELD }}/{{ ID }}" data-role="button">
-							Open
-						</a>
-					</td>					
-				{{/ifCond}}
-				{{#each GRID_VIEW_ROW_CELL_DATA_ARRAY }}
-					{{#usearrayindex ../../GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST index=@index}}
-						{{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
-							<td>
-								{{ ../../this }}
-							</td>
-						{{/if}}
-					{{/usearrayindex}}
-				{{/each}}
-			</tr>
-		{{/each}}
-	</tbody>
+    <thead>
+        <tr class="ui-bar-b">
+
+        {{#if GRID_VIEW_DATA_OBJECT_LAUNCH }}
+            <th></th>
+        {{/if}}
+        {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST}}
+            {{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
+                <th data-priority="{{ @index }}">{{ GRID_VIEW_COLUMN_NAME }}</th>
+            {{/if}}
+        {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA }}
+
+            <tr class="grid-data-row {{#isOdd @index}}ui-bar-c{{else}}ui-bar-d{{/isOdd}}" data-id="{{ ID }}">
+                {{#ifCond ../GRID_VIEW_DATA_OBJECT_LAUNCH "!==" undefined}}
+                    <td>
+                        <a href="#{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_OBJECT_NAME }}/{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_TARGET_FIELD }}/{{ ID }}" data-role="button">
+                            Open
+                        </a>
+                    </td>
+                {{/ifCond}}
+                {{#each GRID_VIEW_ROW_CELL_DATA_ARRAY }}
+                    {{#usearrayindex ../../GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST index=@index}}
+                        {{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
+                            <td>
+                                {{ ../../this }}
+                            </td>
+                        {{/if}}
+                    {{/usearrayindex}}
+                {{/each}}
+            </tr>
+        {{/each}}
+    </tbody>
 </table>
 

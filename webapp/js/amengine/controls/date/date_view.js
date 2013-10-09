@@ -19,6 +19,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!datetempla
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
                 this.template = Template;
+            },
+            getValue : function () {
+                return BaseControlView.prototype.getValue.apply(this, arguments);
             }
     });
     return DateView;

@@ -4,9 +4,9 @@ define(['backbone', 'pagemenufieldstaticcouplingmodel'], function (Backbone, Pag
 
     var PageMenuFieldStaticCouplingCollection = Backbone.Collection.extend({
         model: function(attrs, options){      
-        	PageMenuFieldStaticCouplingModel = require('pagemenufieldstaticcouplingmodel');   
-        	return new PageMenuFieldStaticCouplingModel(attrs, options);
-    	}
+            PageMenuFieldStaticCouplingModel = require('pagemenufieldstaticcouplingmodel');
+            return new PageMenuFieldStaticCouplingModel(attrs, options);
+        }
     });
 
     return PageMenuFieldStaticCouplingCollection;

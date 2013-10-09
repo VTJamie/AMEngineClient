@@ -2,7 +2,7 @@
 
 define(['backbone', 'basemodel', 'menuitemcollection'], function (Backbone,
     BaseModel, MenuItemCollection) {
-	"use strict";
+    "use strict";
     var C = {
         MENU_ARRAY: MenuItemCollection
     },

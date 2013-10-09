@@ -5,7 +5,7 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'baserequestmodel'], func
 
     var C = {
         RESPONSE_TYPE_IDENTIFIER: "RESPONSE_TYPE_IDENTIFIER"
-        //	PERSIST: "PERSIST"
+        //    PERSIST: "PERSIST"
     };
 
     //M[C.PERSIST] = PersistModel;

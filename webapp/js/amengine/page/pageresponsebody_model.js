@@ -4,7 +4,7 @@ define(['backbone', 'constantsrequestmodel', 'tablegroupmodel',
         'collapsiblegroupmodel', 'buttongroupmodel', 'pagemenuitemcollection', 'basemodel'
 ], function (Backbone, CM, TableGroupModel, CollapsibleGroupModel,
     ButtonGroupModel, PageMenuItemCollection, BaseModel) {
-    	"use strict";
+        "use strict";
     var constants = {
         GROUP_TYPE: "GROUP_TYPE",
         GROUP_TYPE_TABLE: "GROUP_TYPE_TABLE",

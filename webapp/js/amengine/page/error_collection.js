@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
 define(['backbone', 'errormodel'], function (Backbone, ErrorModel) {
-	"use strict";
+    "use strict";
     var ErrorCollection = Backbone.Collection.extend({
         model: ErrorModel
     });

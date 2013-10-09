@@ -8,10 +8,10 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
             initialize: function () {
                 for (var cm in this.C) {
                     CurrentParam = this.C[cm];
-				 	                if(cm == "MENU_ITEM_SUB_LIST")
-				{
-				//	debug.log(CurrentParam);
-				}
+                                     if(cm == "MENU_ITEM_SUB_LIST")
+                {
+                //    debug.log(CurrentParam);
+                }
                     if (CurrentParam && typeof this.get(CM.get(cm)) !== "undefined") {
                    
                         if (typeof CurrentParam === "function") {

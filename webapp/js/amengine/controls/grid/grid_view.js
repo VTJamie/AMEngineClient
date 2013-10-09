@@ -2,7 +2,7 @@
 
 define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!gridtemplate'], function (
     $, jqM, Backbone, BaseControlView, Template) {
-	"use strict";
+    "use strict";
     var C = {
       
 
@@ -13,9 +13,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!gridtempla
                 this.template = Template;                
             },
             attributes: {
-            	 "class": "ui-corner-all amengine-table"	
+                 "class": "ui-corner-all amengine-table"
             },
-            
+            getValue : function () {
+                return {};
+            }
         });
     return GridView;
 });

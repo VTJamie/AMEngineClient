@@ -4,7 +4,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!selecttemp
     $, jqM, Backbone, BaseControlView, Template) {
     "use strict";
     var C = {
-    	ID: "ID",
+        ID: "ID",
         LABEL: "LABEL",
         CURRENT_VALUE: "CURRENT_VALUE",
         MAX_LENGTH: "MAX_LENGTH",
@@ -21,11 +21,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!selecttemp
                 this.template = Template;
             },
             getValue: function (){
-            	var returnvalue = {};
-            	if(this.model.get(C.EDITABLE)){
-            		returnvalue[this.model.get(C.ID)] = this.$el.find('select').val();
-            	}	
-            	return returnvalue;
+                var returnvalue = {};
+                if(this.model.get(C.EDITABLE)){
+                    returnvalue[this.model.get(C.ID)] = this.$el.find('select').val();
+                }
+                return returnvalue;
             }            
         });
     return SelectView;

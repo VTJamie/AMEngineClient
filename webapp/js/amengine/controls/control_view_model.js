@@ -3,9 +3,9 @@
 define(['backbone'], function (Backbone) {
     "use strict";    
         var ControlViewModel = Backbone.Model.extend({
-        	defaults: {
-        		view: undefined
-        	}          
+            defaults: {
+                view: undefined
+            }
         });
 
     return ControlViewModel;

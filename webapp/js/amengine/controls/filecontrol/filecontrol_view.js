@@ -16,6 +16,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!filecontro
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
                 this.template = Template;
+            },
+            getValue : function () {
+                return {};
             }
         });
     return FileView;

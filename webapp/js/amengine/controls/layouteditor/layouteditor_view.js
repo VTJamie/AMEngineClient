@@ -2,7 +2,7 @@
 
 define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!layouteditortemplate'], function (
     $, jqM, Backbone, BaseControlView, Template) {
-	"use strict";
+    "use strict";
     var C = {
         LABEL: "LABEL",
         CURRENT_VALUE: "CURRENT_VALUE",
@@ -19,6 +19,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!layoutedit
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
                 this.template = Template;
+            },
+            getValue : function () {
+               return BaseControlView.prototype.getValue.apply(this, arguments);
             }
     });
     return LayoutEditorView;

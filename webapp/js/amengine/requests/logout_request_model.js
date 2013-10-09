@@ -9,12 +9,12 @@ define(['backbone', 'constantsrequestmodel', 'baserequestmodel'], function (Back
     }, LogoutRequestModel = BaseRequestModel.extend({
             C: $.extend(C, BaseRequestModel.prototype.C),
              request: function (success) {       
-		        var dataobject = {};
-		      	dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_LOGOUT);		      			        
-		        this.sendRequestWithPersist(dataobject, success);
-		    }
+                var dataobject = {};
+                  dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_LOGOUT);
+                this.sendRequestWithPersist(dataobject, success);
+            }
         //    url: 'js/amengine/mock/menu.json'
         });
-	
+
     return new LogoutRequestModel();
 });

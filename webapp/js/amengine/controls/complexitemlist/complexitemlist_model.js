@@ -2,7 +2,7 @@
 
 define(['backbone', 'constantsrequestmodel', 'basecontrolmodel', 'complexitemlistdetailsmodel'], function (
     Backbone, CM, BaseControlModel, ComplexItemListDetailsModel) {
-	"use strict";
+    "use strict";
     var constants = {
         CONTROL_TYPE_COMPLEX_ITEM_LIST: "CONTROL_TYPE_COMPLEX_ITEM_LIST"
 

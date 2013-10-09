@@ -13,15 +13,15 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
         render: function () {
 
             this.$el.empty().append(this.template(this.model.toJSON()));
-			this.$el.trigger("create");
+            this.$el.trigger("create");
             return this.el;
         },
         attributes: {
-        	'data-role': 'fieldcontain'
+            'data-role': 'fieldcontain'
         },
         getValue: function(){
-        	debug.log('Control getValue not overridden');
-        	return {};
+            debug.log('Control getValue not overridden');
+            return {};
         }
     });
     return BaseControlView;

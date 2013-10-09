@@ -2,7 +2,7 @@
 
 define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!complexitemlisttemplate'], function (
     $, jqM, Backbone, BaseControlView, Template) {
-	"use stric";
+    "use stric";
     var C = {
         
     },
@@ -11,6 +11,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!complexite
                 BaseControlView.prototype.initialize.apply(this, arguments);
                 this.template = Template;
                 debug.log("ComplexItemListView", this.model.toJSON());
+            },
+            getValue : function () {
+                return {};
             }
     });
     return ComplexItemListView;
