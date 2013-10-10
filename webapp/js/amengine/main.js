@@ -61,6 +61,11 @@ require.config({
         'errormodel': './page/error_model',
         'errorcollection': './page/error_collection',
 
+        //Dialog
+        'dialogview': './controls/complexitemlist/dialog/dialog_view',
+        'dialogtemplate': './controls/complexitemlist/dialog/dialog_template',
+        'dialogresponsebodymodel': './controls/complexitemlist/dialog/dialogresponsebody_model',
+
         //Utilities
         'factory': './utilities/controlorgroup_factory',
         'urlutility': './utilities/url_utility',

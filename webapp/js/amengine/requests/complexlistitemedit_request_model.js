@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'initialpagerequestmodel'], function (Backbone, CM, BaseFieldRequestModel, InitialPageRequestModel) {
+define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'initialpagerequestmodel', 'dialogresponsebodymodel'], function (Backbone, CM, BaseFieldRequestModel, InitialPageRequestModel, DialogResponseBodyModel) {
 
     "use strict";
 
@@ -19,7 +19,7 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'initialpa
         REQUEST_DATA_OBJECT_ID: "REQUEST_DATA_OBJECT_ID",
         REQUEST_COMPLEX_ITEM_ID: "REQUEST_COMPLEX_ITEM_ID",
         REQUEST_TYPE_FIELD_COMPLEX_ITEM_LIST_EDIT: "REQUEST_TYPE_FIELD_COMPLEX_ITEM_LIST_EDIT",
-        //RESPONSE_BODY: SubmitResponseBodyModel,
+        RESPONSE_BODY: DialogResponseBodyModel,
         ROOT_OBJECT: "ROOT_OBJECT",
         OBJECT_NAME: "OBJECT_NAME",
         ID: "ID"
