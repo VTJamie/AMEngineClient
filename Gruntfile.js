@@ -80,6 +80,13 @@ module.exports = function (grunt) {
                     raw: 'preferred_syntax = :sass\n' // Use `raw` since it's not directly available
                 }
             }
+        },
+        sloc: {
+            main: {
+                files: {
+                    'webapp/js/amengine': [ '**.js' ]
+                }
+            }
         }
 
     });
@@ -92,6 +99,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-sloc');
 
     // Default task(s).
     grunt.registerTask('default', ['jshint', 'jslint', 'compass', 'replace:loggingoff', 'copy', 'replace:loggingon']);

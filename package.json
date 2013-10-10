@@ -9,6 +9,7 @@
         "grunt-contrib-watch": "*",
         "grunt-text-replace": "*",
         "grunt-contrib-clean": "*",
-   "grunt-contrib-compass": "*"
- }
+        "grunt-sloc": "*",
+        "grunt-contrib-compass": "*"
+    }
 }
