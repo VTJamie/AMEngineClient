@@ -10,7 +10,7 @@ require.config({
         'jquerymobile-alphascroll': '../customizedlibs/jquery/jquery.mobile.alphascroll',
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
         'underscore': '../libs/backbone/underscore-min',
-        'backbone': '../libs/backbone/backbone-min',
+        'backbone': '../libs/backbone/backbone',
         'backbone-localstorage': '../libs/backbone/backbone.localStorage',
         'backbone-jquerymobileview': '../customizedlibs/backbone/jqmView',
         'backbone-jquerymobilepage': '../customizedlibs/backbone/jqmPage',
@@ -60,6 +60,7 @@ require.config({
         'pagemenufieldstaticcouplingmodel': './page/pagemenu/pagemenufieldstaticcoupling_model',
         'errormodel': './page/error_model',
         'errorcollection': './page/error_collection',
+        'pagecollection': './page/page_collection',
 
         //Dialog
         'dialogview': './controls/complexitemlist/dialog/dialog_view',
@@ -101,10 +102,11 @@ require.config({
         'landingpagerequestmodel': './requests/landingpage_request_model',
         'menurequestmodel': './requests/menu_request_model',
         'initialpagerequestmodel': './requests/initialpage_request_model',
-        'submitrequestmodel': './requests/submit_request_model',
+        'submitrequestmodel': './controls/button/submit_request_model',
         'basefieldrequestmodel': './requests/basefield_request_model',
         'logoutrequestmodel': './requests/logout_request_model',
-        'complexlistitemeditrequestmodel': './requests/complexlistitemedit_request_model',
+        'complexlistitemeditrequestmodel': './controls/complexitemlist/complexlistitemedit_request_model',
+        'complexlistitemsubmitrequestmodel': './controls/complexitemlist/complexlistitemsubmit_request_model',
 
         //Controls
         'basecontrolview': './controls/basecontrol_view',

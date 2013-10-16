@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel'], function ($, Backbone, CM, ControlViewModel) {
+define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'], function ($, Backbone, CM, ControlViewModel, App) {
     "use strict";
 
     var C ={
@@ -8,14 +8,14 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel'], func
     },
     ControlViewCollection = Backbone.Collection.extend({
         model : ControlViewModel,
-        getFieldValues : function (options) {
-            var valueobject = {};
+        _getFieldValues : function (options) {
+            var valueobject = {}, p;
             options = $.extend({withprefix: true, controlid: undefined}, options);
             this.each(function (model) {
                 $.extend(valueobject, model.get("view").getValue());
             });
 
-            for(var p in valueobject){
+            for(p in valueobject){
                 if(options.controlid === undefined || options.controlid === p) {
                     if(options.withprefix === true) {
                         valueobject[CM.get(C.FIELD_PREFIX) + p] = valueobject[p];
@@ -27,18 +27,26 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel'], func
                         delete valueobject[p];
                     }
                 }
-
-
             }
             return valueobject;
         }
     }), currentpagecollection;
 
+    ControlViewCollection.getFieldValues = function() {
+        App.vent.trigger('loadactivecontrols.amengine');
+        return ControlViewCollection.getCurrentInstance()._getFieldValues(arguments);
+    };
+
     ControlViewCollection.getCurrentInstance = function () {
         if (currentpagecollection === undefined) {
+            debug.log("Creating blank ControlViewCollection");
             currentpagecollection = new ControlViewCollection();
         }
         return currentpagecollection;
+    };
+
+    ControlViewCollection.setCurrentInstance = function (newinstance) {
+        currentpagecollection = newinstance;
     };
     return ControlViewCollection;
 });

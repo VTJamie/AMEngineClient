@@ -33,7 +33,7 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
             dataobject[CM.get(C.REQUEST_FIELD_ACTION_PROPERTY_NAME)] = data.REQUEST_FIELD_ACTION_PROPERTY_NAME;
             dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = InitialPageRequestModel.get(constants.RESPONSE_BODY).get(constants.OBJECT_NAME);
             dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = InitialPageRequestModel.get(constants.RESPONSE_BODY).get(constants.ID);
-            $.extend(dataobject, ControlViewCollection.getCurrentInstance().getFieldValues());
+            $.extend(dataobject, ControlViewCollection.getFieldValues());
             this.sendRequestWithPersist(dataobject, success);
         }
     });

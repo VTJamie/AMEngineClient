@@ -1,9 +1,9 @@
 /*global $, define, require*/
 
 define([], function () {
-    var TableGroupView = undefined,
-        CollapsibleGroupView = undefined,
-        ButtonGroupView = undefined;
+    var TableGroupView,
+        CollapsibleGroupView,
+        ButtonGroupView;
     require(['tablegroupview', 'collapsiblegroupview', 'buttongroupview'], function (
         tgv, cgv, bgv) {
         TableGroupView = tgv;

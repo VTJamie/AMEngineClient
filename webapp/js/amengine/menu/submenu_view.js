@@ -9,11 +9,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'menuitemview', 'hbs!submenutempla
             this.options = $.extend({}, options);
             this.model = this.options.model;
         },
-
+        template: SubMenuTemplate,
         render: function () {
             var that = this, menuarray, curmodel, curview, $thisul;
 
-            that.$el.empty().html(SubMenuTemplate(that.model.toJSON()));
+            that.$el.empty().html(this.template(that.model.toJSON()));
             $thisul = that.$el.find('> ul');
 
             menuarray = that.model.get(C.MENU_ITEM_SUB_LIST);

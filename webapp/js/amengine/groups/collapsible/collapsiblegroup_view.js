@@ -2,7 +2,7 @@
 
 define(['jquery', 'jquerymobile', 'backbone', 'factory',
         'hbs!collapsiblegrouptemplate'
-], function ($, jqM, Backbone, Factory, Template) {
+], function ($, jqM, Backbone, runFactory, Template) {
 
     var C = {
         CONTROL_ARRAY: "CONTROL_ARRAY"
@@ -18,7 +18,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'factory',
             this.$el.empty().append(Template(this.model.toJSON()));
             var controlarray = this.model.get(C.CONTROL_ARRAY);
             for (var idx = 0; idx < controlarray.length; idx++) {
-                var newitem = Factory(controlarray.at(idx));
+                var newitem = runFactory(controlarray.at(idx));
                 this.$el.append(newitem);
             }
             this.$el.trigger("create");

@@ -9,9 +9,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'pagemenuitemview', 'hbs!pagemenut
             this.options = $.extend({}, options);
             this.model = this.options.model;
         },
-
+        template: PageMenuTemplate,
         render: function () {
-            this.$el.empty().html(PageMenuTemplate(this.model.toJSON()));
+            this.$el.empty().html(this.template(this.model.toJSON()));
             var curmodel, curview, $thisul = this.$el.find('> ul');
             for (var idx = 0; idx < this.model.length; idx++) {
                 curmodel = this.model.at(idx);

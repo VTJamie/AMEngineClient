@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', 'controlviewcollection', 'pagecontainer'], function ($, jqM, Backbone, Template, Factory, ControlViewCollection, PageContainer) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', 'controlviewcollection', 'pagecontainer'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageContainer) {
     "use strict";
     var constants = {
         RESPONSE_BODY: "RESPONSE_BODY",
@@ -10,6 +10,14 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', '
         initialize: function(options) {
             PageContainer.prototype.initialize.apply(this, arguments);
             this.responseobject = options.model;
+            this.controlcollection = new ControlViewCollection();
+            App.vent.on('loadactivecontrols.amengine', this.loadActiveControls, this);
+        },
+        loadActiveControls: function () {
+            if (this.$el.closest('.ui-page-active').size() > 0) {
+                debug.log('Loading Controls', this);
+                ControlViewCollection.setCurrentInstance(this.controlcollection);
+            }
         },
         template: Template,
         render: function () {
@@ -18,9 +26,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', '
             $content =  this.getContent(),
             $header = this.getHeader();
 
+
+            ControlViewCollection.setCurrentInstance(this.controlcollection);
             ControlViewCollection.getCurrentInstance().reset();
 
-            $content.append(Factory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
+            $content.append(runFactory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
             return this.el;
         },
         events: $.extend({}, PageContainer.prototype.events, {

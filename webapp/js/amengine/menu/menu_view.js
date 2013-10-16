@@ -7,19 +7,19 @@ define(['jquery', 'jquerymobile', 'backbone', 'menurequestmodel', 'menuitemview'
         MENU_ARRAY: "MENU_ARRAY"
     }, MenuView = Backbone.View.extend({
         initialize: function () {
-            this.model = MenuRequest;
             App.vent.on("menu:reload", this.menuReload, this);
         },
-
+        template: MenuTemplate,
+        model: MenuRequest,
         render: function () {
             var that = this, menuarray, curmodel, curview, $thisul;
             this.model.request(function (model) {
-                that.$el.empty().html(MenuTemplate(model.toJSON()));
+                that.$el.empty().html(that.template(model.toJSON()));
                 $thisul = that.$el.find('> ul');
                 menuarray = model.get(C.MENU).get(C.MENU_ARRAY);
                 for (var idx = 0; idx < menuarray.length; idx++) {
                     curmodel = menuarray.at(idx);
-                    curview = new MenuListItemView ();
+                    curview = new MenuListItemView();
                     curview.model = curmodel;
                     $thisul.append(curview.render());
                 }

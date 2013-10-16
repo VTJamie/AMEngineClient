@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'controlviewcollection', 'pagemenuview', 'pagecontainer', 'menuview'], function ($, jqM, Backbone, Template, Factory, ControlViewCollection, PageMenuView, PageContainer, MenuView) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'controlviewcollection', 'pagemenuview', 'pagecontainer', 'menuview', 'app'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageMenuView, PageContainer, MenuView, App) {
     "use strict";
     var constants = {
         RESPONSE_BODY: "RESPONSE_BODY",
@@ -10,6 +10,14 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
         initialize: function(options) {
             PageContainer.prototype.initialize.apply(this, arguments);
             this.responseobject = options.model;
+            this.controlcollection = new ControlViewCollection();
+            App.vent.on('loadactivecontrols.amengine', this.loadActiveControls, this);
+        },
+        loadActiveControls: function () {
+            if (this.$el.closest('.ui-page-active').size() > 0) {
+                debug.log('Loading Controls', this);
+                ControlViewCollection.setCurrentInstance(this.controlcollection);
+            }
         },
         template: Template,
         render: function () {
@@ -21,7 +29,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
             pagemenuarray = that.responseobject.get(constants.RESPONSE_BODY).get(constants.MENU_ARRAY);
 
             $menu.append(new MenuView().render());
-
+            ControlViewCollection.setCurrentInstance(this.controlcollection);
             ControlViewCollection.getCurrentInstance().reset();
 
             if(pagemenuarray !== undefined) {
@@ -30,7 +38,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
                     model: pagemenuarray
                 }).render());
             }
-            $content.append(Factory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
+            $content.append(runFactory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
             return this.el;
         },
         events: $.extend({

@@ -4,23 +4,21 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
     "use strict";
     var C = {
 
-    }, CurrentParam, BaseModel = Backbone.Model.extend({
+    }, BaseModel = Backbone.Model.extend({
             initialize: function () {
-                for (var cm in this.C) {
-                    CurrentParam = this.C[cm];
-                                     if(cm == "MENU_ITEM_SUB_LIST")
-                {
-                //    debug.log(CurrentParam);
-                }
-                    if (CurrentParam && typeof this.get(CM.get(cm)) !== "undefined") {
+                var currentParam, cm, CurrentParamModel;
+                for (cm in this.C) {
+                    currentParam = this.C[cm];
+                    if (currentParam && this.get(CM.get(cm)) !== undefined) {
                    
-                        if (typeof CurrentParam === "function") {
-                            if (CurrentParam.prototype instanceof Backbone.Model || CurrentParam.prototype instanceof Backbone.Collection) {
-                                this.set(cm, new CurrentParam(this.get(CM.get(cm))));
+                        if (typeof currentParam === "function") {
+                            if (currentParam.prototype instanceof Backbone.Model || currentParam.prototype instanceof Backbone.Collection) {
+                                CurrentParamModel = currentParam;
+                                this.set(cm, new CurrentParamModel(this.get(CM.get(cm))));
                 
                             } 
                             else {
-                                this.set(cm, CurrentParam(this.get(CM.get(cm))));
+                                this.set(cm, currentParam(this.get(CM.get(cm))));
                             }
                         } 
                         else {
@@ -35,8 +33,9 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
 
             },
             toJSON: function () {
-                var returnjsonobj = Backbone.Model.prototype.toJSON.apply(this, arguments);
-                for (var p in returnjsonobj) {
+                var returnjsonobj = Backbone.Model.prototype.toJSON.apply(this, arguments),
+                p;
+                for (p in returnjsonobj) {
                     if (returnjsonobj[p] instanceof Backbone.Model || returnjsonobj[p] instanceof Backbone.Collection) {
                         returnjsonobj[p] = returnjsonobj[p].toJSON();
                     }
@@ -44,12 +43,14 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
                 return returnjsonobj;
             },
             parse: function (data) {
-                for (var cm in this.C) {
-                    CurrentParam = this.C[cm];
-                    if (CurrentParam && typeof data[CM.get(cm)] !== "undefined") {
-                        if (typeof CurrentParam === "function") {
-                            if (CurrentParam.prototype instanceof Backbone.Model || CurrentParam.prototype instanceof Backbone.Collection) {
-                                data[cm] = new CurrentParam(data[CM.get(cm)]);
+                var CurrentConstantParam,
+                cm;
+                for (cm in this.C) {
+                    CurrentConstantParam = this.C[cm];
+                    if (CurrentConstantParam && data[CM.get(cm)] !== undefined) {
+                        if (typeof CurrentConstantParam === "function") {
+                            if (CurrentConstantParam.prototype instanceof Backbone.Model || CurrentConstantParam.prototype instanceof Backbone.Collection) {
+                                data[cm] = new CurrentConstantParam(data[CM.get(cm)]);
                             }
                         } else {
                             data[cm] = data[CM.get(cm)];

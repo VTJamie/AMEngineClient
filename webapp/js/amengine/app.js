@@ -1,6 +1,6 @@
 /*global $, require, define, debug */
 /*jslint nomen: true*/
-define(['jquerymobile', 'underscore', 'backbone', 'marionette'], function (jqM, _, Backbone, Marionette) {
+define(['jquerymobile', 'underscore', 'backbone', 'marionette', 'pagecollection'], function (jqM, _, Backbone, Marionette, PageCollection) {
     "use strict";
 
     var TheApplication,
@@ -13,7 +13,6 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette'], function (jqM, 
 
             loadPage: function (page) {
                 if ($.mobile.pageContainer !== undefined) {
-
                     $.mobile.pageContainer.append(page.render());
                     if (typeof page.onShow === "function") {
                         page.onShow();
@@ -24,7 +23,7 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette'], function (jqM, 
                     }
                 } else {
 
-                    this.bodyRegion.show(page);
+                    this.bodyRegion.show(page); //page.onShow gets called inside here
                     TheApplication.readyForJqM();
                     if (typeof page.afterjqMInit === "function") {
                         page.afterjqMInit();
@@ -46,7 +45,13 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette'], function (jqM, 
     });
 
     $(TheApplication.bodyRegion.el).on('pagehide', function (event, options) {
-        $(event.target).remove();
+        if($.mobile.pageContainer.find(".ui-page-active").is('.ui-dialog')) {
+            debug.log('save old page', event.target);
+
+            PageCollection.push({page: event.target});
+        } else {
+            $(event.target).remove();
+        }
     });
 
 
