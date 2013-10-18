@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', 'controlviewcollection', 'pagecontainer'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageContainer) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', 'controlviewcollection', 'pagecontainer', 'app', 'pageresponsebodymodel'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageContainer, App, PageResponseBodyModel) {
     "use strict";
     var constants = {
         RESPONSE_BODY: "RESPONSE_BODY",
@@ -12,11 +12,17 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', '
             this.responseobject = options.model;
             this.controlcollection = new ControlViewCollection();
             App.vent.on('loadactivecontrols.amengine', this.loadActiveControls, this);
+            App.vent.on('loadactivepage.amengine', this.loadResponseBody, this);
         },
         loadActiveControls: function () {
             if (this.$el.closest('.ui-page-active').size() > 0) {
                 debug.log('Loading Controls', this);
                 ControlViewCollection.setCurrentInstance(this.controlcollection);
+            }
+        },
+        loadResponseBody: function () {
+            if (this.$el.closest('.ui-page-active').size() > 0) {
+                PageResponseBodyModel.setCurrentInstance(this.responseobject);
             }
         },
         template: Template,

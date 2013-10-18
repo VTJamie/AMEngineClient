@@ -8,22 +8,23 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
     },
     ControlViewCollection = Backbone.Collection.extend({
         model : ControlViewModel,
-        _getFieldValues : function (options) {
-            var valueobject = {}, p;
-            options = $.extend({withprefix: true, controlid: undefined}, options);
+        _getFieldValues : function (inputoptions) {
+            var valueobject = {},
+            p,
+            options = $.extend({withoutprefix: false, controlid: undefined}, inputoptions);
+
             this.each(function (model) {
                 $.extend(valueobject, model.get("view").getValue());
             });
-
             for(p in valueobject){
                 if(options.controlid === undefined || options.controlid === p) {
-                    if(options.withprefix === true) {
+                    if(!options.withoutprefix) {
                         valueobject[CM.get(C.FIELD_PREFIX) + p] = valueobject[p];
                         delete valueobject[p];
                     }
                 }
                 else {
-                    if(options.controlid === p) {
+                    if(options.controlid !== p) {
                         delete valueobject[p];
                     }
                 }
@@ -32,9 +33,9 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
         }
     }), currentpagecollection;
 
-    ControlViewCollection.getFieldValues = function() {
+    ControlViewCollection.getFieldValues = function(options) {
         App.vent.trigger('loadactivecontrols.amengine');
-        return ControlViewCollection.getCurrentInstance()._getFieldValues(arguments);
+        return ControlViewCollection.getCurrentInstance()._getFieldValues(options);
     };
 
     ControlViewCollection.getCurrentInstance = function () {

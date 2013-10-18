@@ -100,6 +100,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-sloc');
+    grunt.option('force', true);
 
     // Default task(s).
     grunt.registerTask('default', ['jshint', 'jslint', 'compass', 'replace:loggingoff', 'copy', 'replace:loggingon']);

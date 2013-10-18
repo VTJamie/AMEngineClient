@@ -1,6 +1,6 @@
 /*global $, define, require, window, debug*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!buttontemplate', 'submitrequestmodel', 'pagecollection'], function ($, jqM, Backbone, App, BaseControlView, Template, SubmitRequestModel, PageCollection) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!buttontemplate', 'submitrequestmodel', 'pagecollection', 'pageresponsebodymodel', 'complexlistitemsubmitrequestmodel'], function ($, jqM, Backbone, App, BaseControlView, Template, SubmitRequestModel, PageCollection, PageResponseBodyModel, ComplexListItemSubmitRequestModel) {
     "use strict";
     var C = {
         LABEL: "LABEL",
@@ -14,7 +14,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
         SUBMIT_RESPONSE_ACTION_TYPE: "SUBMIT_RESPONSE_ACTION_TYPE",
         SUBMIT_RESPONSE_ACTION_TYPE_CLOSE: "SUBMIT_RESPONSE_ACTION_TYPE_CLOSE",
         ERRORS: "ERRORS",
-        RESPONSE_BODY: "RESPONSE_BODY"
+        RESPONSE_BODY: "RESPONSE_BODY",
+        IS_DIALOG: "IS_DIALOG"
     }, ButtonView = BaseControlView.extend({
         initialize: function (options) {
             BaseControlView.prototype.initialize.apply(this, arguments);
@@ -32,31 +33,60 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
         },
         attributes: {},
         buttonClicked: function (event) {
+            debug.log(PageResponseBodyModel.getCurrentInstance());
             var that = this,
             responsebody,
-            lastpage;
+            lastpage,
+            isdialog = PageResponseBodyModel.getCurrentInstance().get(C.RESPONSE_BODY).get(C.IS_DIALOG);
             if (this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_SUBMIT) {
-                SubmitRequestModel.request({
-                    REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
-                }, function (model) {
+                debug.log(isdialog);
+                if(isdialog) {
+                    ComplexListItemSubmitRequestModel.request({
+                        REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
+                    }, function (model) {
 
-                    responsebody = model.get(C.RESPONSE_BODY);
-                    if (responsebody.get(C.ERRORS).size() === 0) {
-                        responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
-                            if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
-                                if(PageCollection.length > 0) {
-                                    lastpage = PageCollection.pop().get("page");
-                                    $.mobile.changePage($(lastpage));
-                                } else {
-                                    window.history.back();
+                        responsebody = model.get(C.RESPONSE_BODY);
+                        if (responsebody.get(C.ERRORS).size() === 0) {
+                            responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
+                                if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
+                                    if(PageCollection.length > 0) {
+                                        lastpage = PageCollection.pop().get("page");
+                                       $.mobile.changePage($(lastpage));
+                                    } else {
+                                        window.history.back();
+                                    }
+
+                                    //App.vent.trigger('menu:reload');
+                                    event.preventDefault();
                                 }
+                            });
+                        }
+                    });
+                }
+                else
+                {
+                    SubmitRequestModel.request({
+                        REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
+                    }, function (model) {
 
-                                //App.vent.trigger('menu:reload');
-                                event.preventDefault();
-                            }
-                        });
-                    }
-                });
+                        responsebody = model.get(C.RESPONSE_BODY);
+                        if (responsebody.get(C.ERRORS).size() === 0) {
+                            responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
+                                if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
+                                    if(PageCollection.length > 0) {
+                                        lastpage = PageCollection.pop().get("page");
+                                        $.mobile.changePage($(lastpage));
+                                    } else {
+                                        window.history.back();
+                                    }
+
+                                    //App.vent.trigger('menu:reload');
+                                    event.preventDefault();
+                                }
+                            });
+                        }
+                    });
+                }
             }
             else if (this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_CANCEL) {
                 var lastpage;

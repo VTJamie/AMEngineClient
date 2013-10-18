@@ -3,7 +3,10 @@
 define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function (
     $, jqM, Backbone, ControlViewCollection) {
     
-    var BaseControlView = Backbone.View.extend({
+    var C = {
+        ID: "ID"
+    },
+    BaseControlView = Backbone.View.extend({
         initialize: function (options) {
             if (typeof options !== "undefined") {
                 this.model = options.model;
@@ -20,7 +23,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
             'data-role': 'fieldcontain'
         },
         getValue: function(){
-            debug.log('Control getValue not overridden');
+            debug.log(this.model.get(C.ID), 'Control getValue not overridden');
             return {};
         }
     });

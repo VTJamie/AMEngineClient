@@ -29,7 +29,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!texttempla
                         valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val();
                     }
                     else {
-                        valueobject[this.model.get(C.ID)] = this.$el.find('textarea').val();
+                        valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val();    //temporary
+                        //valueobject[this.model.get(C.ID)] = this.$el.find('textarea').val();
                     }
                 }
             }

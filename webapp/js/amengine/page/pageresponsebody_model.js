@@ -1,9 +1,9 @@
 /*global $, define, require*/
 
 define(['backbone', 'constantsrequestmodel', 'tablegroupmodel',
-        'collapsiblegroupmodel', 'buttongroupmodel', 'pagemenuitemcollection', 'basemodel'
+        'collapsiblegroupmodel', 'buttongroupmodel', 'pagemenuitemcollection', 'basemodel', 'app'
 ], function (Backbone, CM, TableGroupModel, CollapsibleGroupModel,
-    ButtonGroupModel, PageMenuItemCollection, BaseModel) {
+    ButtonGroupModel, PageMenuItemCollection, BaseModel, App) {
         "use strict";
     var constants = {
         GROUP_TYPE: "GROUP_TYPE",
@@ -39,9 +39,19 @@ define(['backbone', 'constantsrequestmodel', 'tablegroupmodel',
             }
         }
     },
+    currentinstance,
     PageResponseBodyModel = BaseModel.extend({
         C: $.extend(C, BaseModel.prototype.C)
     });
+
+    PageResponseBodyModel.getCurrentInstance = function () {
+        App.vent.trigger('loadactivepage.amengine');
+        return currentinstance;
+    };
+
+    PageResponseBodyModel.setCurrentInstance = function (newinstance) {
+        currentinstance = newinstance;
+    };
 
     return PageResponseBodyModel;
 });

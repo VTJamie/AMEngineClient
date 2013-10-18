@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitresponsebodymodel', 'controlviewcollection', 'initialpagerequestmodel'], function (Backbone, CM, BaseFieldRequestModel, SubmitResponseBodyModel, ControlViewCollection, InitialPageRequestModel) {
+define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitresponsebodymodel', 'controlviewcollection', 'initialpagerequestmodel', 'pageresponsebodymodel'], function (Backbone, CM, BaseFieldRequestModel, SubmitResponseBodyModel, ControlViewCollection, InitialPageRequestModel, PageResponseBodyModel) {
 
     "use strict";
 
@@ -27,12 +27,13 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
         //   url: 'js/amengine/mock/initialpage2.json',
         C: $.extend(C, BaseFieldRequestModel.prototype.C),
         request: function (data, success) {
-            var dataobject = {};
+            var dataobject = {},
+            currentpageresponsebody = PageResponseBodyModel.getCurrentInstance();
             dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_FIELD_REQUEST);
             dataobject[CM.get(C.REQUEST_TYPE_SUB_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_FIELD_SUBMIT);
             dataobject[CM.get(C.REQUEST_FIELD_ACTION_PROPERTY_NAME)] = data.REQUEST_FIELD_ACTION_PROPERTY_NAME;
-            dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = InitialPageRequestModel.get(constants.RESPONSE_BODY).get(constants.OBJECT_NAME);
-            dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = InitialPageRequestModel.get(constants.RESPONSE_BODY).get(constants.ID);
+            dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(constants.OBJECT_NAME);
+            dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(constants.ID);
             $.extend(dataobject, ControlViewCollection.getFieldValues());
             this.sendRequestWithPersist(dataobject, success);
         }

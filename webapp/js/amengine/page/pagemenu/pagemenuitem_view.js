@@ -32,7 +32,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'hbs!pagemenuitemtemplate',
             },
             menuItemClicked: function (event) {
                 var hash = ["#"],
-                controlcollection = ControlViewCollection.getFieldValues({withprefix: false});
+                controlcollection = ControlViewCollection.getFieldValues({withoutprefix: true});
 
                 if(this.model.get(constants.MENU_ITEM_ACTION) === ""){
                     event.stopPropagation();
