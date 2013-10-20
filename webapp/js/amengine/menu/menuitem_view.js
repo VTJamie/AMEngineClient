@@ -33,8 +33,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'logoutrequestmodel', 'hbs!
             menuItemClicked: function (event) {
                 if(this.model.get(constants.MENU_ITEM_IS_LOGOUT)){
                     LogoutRequestModel.request(function(model){
-                        Backbone.history.navigate('', true);
-                        App.vent.trigger("menu:reload");
+                        Backbone.history.navigate('', {trigger: true});
                     });
                     event.preventDefault();
                 }

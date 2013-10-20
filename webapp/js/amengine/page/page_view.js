@@ -48,9 +48,17 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
             return this.el;
         },
         events: $.extend({
-            'tap #panel-toggle': 'panelToggle'
+            'tap #panel-toggle': 'panelToggle',
+            'keyup': 'buttonClicked'
         }, PageContainer.prototype.events),
-
+        buttonClicked: function(e) {
+            if(e.keyCode === 13) {
+                App.vent.trigger('enterpressed.amengine');
+            }
+            else if(e.keyCode === 27) {
+                App.vent.trigger('escapepressed.amengine');
+            }
+        },
         panelToggle: function(e) {
             this.getMenu().panel().panel('open');
             e.preventDefault();

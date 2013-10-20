@@ -19,6 +19,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
     }, ButtonView = BaseControlView.extend({
         initialize: function (options) {
             BaseControlView.prototype.initialize.apply(this, arguments);
+            App.vent.on('enterpressed.amengine', this.enterPressed, this);
+            App.vent.on('escapepressed.amengine', this.escapePressed, this);
+        },
+        remove: function () {
+            App.vent.off('enterpressed.amengine');
+            App.vent.off('escapepressed.amengine');
         },
         events: {
             'tap': "buttonClicked",
@@ -32,6 +38,16 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
             return this.el;
         },
         attributes: {},
+        enterPressed: function(e) {
+            if(this.$el.closest('.ui-page-active').size() > 0 && this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_SUBMIT) {
+                this.buttonClicked(e);
+            }
+        },
+        escapePressed: function(e) {
+            if(this.$el.closest('.ui-page-active').size() > 0 && this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_CANCEL) {
+                this.buttonClicked(e);
+            }
+        },
         buttonClicked: function (event) {
             var that = this,
             responsebody,
@@ -51,7 +67,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
                     responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
                         if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
                             goBack();
-                            event.preventDefault();
+                            if(event) {
+                                event.preventDefault();
+                            }
                         }
                     });
                 }
