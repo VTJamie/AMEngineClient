@@ -7,16 +7,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
         SESSION_VALID: "SESSION_VALID"
     }, Controller = Backbone.Marionette.Controller.extend({
         openPage_LandingPage: function () {
-//            $.mobile.loading('show', {
-//                text: 'Loading next view...',
-//                textVisible: true,
-//                theme: 'a',
-//                html: ""
-//            });
             LandingPageRequestModel.request(function (model) {
                 App.loadPage(new PageView({model: model}));
-                //App.vent.trigger('menu:reload');
-            //    $.mobile.loading('hide');
             });
         },
         openPage_OpenPage: function (pagename, pageparams) {
@@ -29,23 +21,15 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
                 splitparamdata.fields[splitparamstrings[idx]] = splitparamstrings[idx + 1];
             }
 
-//            $.mobile.loading('show', {
-//                text: 'Loading next view...',
-//                textVisible: true,
-//                theme: 'a',
-//                html: ""
-//            });
-
             InitialPageRequestModel.request(splitparamdata, function (model) {
                 if (model.get(constants.SESSION_VALID)) {
                     debug.log("Loading", model);
                     App.loadPage(new PageView({model: model}));
                 }
                 else {
+                    debug.log("Failed to Load: " + arguments);
                     Backbone.history.navigate('', {trigger: true});
-                    debug.log("Failed to Load: " + pagename, splitparamdata);
                 }
-                //$.mobile.loading('hide');
             });
         }
     });

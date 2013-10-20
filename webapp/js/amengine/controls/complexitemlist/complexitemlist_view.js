@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexlistitemeditrequestmodel', 'hbs!complexitemlisttemplate'], function (
+define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlisteditrequestmodel', 'hbs!complexitemlisttemplate'], function (
     $, jqM, Backbone, BaseControlView, ComplexListItemEditRequestModel, Template) {
     "use strict";
     var C = {

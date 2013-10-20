@@ -1,6 +1,6 @@
 /*global $, define, require, window, debug*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!buttontemplate', 'submitrequestmodel', 'pagecollection', 'pageresponsebodymodel', 'complexlistitemsubmitrequestmodel'], function ($, jqM, Backbone, App, BaseControlView, Template, SubmitRequestModel, PageCollection, PageResponseBodyModel, ComplexListItemSubmitRequestModel) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!buttontemplate', 'submitrequestmodel', 'pagecollection', 'pageresponsebodymodel', 'complexitemlistsubmitrequestmodel'], function ($, jqM, Backbone, App, BaseControlView, Template, SubmitRequestModel, PageCollection, PageResponseBodyModel, ComplexListItemSubmitRequestModel) {
     "use strict";
     var C = {
         LABEL: "LABEL",
@@ -33,34 +33,35 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
         },
         attributes: {},
         buttonClicked: function (event) {
-            debug.log(PageResponseBodyModel.getCurrentInstance());
             var that = this,
             responsebody,
             lastpage,
             isdialog = PageResponseBodyModel.getCurrentInstance().get(C.RESPONSE_BODY).get(C.IS_DIALOG);
+            function goBack() {
+                if(PageCollection.length > 0) {
+                    lastpage = PageCollection.pop().get("page");
+                    $.mobile.changePage($(lastpage));
+                } else {
+                    window.history.back();
+                }
+            }
+            function handleResponseActionList(responsemodel, e) {
+                responsebody = responsemodel.get(C.RESPONSE_BODY);
+                if (responsebody.get(C.ERRORS).size() === 0) {
+                    responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
+                        if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
+                            goBack();
+                            event.preventDefault();
+                        }
+                    });
+                }
+            }
             if (this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_SUBMIT) {
-                debug.log(isdialog);
                 if(isdialog) {
                     ComplexListItemSubmitRequestModel.request({
                         REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
                     }, function (model) {
-
-                        responsebody = model.get(C.RESPONSE_BODY);
-                        if (responsebody.get(C.ERRORS).size() === 0) {
-                            responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
-                                if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
-                                    if(PageCollection.length > 0) {
-                                        lastpage = PageCollection.pop().get("page");
-                                       $.mobile.changePage($(lastpage));
-                                    } else {
-                                        window.history.back();
-                                    }
-
-                                    //App.vent.trigger('menu:reload');
-                                    event.preventDefault();
-                                }
-                            });
-                        }
+                        handleResponseActionList(model, event);
                     });
                 }
                 else
@@ -68,34 +69,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
                     SubmitRequestModel.request({
                         REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
                     }, function (model) {
-
-                        responsebody = model.get(C.RESPONSE_BODY);
-                        if (responsebody.get(C.ERRORS).size() === 0) {
-                            responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
-                                if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
-                                    if(PageCollection.length > 0) {
-                                        lastpage = PageCollection.pop().get("page");
-                                        $.mobile.changePage($(lastpage));
-                                    } else {
-                                        window.history.back();
-                                    }
-
-                                    //App.vent.trigger('menu:reload');
-                                    event.preventDefault();
-                                }
-                            });
-                        }
+                        handleResponseActionList(model, event);
                     });
                 }
             }
             else if (this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_CANCEL) {
-                var lastpage;
-                if(PageCollection.length > 0) {
-                    lastpage = PageCollection.pop().get("page");
-                    $.mobile.changePage($(lastpage));
-                } else {
-                    window.history.back();
-                }
+                goBack();
             }
         },
         keyUp: function(){

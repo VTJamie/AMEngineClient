@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'pageresponsebodymodel', 'dialogresponsebodymodel', 'controlviewcollection'], function (Backbone, CM, BaseFieldRequestModel, PageResponseBodyModel, DialogResponseBodyModel, ControlViewCollection) {
+define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'pageresponsebodymodel', 'dialogresponsebodymodel', 'controlviewcollection', 'complexitemlistsubmitresponsebodymodel'], function (Backbone, CM, BaseFieldRequestModel, PageResponseBodyModel, DialogResponseBodyModel, ControlViewCollection, ComplexItemListSubmitResponseBodyModel) {
 
     "use strict";
 
@@ -21,7 +21,7 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'pagerespo
         REQUEST_DATA_OBJECT_ID: "REQUEST_DATA_OBJECT_ID",
         REQUEST_COMPLEX_ITEM_ID: "REQUEST_COMPLEX_ITEM_ID",
         REQUEST_TYPE_FIELD_COMPLEX_ITEM_LIST_SAVE_ITEM: "REQUEST_TYPE_FIELD_COMPLEX_ITEM_LIST_SAVE_ITEM",
-        RESPONSE_BODY: DialogResponseBodyModel,
+        RESPONSE_BODY: ComplexItemListSubmitResponseBodyModel,
         ROOT_OBJECT: "ROOT_OBJECT",
         OBJECT_NAME: "OBJECT_NAME",
         REQUEST_MAIN_OBJECT_ID: "REQUEST_MAIN_OBJECT_ID",

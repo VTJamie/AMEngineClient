@@ -20,8 +20,6 @@ module.exports = function (grunt) {
                 'jQuery']
             },
             options: {
-                // junit: 'out/junit.xml', // write the output to a JUnit XML
-                // log: 'out/lint.log',
                 jslintXml: 'out/jslint_xml.xml',
                 errorsOnly: true, // only display errors
                 failOnError: false, // defaults to true
@@ -103,6 +101,6 @@ module.exports = function (grunt) {
     grunt.option('force', true);
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'jslint', 'compass', 'replace:loggingoff', 'copy', 'replace:loggingon']);
+    grunt.registerTask('default', ['jshint', 'jslint', 'copy']);
 
 };

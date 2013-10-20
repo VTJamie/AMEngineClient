@@ -105,8 +105,8 @@ require.config({
         'submitrequestmodel': './controls/button/submit_request_model',
         'basefieldrequestmodel': './requests/basefield_request_model',
         'logoutrequestmodel': './requests/logout_request_model',
-        'complexlistitemeditrequestmodel': './controls/complexitemlist/complexlistitemedit_request_model',
-        'complexlistitemsubmitrequestmodel': './controls/complexitemlist/complexlistitemsubmit_request_model',
+        'complexitemlisteditrequestmodel': './controls/complexitemlist/complexitemlistedit_request_model',
+        'complexitemlistsubmitrequestmodel': './controls/complexitemlist/complexitemlistsubmit_request_model',
 
         //Controls
         'basecontrolview': './controls/basecontrol_view',
@@ -149,6 +149,7 @@ require.config({
         'complexitemlistcolumnitemmodel': './controls/complexitemlist/complexitemlist_columnitem_model',
         'complexitemlistgriddatacollection': './controls/complexitemlist/complexitemlist_griddata_collection',
         'complexitemlistgriddatamodel': './controls/complexitemlist/complexitemlist_griddata_model',
+        'complexitemlistsubmitresponsebodymodel': './controls/complexitemlist/complexitemlistsubmitresponsebody_model',
 
         'gridview': './controls/grid/grid_view',
         'gridtemplate': './controls/grid/grid_template',
