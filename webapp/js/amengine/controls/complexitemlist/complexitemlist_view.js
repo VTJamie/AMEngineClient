@@ -13,10 +13,14 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlis
                 this.template = Template;
             },
             events: $.extend({
-                'click .complexitemlist-item': 'linkItemClicked'
+                'click .complexitemlist-item': 'linkItemClicked',
+                'click .amengine-complexitemlist-add': 'addItem'
             }, BaseControlView.prototype.events),
             getValue : function () {
                 return {};
+            },
+            addItem: function() {
+
             },
             linkItemClicked: function(e) {
                 ComplexListItemEditRequestModel.request({
