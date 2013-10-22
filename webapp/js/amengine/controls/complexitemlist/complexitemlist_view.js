@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlisteditrequestmodel', 'hbs!complexitemlisttemplate'], function (
-    $, jqM, Backbone, BaseControlView, ComplexListItemEditRequestModel, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistnewrequestmodel', 'hbs!complexitemlisttemplate'], function (
+    $, jqM, Backbone, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemNewRequestModel, Template) {
     "use strict";
     var C = {
         ID: "ID",
@@ -20,7 +20,20 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlis
                 return {};
             },
             addItem: function() {
+                ComplexListItemNewRequestModel.request({
+                    REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
+                }, function(responsemodel){
+                    if (responsemodel.get(C.SESSION_VALID)) {
+                        debug.log("Loading", responsemodel);
+                        require(['app', 'dialogview'], function(App, DialogView){
+                            App.loadPage(new DialogView({model: responsemodel}));
+                        });
 
+                    }
+                    else {
+                        Backbone.history.navigate('', {trigger: true});
+                    }
+                });
             },
             linkItemClicked: function(e) {
                 ComplexListItemEditRequestModel.request({

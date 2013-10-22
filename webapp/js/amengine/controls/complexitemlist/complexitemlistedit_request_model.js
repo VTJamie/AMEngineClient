@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'initialpagerequestmodel', 'dialogresponsebodymodel'], function (Backbone, CM, BaseFieldRequestModel, InitialPageRequestModel, DialogResponseBodyModel) {
+define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'initialpagerequestmodel', 'dialogresponsebodymodel', 'pageresponsebodymodel'], function (Backbone, CM, BaseFieldRequestModel, InitialPageRequestModel, DialogResponseBodyModel, PageResponseBodyModel) {
 
     "use strict";
 

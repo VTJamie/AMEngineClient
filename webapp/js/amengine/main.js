@@ -106,6 +106,7 @@ require.config({
         'basefieldrequestmodel': './requests/basefield_request_model',
         'logoutrequestmodel': './requests/logout_request_model',
         'complexitemlisteditrequestmodel': './controls/complexitemlist/complexitemlistedit_request_model',
+        'complexitemlistnewrequestmodel': './controls/complexitemlist/complexitemlistnew_request_model',
         'complexitemlistsubmitrequestmodel': './controls/complexitemlist/complexitemlistsubmit_request_model',
 
         //Controls

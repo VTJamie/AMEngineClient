@@ -27,7 +27,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
                     App.loadPage(new PageView({model: model}));
                 }
                 else {
-                    debug.log("Failed to Load: " + arguments);
+                    debug.log("Failed to Load: ", pagename, pageparams);
                     Backbone.history.navigate('', {trigger: true});
                 }
             });
