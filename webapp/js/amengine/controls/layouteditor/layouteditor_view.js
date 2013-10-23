@@ -1,8 +1,10 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!layouteditortemplate'], function (
-    $, jqM, Backbone, BaseControlView, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', 'hbs!layouteditortemplate', 'hbs!layouteditoravailablepartialtemplate', 'hbs!layouteditordroppartialtemplate'], function (
+    $, jqM, Backbone, BaseControlView, HBS, Template, AvailablePartial, DropPartial) {
     "use strict";
+    HBS.registerPartial('droppartial', DropPartial);
+    HBS.registerPartial('availablepartial', AvailablePartial);
     var C = {
         LABEL: "LABEL",
         CURRENT_VALUE: "CURRENT_VALUE",
@@ -13,14 +15,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!layoutedit
         TEXT_BOX_TYPE_TEXT_AREA: "TEXT_BOX_TYPE_TEXT_AREA",
         EDITABLE: "EDITABLE",
         REQUIRED: "REQUIRED"
-    };
-
-    var LayoutEditorView = BaseControlView.extend({
+    },
+    LayoutEditorView = BaseControlView.extend({
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
-                this.template = Template;
-                debug.log("WHAT!!", this.model);
             },
+            template: Template,
             getValue : function () {
             //                                            var $droparea = $(this).find('.droparea');
             //                                            var resultobj = {};

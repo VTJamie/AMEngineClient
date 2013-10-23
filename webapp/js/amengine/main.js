@@ -164,6 +164,8 @@ require.config({
 
         'layouteditorview': './controls/layouteditor/layouteditor_view',
         'layouteditortemplate': './controls/layouteditor/layouteditor_template',
+        'layouteditoravailablepartialtemplate': './controls/layouteditor/layouteditorpartialavailabletemplate',
+        'layouteditordroppartialtemplate': './controls/layouteditor/layouteditorpartialdroptemplate',
         'layouteditormodel': './controls/layouteditor/layouteditor_model',
         'layouteditoritemmodel': './controls/layouteditor/layouteditor_item_model',
         'layouteditoritemcollection': './controls/layouteditor/layouteditor_item_collection',

@@ -1,0 +1,7 @@
+<li>{{ CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER }}
+    <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;'>
+        {{#each CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS }}
+            {{partial "droppartial" this}}
+        {{/each}}
+    </ul>
+</li>

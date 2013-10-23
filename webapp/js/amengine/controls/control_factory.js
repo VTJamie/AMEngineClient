@@ -53,7 +53,6 @@ define(['textview', 'selectview', 'buttonview', 'complexitemlistview', 'dateview
             }).render();
 
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_LAYOUT_EDITOR) {
-            debug.log('UHM HELLOO!');
             return new LayoutEditorView({
                 model: controlmodel
             }).render();

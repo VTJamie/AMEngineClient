@@ -2,6 +2,15 @@ define([
         'Handlebars'
     ], function (Handlebars) {
         "use strict";
+
+
+        Handlebars.registerHelper('partial', function partial(template, context, options) {
+            var f = Handlebars.partials[template];
+            if (!_.isFunction(f)) {
+                return "";
+            }
+            return new Handlebars.SafeString(f(context));
+        });
         Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 
             switch (operator) {

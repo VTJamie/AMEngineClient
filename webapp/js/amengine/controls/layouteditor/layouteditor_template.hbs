@@ -1,4 +1,3 @@
-{{#output this}}{{/output}}
 <table>
     {{#if IS_VISIBLE }}
         <tr>
@@ -7,7 +6,7 @@
                     <div><span>Available Items</span></div>
                     <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;'>
                         {{#each CONTROL_LAYOUT_EDITOR_ITEM_AVAILABLE_ITEMS }}
-
+                            {{partial "availablepartial" this}}
                         {{/each}}
                     </ul>
                 </div>
@@ -17,6 +16,7 @@
                     <div><span>Drop Area</span></div>
                     <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;'>
                         {{#each CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS }}
+                            {{partial "droppartial" this}}
 
                         {{/each}}
                     </ul>
