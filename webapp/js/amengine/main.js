@@ -165,6 +165,8 @@ require.config({
         'layouteditorview': './controls/layouteditor/layouteditor_view',
         'layouteditortemplate': './controls/layouteditor/layouteditor_template',
         'layouteditormodel': './controls/layouteditor/layouteditor_model',
+        'layouteditoritemmodel': './controls/layouteditor/layouteditor_item_model',
+        'layouteditoritemcollection': './controls/layouteditor/layouteditor_item_collection',
 
         'workflowindicatorview': './controls/workflowindicator/workflowindicator_view',
         'workflowindicatortemplate': './controls/workflowindicator/workflowindicator_template',

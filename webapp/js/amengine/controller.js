@@ -14,10 +14,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'marionette', 'app', 'landingpager
         openPage_OpenPage: function (pagename, pageparams) {
             var splitparamdata = {
                 OBJECT_NAME: pagename,
-                fields: {}
-            }, splitparamstrings = pageparams ? pageparams.split("/") : [];
+                fields: {},
+            }, splitparamstrings = pageparams ? pageparams.split("/") : [],
+            idx;
 
-            for (var idx = 1; idx < splitparamstrings.length - 1; idx += 2) {
+            for (idx = 1; idx < splitparamstrings.length - 1; idx += 2) {
                 splitparamdata.fields[splitparamstrings[idx]] = splitparamstrings[idx + 1];
             }
 

@@ -6,7 +6,7 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
 
     }, BaseModel = Backbone.Model.extend({
             initialize: function () {
-                var currentParam, cm, CurrentParamModel;
+                var currentParam, cm, CurrentParamModel, lazymodel;
                 for (cm in this.C) {
                     currentParam = this.C[cm];
                     if (currentParam && this.get(CM.get(cm)) !== undefined) {
@@ -16,7 +16,8 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
                                 CurrentParamModel = currentParam;
                                 this.set(cm, new CurrentParamModel(this.get(CM.get(cm))));
                 
-                            } 
+                            }
+
                             else {
                                 this.set(cm, currentParam(this.get(CM.get(cm))));
                             }
