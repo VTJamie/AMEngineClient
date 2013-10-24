@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistnewrequestmodel', 'hbs!complexitemlisttemplate'], function (
-    $, jqM, Backbone, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemNewRequestModel, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistnewrequestmodel', 'hbs!complexitemlisttemplate'], function (
+    $, jqM, Backbone, App, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemNewRequestModel, Template) {
     "use strict";
     var C = {
         ID: "ID",
@@ -20,6 +20,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlis
                 return {};
             },
             addItem: function() {
+                App.showLoader();
                 ComplexListItemNewRequestModel.request({
                     REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
                 }, function(responsemodel){
@@ -27,15 +28,18 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlis
                         debug.log("Loading", responsemodel);
                         require(['app', 'dialogview'], function(App, DialogView){
                             App.loadPage(new DialogView({model: responsemodel}));
+                            App.hideLoader();
                         });
 
                     }
                     else {
+                        App.hideLoader();
                         Backbone.history.navigate('', {trigger: true});
                     }
                 });
             },
             linkItemClicked: function(e) {
+                App.showLoader();
                 ComplexListItemEditRequestModel.request({
                     REQUEST_COMPLEX_ITEM_ID: $(e.target).closest('tr').attr('data-id'),
                     REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
@@ -44,10 +48,12 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'complexitemlis
                         debug.log("Loading", responsemodel);
                         require(['app', 'dialogview'], function(App, DialogView){
                             App.loadPage(new DialogView({model: responsemodel}));
+                            App.hideLoader();
                         });
 
                     }
                     else {
+                        App.hideLoader();
                         Backbone.history.navigate('', {trigger: true});
                     }
                 });

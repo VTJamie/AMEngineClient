@@ -54,6 +54,23 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette', 'pagecollection'
         }
     });
 
+    TheApplication.showLoader = function () {
+       if($.mobile.pageContainer) {
+           $.mobile.loading('show', {
+               text: 'Loading...',
+               textVisible: true,
+               theme: 'a',
+               html: ""
+           });
+       }
+    };
+
+    TheApplication.hideLoader = function () {
+        if($.mobile.pageContainer) {
+            $.mobile.loading('hide');
+        }
+    };
+
 
     TheApplication.on('start', function (options) {
 

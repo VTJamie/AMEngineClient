@@ -218,6 +218,9 @@ require.config({
         },
         'jquery-ui': {
             deps: ['jquery']
+        },
+        'amengine-css': {
+            deps: ['jquerymobile-css']
         }
     },
     map: {
