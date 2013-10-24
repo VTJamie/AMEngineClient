@@ -8,13 +8,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
     var C = {
         LABEL: "LABEL",
         CURRENT_VALUE: "CURRENT_VALUE",
-        MAX_LENGTH: "MAX_LENGTH",
-        PROTECTED_TEXT_FIELD: "PROTECTED_TEXT_FIELD",
-        TEXT_BOX_TYPE: "TEXT_BOX_TYPE",
-        TEXT_BOX_TYPE_TEXT_BOX: "TEXT_BOX_TYPE_TEXT_BOX",
-        TEXT_BOX_TYPE_TEXT_AREA: "TEXT_BOX_TYPE_TEXT_AREA",
         EDITABLE: "EDITABLE",
-        REQUIRED: "REQUIRED"
+        REQUIRED: "REQUIRED",
+        CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM",
+        CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"
     },
     LayoutEditorView = BaseControlView.extend({
             initialize: function (options) {
@@ -89,7 +86,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
                return BaseControlView.prototype.getValue.apply(this, arguments);
             },
             render: function() {
-               return BaseControlView.prototype.render.apply(this, arguments);
+               BaseControlView.prototype.render.apply(this, arguments);
 
 //                                if (controldef[adata.C[AMC.IS_VISIBLE]])
 //                                {
@@ -118,15 +115,15 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                                    $(currentobj).remove();
 //                                                }
 //                                                removeallchild($(this).parent().parent()[0]);
-//                                              //  alert($(this).parent().parent().data('itemdef')[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER]]);
+
 //                                            });
 //                                            var percentage = 100 / numberofcols;
 //                                            for (var i = 0; i < numberofcols; i++)
 //                                            {
 //                                                $(curgroup).find('.portlet-content tr').append("<td class='ui-widget-content' style='min-height: 40px; padding-left: 5px; padding-right: 5px; width: " + percentage + "%; vertical-align: top'></td>");
 //                                            }
-//                                            //     alert(itemdef[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS]]);
-//                                            //  $(curgroup).append("<td style='min-height: 40px; padding-left: 5px; padding-right: 5px;'></td>");
+
+
 //                                            $(curgroup).find(".portlet-content td").sortable(
 //                                                       {
 //                                                           connectWith: ".layoutcontrol-sortable-" + controldef[adata.C[AMC.ID]] + "-" + rootid,
@@ -183,7 +180,6 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                        {
 //                                            var curdiv = $("<div class='portlet ui-widget-content'><div class='portlet-header ui-widget-header' style='cursor: pointer'>" + itemdef[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER]] + "</div><table class='portlet-content' style='width: 100%;'></table></div>")[0];
 //
-//                                            //$(curdiv).addClass("layoutcontrol-item-" + controldef[adata.C[AMC.ID]] + "-" + rootid);
 //                                            $(curdiv).attr("numcols", itemdef[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS]]);
 //                                            $(curdiv).addClass("layoutcontrol-group-" + controldef[adata.C[AMC.ID]] + "-" + rootid);
 //                                            $(itemparent).append(curdiv);
@@ -223,7 +219,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                        }
 //                                        else
 //                                        {
-//                                            //
+
 //                                            var curdiv = $("<div class='portlet'><div class='portlet-header ui-widget-header' style='cursor: pointer'>" + itemdef[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER]] + "</div></div>")[0];
 //
 //                                            if (addsortable)
@@ -236,31 +232,34 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                                });
 //                                            }
 //                                            $(curdiv).addClass("layoutcontrol-just-item-" + controldef[adata.C[AMC.ID]] + "-" + rootid);
-//                                            $(curdiv).draggable({
-//                                                connectToSortable: ".layoutcontrol-sortable-" + controldef[adata.C[AMC.ID]] + "-" + rootid,
-//                                                revert: "invalid",
-//                                                helper: "clone",
-//                                                start: function(event, ui)
-//                                                {
-//                                                    ui.helper.data('itemdef',$(this).data('itemdef'));
-//                                                    $(this).hide();
-//
-//                                                },
-//
-//                                                stop: function(event, ui)
-//                                                {
-//                                                    if (!ui.helper.data('dropped'))
-//                                                    {
-//                                                        $(this).show();
-//                                                    }
-//                                                    else
-//                                                    {
-//                                                        $(this).remove();
-//                                                    }
-//
-//                                                },
-//                                                cursor: "move"
-//                                            });
+
+                                            this.$el.find('.available-items .available-item').draggable({
+                                                connectToSortable: '.drop-area',
+                                                revert: "invalid",
+                                                helper: "clone",
+                                                start: function(event, ui)
+                                                {
+                                               //     ui.helper.data('itemdef',$(this).data('itemdef'));
+                                                    if(!ui.helper.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP)) {
+                                                        $(this).hide();
+                                                    }
+
+                                                },
+
+                                                stop: function(event, ui)
+                                                {
+                                                    if (!ui.helper.data('dropped') || ui.helper.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP))
+                                                    {
+                                                        $(this).show();
+                                                    }
+                                                    else
+                                                    {
+                                                        $(this).remove();
+                                                    }
+
+                                                },
+                                                cursor: "move"
+                                            });
 //                                            $(itemparent).append(curdiv);
 //                                            $(curdiv).data("itemdef", itemdef);
 //                                        }
@@ -276,34 +275,31 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                    {
 //                                        processitem(availablecontent, controldef[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_AVAILABLE_ITEMS]][ci], false);
 //                                    }
-//
-//                                    $(dropareacontent).sortable(
-//                                         {
-//                                             connectWith: ".layoutcontrol-sortable-" + controldef[adata.C[AMC.ID]] + "-" + rootid,
-//                                             tolerance: "pointer",
-//                                             start: function (event, ui)
-//                                             {
-//
-//                                                // ui.helper.data('itemdef', ui.item.data('itemdef'));
-//                                             },
-//                                             receive: function(event, ui)
-//                                             {
+                                    this.$el.find('.drop-area').sortable(
+                                         {
+                                            // connectWith: ".layoutcontrol-sortable-" + controldef[adata.C[AMC.ID]] + "-" + rootid,
+                                             tolerance: "pointer",
+                                             start: function (event, ui)
+                                             {
+
+
+                                             },
+                                             receive: function(event, ui)
+                                             {
 //                                                 if ($(this).data("uiSortable") && $(this).data("uiSortable").currentItem)
 //                                                 {
 //                                                     $(this).data("uiSortable").currentItem.data('itemdef', ui.item.data('itemdef'));
 //                                                 }
-//                                                 if (ui.helper)
-//                                                 {
-//                                                     ui.item.data('itemdef', ui.helper.data('itemdef'));
-//                                                     ui.helper.data("dropped", true);
-//                                                 }
-//                                                // $(this).data("uiSortable").currentItem.data('itemdef', ui.item.data('itemdef'));
-//                                                 //     ui.item.data('itemdef', ui.helper.data('itemdef'));
-//
-//                                             },
-//                                             stop: function (event, ui)
-//                                             {
-//
+                                                 if (ui.helper)
+                                                 {
+                                                     //ui.item.data('itemdef', ui.helper.data('itemdef'));
+                                                     ui.helper.data("dropped", true);
+                                                 }
+
+                                             },
+                                             stop: function (event, ui)
+                                             {
+
 //                                                 if (ui.item.hasClass("layoutcontrol-group-" + controldef[adata.C[AMC.ID]] + "-" + rootid))
 //                                                 {
 //                                                     appendgroupsortable(ui.item[0]);
@@ -317,14 +313,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                                         {
 //                                                             processitem(availablecontent, $(this).parent().parent().data("itemdef"), false);
 //                                                             $(this).parent().parent().remove();
-//                                                             //  $(availablecontent).append($(this).parent().parent());
-//                                                             //   $(this).remove();
-//                                                             // alert($(this).parent().parent().data('itemdef')[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER]]);
 //                                                         });
 //                                                     }
 //                                                 }
-//                                             }
-//                                         });
+                                             }
+                                         });
 //
 //                                }
 //                                else
@@ -333,6 +326,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
 //                                }
 //                            }
               //          },
+              return this.el;
             }
     });
     return LayoutEditorView;

@@ -6,9 +6,11 @@ require.config({
 
         // Common JS Libs
         'jquery': '../libs/jquery/jquery-1.10.2',
+        'jquery-ui': '../libs/jquery/jquery-ui-1.10.3.custom.min',
         'jquerymobile': '../libs/jquery/jquery.mobile-1.3.2',
         'jquerymobile-alphascroll': '../customizedlibs/jquery/jquery.mobile.alphascroll',
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
+
         'underscore': '../libs/backbone/underscore-min',
         'backbone': '../libs/backbone/backbone',
         'backbone-localstorage': '../libs/backbone/backbone.localStorage',
@@ -213,6 +215,9 @@ require.config({
         },
         'app': {
             deps: ['jquery', 'jquerymobile', 'logging', 'underscore', 'backbone', 'marionette']
+        },
+        'jquery-ui': {
+            deps: ['jquery']
         }
     },
     map: {
@@ -230,7 +235,7 @@ require(['css!jquerymobile-css', 'css!amengine-css']);
 //require(['css!jquerymobile-css', 'css!jquerymobile-fluid960-css', 'css!amengine-css']);
 
 //router and routecontroller must be specified in a sub config file
-require(['jquery', 'jquerymobile-config', 'jquerymobile', 'backbone', 'app', 'constantsrequestmodel'], function ($, jqConfig, jqM, Backbone, App, ConstantsRequestModel) {
+require(['jquery', 'jquery-ui', 'jquerymobile-config', 'jquerymobile', 'backbone', 'app', 'constantsrequestmodel'], function ($, jQueryUI, jqConfig, jqM, Backbone, App, ConstantsRequestModel) {
     "use strict";
     ConstantsRequestModel.request(function () {
         require(['router', 'routecontroller'], function (Router, Controller) {
