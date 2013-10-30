@@ -1,1 +1,5 @@
-<li class="ui-body-a available-item ui-bar-{{#ifCond CONTROL_LAYOUT_EDITOR_ITEM_TYPE "===" "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"}}b{{else}}c{{/ifCond}} {{ CONTROL_LAYOUT_EDITOR_ITEM_TYPE }}"><span>{{ CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER }}</span></li>
+<li data-numcols="{{ CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS }}" class="ui-body-a available-item ui-bar-{{#ifCond CONTROL_LAYOUT_EDITOR_ITEM_TYPE "===" "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"}}b{{else}}c{{/ifCond}} {{ CONTROL_LAYOUT_EDITOR_ITEM_TYPE }}">
+    <span class="layouteditor-label {{ CONTROL_LAYOUT_EDITOR_ITEM_TYPE }}">
+        {{ CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER }}
+    </span>
+</li>

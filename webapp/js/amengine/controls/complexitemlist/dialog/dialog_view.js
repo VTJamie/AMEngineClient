@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', 'controlviewcollection', 'pagecontainer', 'app', 'pageresponsebodymodel', 'pageview'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageContainer, App, PageResponseBodyModel, PageView) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', 'controlviewcollection', 'pagecontainer', 'app', 'pageresponsebodymodel', 'pageview', 'pagecollection'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageContainer, App, PageResponseBodyModel, PageView, PageCollection) {
     "use strict";
     var constants = {
         RESPONSE_BODY: "RESPONSE_BODY",
@@ -33,7 +33,21 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', '
             'class': "type-interior",
             'data-role': 'dialog',
             'role': 'dialog'
-        })
+        }),
+        events: $.extend({}, PageView.prototype.events, {
+            'click :jqmData(icon=delete)': 'goBack'
+        }),
+        goBack: function (e) {
+            if(PageCollection.length > 0) {
+                $.mobile.changePage($(PageCollection.pop().get("page")));
+            } else {
+                window.history.back();
+            }
+            if(e) {
+                e.preventDefault();
+            }
+            return false;
+        }
     });
     return DialogView;
 });

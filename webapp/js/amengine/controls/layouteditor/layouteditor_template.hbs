@@ -1,29 +1,25 @@
 {{#if IS_VISIBLE }}
 <table class="amengine-layouteditor">
-
-        <thead>
+    <thead>
         <tr class="ui-bar-b"><th class="ui-corner-top-left">Available Items</th><th>Drop Area</th></tr>
-        </thead>
+    </thead>
     <tbody>
         <tr>
             <td style='width: 30%; vertical-align: top' class="ui-body-a ui-shadow-inset ui-input-text">
-                    <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;' class="available-items">
-                        {{#each CONTROL_LAYOUT_EDITOR_ITEM_AVAILABLE_ITEMS }}
-                            {{partial "availablepartial" this}}
-                        {{/each}}
-                    </ul>
+                <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;' class="available-items">
+                    {{#each CONTROL_LAYOUT_EDITOR_ITEM_AVAILABLE_ITEMS }}
+                        {{partial "availablepartial" this}}
+                    {{/each}}
+                </ul>
             </td>
             <td style='width:70%; vertical-align: top' class="ui-body-a ui-shadow-inset ui-input-text">
-                    <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;' class="drop-items drop-area">
-                        {{#each CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS }}
-                            {{partial "droppartial" this}}
-
-                        {{/each}}
-                    </ul>
+                <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;' class="drop-items drop-area">
+                    {{#each CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS }}
+                        {{partial "droppartial" this}}
+                    {{/each}}
+                </ul>
             </td>
         </tr>
     </tbody>
-
-
 </table>
 {{/if}}

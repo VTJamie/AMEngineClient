@@ -1,4 +1,10 @@
-<li class="ui-body-a drop-item ui-bar-{{#ifCond CONTROL_LAYOUT_EDITOR_ITEM_TYPE "===" "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"}}b{{else}}c{{/ifCond}}"><span class="{{ CONTROL_LAYOUT_EDITOR_ITEM_TYPE }}">{{ CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER }}</span>
+<li data-numcols="{{ CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS }}" class="ui-body-a drop-item ui-bar-{{#ifCond CONTROL_LAYOUT_EDITOR_ITEM_TYPE "===" "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"}}b{{else}}c{{/ifCond}}">
+    <div style="width: 100%">
+    <span class="layouteditor-label {{ CONTROL_LAYOUT_EDITOR_ITEM_TYPE }}">
+        {{ CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER }}
+    </span>
+    <a href="#" class="ui-icon-pack ui-btn-right layouteditor-trash-button" data-role="button" data-icon="trash" data-iconpos="notext"></a>
+    </div>
     {{#ifCond CONTROL_LAYOUT_EDITOR_ITEM_TYPE "===" "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"}}
         <ul style='min-height: 200px; padding-left: 5px; padding-right: 5px;' class="ui-shadow-inset ui-body-a drop-area">
             {{#each CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS }}

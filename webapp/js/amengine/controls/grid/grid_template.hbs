@@ -1,6 +1,6 @@
-<table data-inset="true" data-role="table" data-mode="reflow" class="ui-responsive">
+<table id="{{ ID }}-grid" data-inset="true" data-role="table" data-sortable="true" data-mode="reflow" class="ui-responsive">
     <thead>
-        <tr class="ui-bar-b">
+        <tr class="ui-bar-a">
 
         {{#if GRID_VIEW_DATA_OBJECT_LAUNCH }}
             <th></th>
@@ -15,7 +15,7 @@
     <tbody>
         {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA }}
 
-            <tr class="grid-data-row {{#isOdd @index}}ui-bar-c{{else}}ui-bar-d{{/isOdd}}" data-id="{{ ID }}">
+            <tr class="grid-data-row {{#isOdd @index}}ui-bar-b{{else}}ui-bar-c{{/isOdd}}" data-id="{{ ID }}">
                 {{#ifCond ../GRID_VIEW_DATA_OBJECT_LAUNCH "!==" undefined}}
                     <td>
                         <a href="#{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_OBJECT_NAME }}/{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_TARGET_FIELD }}/{{ ID }}" data-role="button">
@@ -36,4 +36,5 @@
         {{/each}}
     </tbody>
 </table>
+<div id="{{ ID }}-pager" data-role="pager"></div>
 

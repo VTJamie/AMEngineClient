@@ -15,47 +15,30 @@ define(['textview', 'selectview', 'buttonview', 'complexitemlistview', 'dateview
         CONTROL_TYPE_LAYOUT_EDITOR: "CONTROL_TYPE_LAYOUT_EDITOR"
     };
     return function (controlmodel) {
-
+        var returncontrol;
         if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_TEXT) {
-            return new TextView({
-                model: controlmodel
-            }).render();
+            returncontrol = new TextView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_SELECT) {
-            return new SelectView({
-                model: controlmodel
-            }).render();
+            returncontrol = new SelectView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_BUTTON) {
-            return new ButtonView({
-                model: controlmodel
-            }).render();
+            returncontrol = new ButtonView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_DATE) {
-            return new DateView({
-                model: controlmodel
-            }).render();
+            returncontrol = new DateView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_GRID) {
-            return new GridView({
-                model: controlmodel
-            }).render();
-
+            returncontrol = new GridView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_COMPLEX_ITEM_LIST) {
-            return new ComplexItemListView({
-                model: controlmodel
-            }).render();
-
+            returncontrol = new ComplexItemListView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_FILE) {
-            return new FileView({
-                model: controlmodel
-            }).render();
-
+            returncontrol = new FileView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_WORKFLOW_INDICATOR) {
-            return new WorkflowIndicatorView({
-                model: controlmodel
-            }).render();
-
+            returncontrol = new WorkflowIndicatorView({model: controlmodel});
         } else if (controlmodel.get(C.CONTROL_TYPE) === C.CONTROL_TYPE_LAYOUT_EDITOR) {
-            return new LayoutEditorView({
-                model: controlmodel
-            }).render();
+            returncontrol = new LayoutEditorView({model: controlmodel});
         }
+        returncontrol.render();
+        if(typeof returncontrol.onShow === "function") {
+            returncontrol.onShow();
+        }
+        return returncontrol.el;
     };
 });

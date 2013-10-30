@@ -11,6 +11,14 @@ require.config({
         'jquerymobile-alphascroll': '../customizedlibs/jquery/jquery.mobile.alphascroll',
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
 
+        'jquerymobile-slickgrid-core': '../libs/jquery/slickgrid/slick.core',
+        'jquerymobile-slickgrid-dataview': '../libs/jquery/slickgrid/slick.dataview',
+        'jquerymobile-slickgrid-editors': '../libs/jquery/slickgrid/slick.editors',
+        'jquerymobile-slickgrid-formatters': '../libs/jquery/slickgrid/slick.formatters',
+        'jquerymobile-slickgrid-grid': '../libs/jquery/slickgrid/slick.grid',
+        'jquerymobile-slickgrid-groupitemmetadataprovider': '../libs/jquery/slickgrid/slick.groupitemmetadataprovider',
+        'jquerymobile-slickgrid-remotemodel': '../libs/jquery/slickgrid/slick.remotemodel',
+
         'underscore': '../libs/backbone/underscore-min',
         'backbone': '../libs/backbone/backbone',
         'backbone-localstorage': '../libs/backbone/backbone.localStorage',
@@ -36,6 +44,11 @@ require.config({
         'jquerymobile-theme-default-css': '../../css/themes/default/default',
         'jquerymobile-fluid960-css': '../../css/jquery-mobile-fluid960',
         'amengine-css': '../../css/amengine',
+        'jqm-iconpack-css': '../../css/jqm-icon-pack-2.0-original',
+        'jquerymobiletable-css': '../../css/jquery.mobile.table',
+
+        'slickgrid-grid-css': '../../css/slickgrid/slick.grid',
+        'slickgrid-grid-theme-css': '../../css/slickgrid/slick-default-theme',
 
         //General Resources
         'router': './router',
@@ -77,9 +90,6 @@ require.config({
         //General Models
         'basemodel': './models/base_model',
         'persistmodel': './models/persist_model',
-
-
-
 
 
         //Menu
@@ -221,7 +231,32 @@ require.config({
         },
         'amengine-css': {
             deps: ['jquerymobile-css']
+        },
+        'jqm-iconpack-css': {
+            deps: ['jquerymobile-css']
+        },
+        'jquerymobile-slickgrid-core': {
+            deps: ['jquery']
+        },
+        'jquerymobile-slickgrid-dataview': {
+            deps: ['jquerymobile-slickgrid-core']
+        },
+        'jquerymobile-slickgrid-editors': {
+           deps: ['jquerymobile-slickgrid-core']
+        },
+        'jquerymobile-slickgrid-formatters': {
+           deps: ['jquerymobile-slickgrid-core']
+        },
+        'jquerymobile-slickgrid-grid': {
+           deps: ['jquerymobile-slickgrid-core', 'jquery-ui']
+        },
+        'jquerymobile-slickgrid-groupitemmetadataprovider': {
+           deps: ['jquerymobile-slickgrid-core']
+        },
+        'jquerymobile-slickgrid-remotemodel': {
+           deps: ['jquerymobile-slickgrid-core']
         }
+
     },
     map: {
         '*': {
@@ -233,12 +268,30 @@ require.config({
     }
 });
 
-require(['css!jquerymobile-css', 'css!amengine-css']);
+require([
+         'css!jquerymobile-css',
+         'css!jqm-iconpack-css',
+         'css!amengine-css'
+         ]);
 
 //require(['css!jquerymobile-css', 'css!jquerymobile-fluid960-css', 'css!amengine-css']);
 
 //router and routecontroller must be specified in a sub config file
-require(['jquery', 'jquery-ui', 'jquerymobile-config', 'jquerymobile', 'backbone', 'app', 'constantsrequestmodel'], function ($, jQueryUI, jqConfig, jqM, Backbone, App, ConstantsRequestModel) {
+require(['jquery',
+         'jquery-ui',
+         'jquerymobile-config',
+         'jquerymobile',
+         'backbone',
+         'app',
+         'constantsrequestmodel'
+         ], function (
+         $,
+         jQueryUI,
+         jqConfig,
+         jqM,
+         Backbone,
+         App,
+         ConstantsRequestModel) {
     "use strict";
     ConstantsRequestModel.request(function () {
         require(['router', 'routecontroller'], function (Router, Controller) {

@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', 'hbs!layouteditortemplate', 'hbs!layouteditoravailablepartialtemplate', 'hbs!layouteditordroppartialtemplate'], function (
-    $, jqM, Backbone, BaseControlView, HBS, Template, AvailablePartial, DropPartial) {
+define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecontrolview', 'Handlebars', 'hbs!layouteditortemplate', 'hbs!layouteditoravailablepartialtemplate', 'hbs!layouteditordroppartialtemplate'], function (
+    $, jqM, Backbone, CM, BaseControlView, HBS, Template, AvailablePartial, DropPartial) {
     "use strict";
     HBS.registerPartial('droppartial', DropPartial);
     HBS.registerPartial('availablepartial', AvailablePartial);
@@ -11,78 +11,102 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'Handlebars', '
         EDITABLE: "EDITABLE",
         REQUIRED: "REQUIRED",
         CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM",
-        CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"
+        CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP",
+        CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT: "CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT",
+        CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER: "CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER",
+        CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS: "CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS",
+        CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS: "CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS"
     },
     LayoutEditorView = BaseControlView.extend({
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
             },
             template: Template,
+            events: {
+                'click .layouteditor-trash-button': 'removeItem'
+            },
+            removeItem: function(e) {
+                debug.log($(e.target).closest('li')[0]);
+                e.preventDefault();
+                return false;
+            },
             getValue : function () {
-            //                                            var $droparea = $(this).find('.droparea');
-            //                                            var resultobj = {};
-            //                                            var curthis = this;
-            //                                            function getchildobj(parentobj)//, level)
-            //                                            {
-            //                                                var childobj = {};
-            //                                             //   level++;
-            //                                                if ($(parentobj).data('itemdef'))
-            //                                                {
-            //                                                    childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER]] = $(parentobj).data('itemdef')[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER]];// + " " + level;
-            //                                                }
-            //
-            //                                                if ($(parentobj).data('itemdef') && $(parentobj).data('itemdef')[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_TYPE]] == adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP])
-            //                                                {
-            //                                                    childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS]] = $(parentobj).data('itemdef')[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS]];
-            //                                                }
-            //
-            //                                                if (!$(parentobj).data('itemdef') || $(parentobj).data('itemdef')[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_TYPE]] == adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP])
-            //                                                {
-            //                                                    childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]] = [];
-            //                                                    var $tr = $(parentobj).find('tr:first');
-            //                                                    var $td = $tr.children();
-            //                                                    var arrofitemarr = [];
-            //                                                    $td.each(function (idx, item)
-            //                                                    {
-            //                                                        arrofitemarr[idx] = [];
-            //
-            //                                                        $(item).children().each(function(childidx, childitem)
-            //                                                        {
-            //                                                            arrofitemarr[idx][arrofitemarr[idx].length] = getchildobj(childitem);
-            //                                                        });
-            //                                                    });
-            //
-            //                                                    var longestlen = 0;
-            //                                                    for (var i in arrofitemarr)
-            //                                                    {
-            //                                                        if (arrofitemarr[i].length > longestlen)
-            //                                                        {
-            //                                                            longestlen = arrofitemarr[i].length;
-            //                                                        }
-            //                                                    }
-            //                                                    for (var i = 0; i < longestlen; i++)
-            //                                                    {
-            //                                                        for (var j = 0; j < arrofitemarr.length; j++)
-            //                                                        {
-            //                                                            if (i < arrofitemarr[j].length)
-            //                                                            {
-            //                                                                childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]][childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]].length] = arrofitemarr[j][i];
-            //                                                            }
-            //                                                        }
-            //                                                    }
-            //
-            //                                                }
-            //                                                return childobj;
-            //                                            }
-            //                                            var returnobj = {};
-            //                                            returnobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT]] = [];
-            //                                            $droparea.children().each(function (idx, item)
-            //                                            {
-            //                                                returnobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT]][returnobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT]].length] = getchildobj(item);
-            //                                            });
-            //
-            //
-            //                                            return JSON.stringify(returnobj);
+
+                var $droparea = this.$el.find('.drop-items'),
+                resultobj = {},
+                curthis = this,
+                returnobj = {},
+                $parentobj,
+                isitem,
+                isgroup;
+            function getchildobj(parentobj)
+            {
+                var tempobj;
+                tempobj = {};
+                $parentobj = $(parentobj);
+
+                isitem = $parentobj.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM);
+                isgroup = $parentobj.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP);
+             //   childobj = {};
+                if(!isitem && !isgroup) {
+                    $parentobj.children().each(function(idx, item) {
+                        $.extend(tempobj, getchildobj(item));
+                    });
+                }
+                else {
+                    tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER)] = $parentobj.text().trim();
+
+                    if (isgroup)
+                    {
+
+                        tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS)] = $(parentobj).attr('data-numcols');
+                        tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS)] = [];
+
+    //                    var $tr = $(parentobj).find('tr:first');
+    //                    var $td = $tr.children();
+    //                    var arrofitemarr = [];
+    //                    $td.each(function (idx, item)
+    //                    {
+    //                        arrofitemarr[idx] = [];
+    //
+    //                        $(item).children().each(function(childidx, childitem)
+    //                        {
+    //                            arrofitemarr[idx][arrofitemarr[idx].length] = getchildobj(childitem);
+    //                        });
+    //                    });
+    //
+    //                    var longestlen = 0;
+    //                    for (var i in arrofitemarr)
+    //                    {
+    //                        if (arrofitemarr[i].length > longestlen)
+    //                        {
+    //                            longestlen = arrofitemarr[i].length;
+    //                        }
+    //                    }
+    //                    for (var i = 0; i < longestlen; i++)
+    //                    {
+    //                        for (var j = 0; j < arrofitemarr.length; j++)
+    //                        {
+    //                            if (i < arrofitemarr[j].length)
+    //                            {
+    //                                childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]][childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]].length] = arrofitemarr[j][i];
+    //                            }
+    //                        }
+    //                    }
+    //
+                    }
+                }
+
+                return tempobj;
+            }
+            returnobj[CM.get(C.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT)] = [];
+            $droparea.children().each(function (idx, item)
+            {
+                returnobj[CM.get(C.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT)].push(getchildobj(item));
+            });
+
+           debug.log(JSON.stringify(returnobj));
+          //  return JSON.stringify(returnobj);
                return BaseControlView.prototype.getValue.apply(this, arguments);
             },
             render: function() {

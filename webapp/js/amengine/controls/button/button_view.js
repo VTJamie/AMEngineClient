@@ -39,13 +39,14 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
         },
         attributes: {},
         enterPressed: function(e) {
-            debug.log("enter pressed");
             if(this.$el.closest('.ui-page-active').size() > 0 && this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_SUBMIT) {
+                debug.log("Button", "enter pressed");
                 this.buttonClicked(e);
             }
         },
         escapePressed: function(e) {
             if(this.$el.closest('.ui-page-active').size() > 0 && this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_CANCEL) {
+                debug.log("Escape", "enter pressed");
                 this.buttonClicked(e);
             }
         },
