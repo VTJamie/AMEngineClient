@@ -4,6 +4,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!datetempla
     $, jqM, Backbone, BaseControlView, Template) {
 
     var C = {
+        ID: "ID",
         LABEL: "LABEL",
         CURRENT_VALUE: "CURRENT_VALUE",
         MAX_LENGTH: "MAX_LENGTH",
@@ -12,7 +13,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!datetempla
         TEXT_BOX_TYPE_TEXT_BOX: "TEXT_BOX_TYPE_TEXT_BOX",
         TEXT_BOX_TYPE_TEXT_AREA: "TEXT_BOX_TYPE_TEXT_AREA",
         EDITABLE: "EDITABLE",
-        REQUIRED: "REQUIRED"
+        REQUIRED: "REQUIRED",
+        IS_VISIBLE: "IS_VISIBLE"
     };
 
     var DateView = BaseControlView.extend({
@@ -21,7 +23,16 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!datetempla
                 this.template = Template;
             },
             getValue : function () {
-                return BaseControlView.prototype.getValue.apply(this, arguments);
+
+                var valueobj = {};
+                if (this.model.get(C.IS_VISIBLE) && this.model.get(C.EDITABLE)) {
+                    valueobj[this.model.get(C.ID)] = this.$el.find(':jqmData(type=date)').val().trim();
+                }
+                else if (this.model.get(C.IS_VISIBLE)) {
+                    valueobj[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE).trim();
+                }
+
+                return valueobj;
             }
     });
     return DateView;

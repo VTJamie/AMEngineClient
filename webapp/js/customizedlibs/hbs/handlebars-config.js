@@ -2,6 +2,16 @@ define([
         'Handlebars'
     ], function (Handlebars) {
         "use strict";
+        function pad(num, size) {
+            var s = num+"";
+            while (s.length < size) s = "0" + s;
+            return s;
+        }
+
+        Handlebars.registerHelper('date', function (value, options) {
+            var datevalue = new Date(value);
+            return  [pad(datevalue.getFullYear(), 4), "-", pad(datevalue.getMonth()+1, 2), "-", pad(datevalue.getDate(), 2)].join("");
+        });
 
 
         Handlebars.registerHelper('partial', function partial(template, context, options) {
@@ -35,11 +45,7 @@ define([
             }
             // return options.inverse(this);
         });
-        Handlebars.registerHelper('output', function (v1, options) {
-            debug.log(v1);
-            return options.fn(this);
 
-        });
         Handlebars.registerHelper('repeat', function (numberofiterations, options) {
             var itemarray = options.hash.items.split(","), htmlarray = new Array ();
             for (var idx = 0; idx < numberofiterations; idx++) {

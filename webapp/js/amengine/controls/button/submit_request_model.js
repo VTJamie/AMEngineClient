@@ -12,7 +12,8 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
         OBJECT_NAME: "OBJECT_NAME",
         ID: "ID",
         ERRORS: "ERRORS",
-        ERROR_FIELD: "ERROR_FIELD"
+        ERROR_FIELD: "ERROR_FIELD",
+        ERROR_MESSAGE: "ERROR_MESSAGE"
     }, C = {
         REQUEST_TYPE_IDENTIFIER: "REQUEST_TYPE_IDENTIFIER",
         REQUEST_TYPE_SUB_IDENTIFIER: "REQUEST_TYPE_SUB_IDENTIFIER",
@@ -29,6 +30,7 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
         //   url: 'js/amengine/mock/initialpage2.json',
         C: $.extend(C, BaseFieldRequestModel.prototype.C),
         request: function (data, success) {
+            $('.ui-page-active .error').empty();
             var dataobject = {},
             currentpageresponsebody = PageResponseBodyModel.getCurrentInstance();
             dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_FIELD_REQUEST);
@@ -38,17 +40,13 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
             dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(constants.ID);
             $.extend(dataobject, ControlViewCollection.getFieldValues());
             this.sendRequestWithPersist(dataobject, function(model) {
-                debug.log(JSON.stringify(model.get(constants.RESPONSE_BODY).toJSON()));
                 if(model.get(constants.RESPONSE_BODY).get(constants.ERRORS).length > 0) {
                     model.get(constants.RESPONSE_BODY).get(constants.ERRORS).each(function (curerror) {
-                        debug.log(ControlViewCollection.getFieldView(curerror.get(constants.ERROR_FIELD)).toJSON());
+                        ControlViewCollection.getFieldView(curerror.get(constants.ERROR_FIELD)).get("view").setErrorMessage(curerror.get(constants.ERROR_MESSAGE));
                     });
                 } else {
                     success(model);
                 }
-
-
-
             });
         }
     });

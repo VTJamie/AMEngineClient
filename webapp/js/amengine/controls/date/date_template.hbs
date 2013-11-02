@@ -1,10 +1,14 @@
 {{#if IS_VISIBLE }}
-    <div class="error">Heyo</div>
-    <label  for="control-{{ ID }}">{{ LABEL }}</label>
+    <div class="error"></div>
+    <div>
+        <label  for="control-{{ ID }}">{{ LABEL }}</label>
+    </div>
 
+    <div>
     {{#if EDITABLE }}
-        <input type="date" id="control-{{ ID }}" data-type="date" value="{{ CURRENT_VALUE }}" />
+        <input type="date" id="control-{{ ID }}" data-type="date" value="{{#date CURRENT_VALUE }}{{/date}}" />
     {{else}}
-        {{ CURRENT_VALUE }}
+       <span> {{ CURRENT_VALUE }} </span>
     {{/if}}
+    </div>
 {{/if}}

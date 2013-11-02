@@ -25,6 +25,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
         getValue: function(){
             debug.log(this.model.get(C.ID), 'Control getValue not overridden');
             return {};
+        },
+        setErrorMessage: function(message) {
+            this.$el.find('.error').empty().append("<span>" + message + "</span>");
         }
     });
     return BaseControlView;

@@ -5,7 +5,15 @@
 }
 
 .error {
-    color: red;
+    color: white;
+    background-color: red;
+    -moz-border-radius: 6px 6px 6px 6px;
+       -webkit-border-radius: 6px 6px 6px 6px;
+       border-radius: 6px 6px 6px 6px;
+}
+
+.error span {
+    margin: 5px;
 }
 
 .ui-table {

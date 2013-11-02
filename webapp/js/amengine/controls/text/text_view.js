@@ -29,12 +29,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!texttempla
                         valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val().trim();
                     }
                     else {
-                      //  valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val();    //temporary
                         valueobject[this.model.get(C.ID)] = this.$el.find('textarea').val().trim();
                     }
                 }
             }
-            else {
+            else if (this.model.get(C.IS_VISIBLE)) {
                 valueobject[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE).trim();
             }
             return valueobject;
