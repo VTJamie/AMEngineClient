@@ -1,7 +1,11 @@
 .ui-table th, .ui-table td {
-line-height: 1em;
-vertical-align: middle;
-padding: 5px;
+    line-height: 1em;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.error {
+    color: red;
 }
 
 .ui-table {

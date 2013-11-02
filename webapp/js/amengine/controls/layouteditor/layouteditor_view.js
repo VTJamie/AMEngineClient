@@ -6,6 +6,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
     HBS.registerPartial('droppartial', DropPartial);
     HBS.registerPartial('availablepartial', AvailablePartial);
     var C = {
+        ID: "ID",
         LABEL: "LABEL",
         CURRENT_VALUE: "CURRENT_VALUE",
         EDITABLE: "EDITABLE",
@@ -33,81 +34,51 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
             getValue : function () {
 
                 var $droparea = this.$el.find('.drop-items'),
-                resultobj = {},
-                curthis = this,
-                returnobj = {},
-                $parentobj,
-                isitem,
-                isgroup;
-            function getchildobj(parentobj)
-            {
-                var tempobj;
-                tempobj = {};
-                $parentobj = $(parentobj);
+                    resultobj = {},
+                    curthis = this,
+                    returnobj = {},
+                    valueobject = {};
+                function getchildobj(curobj)
+                {
+                    var tempobj,
+                        $curobj = $(curobj),
+                        isgroup = $curobj.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP),
+                        isdropitem = $curobj.hasClass('drop-item'),
+                        $curlabel,
+                        returnobj;
 
-                isitem = $parentobj.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM);
-                isgroup = $parentobj.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP);
-             //   childobj = {};
-                if(!isitem && !isgroup) {
-                    $parentobj.children().each(function(idx, item) {
-                        $.extend(tempobj, getchildobj(item));
-                    });
-                }
-                else {
-                    tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER)] = $parentobj.text().trim();
-
-                    if (isgroup)
-                    {
-
-                        tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS)] = $(parentobj).attr('data-numcols');
-                        tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS)] = [];
-
-    //                    var $tr = $(parentobj).find('tr:first');
-    //                    var $td = $tr.children();
-    //                    var arrofitemarr = [];
-    //                    $td.each(function (idx, item)
-    //                    {
-    //                        arrofitemarr[idx] = [];
-    //
-    //                        $(item).children().each(function(childidx, childitem)
-    //                        {
-    //                            arrofitemarr[idx][arrofitemarr[idx].length] = getchildobj(childitem);
-    //                        });
-    //                    });
-    //
-    //                    var longestlen = 0;
-    //                    for (var i in arrofitemarr)
-    //                    {
-    //                        if (arrofitemarr[i].length > longestlen)
-    //                        {
-    //                            longestlen = arrofitemarr[i].length;
-    //                        }
-    //                    }
-    //                    for (var i = 0; i < longestlen; i++)
-    //                    {
-    //                        for (var j = 0; j < arrofitemarr.length; j++)
-    //                        {
-    //                            if (i < arrofitemarr[j].length)
-    //                            {
-    //                                childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]][childobj[adata.C[AMC.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS]].length] = arrofitemarr[j][i];
-    //                            }
-    //                        }
-    //                    }
-    //
+                    if(!isdropitem) {
+                        $curobj.children().each(function(idx, item) {
+                            if(!tempobj) {
+                                tempobj = getchildobj(item);
+                            }
+                        });
                     }
+                    else {
+                        tempobj = {};
+                        $curlabel = $curobj.find(' > div > span.layouteditor-label');
+                        isgroup = $curlabel.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP);
+                        tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER)] = $curlabel.text().trim();
+                        if (isgroup)
+                        {
+                            tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS)] = parseInt($curlabel.attr('data-numcols'));
+                            tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS)] = [];
+                            $curobj.find(' > ul > li').each(function (idx, item) {
+                                tempobj[CM.get(C.CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS)].push(getchildobj(item));
+                            });
+                        }
+                    }
+
+                    return tempobj;
                 }
+                returnobj[CM.get(C.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT)] = [];
+                $droparea.children().each(function (idx, item)
+                {
+                    returnobj[CM.get(C.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT)].push(getchildobj(item));
+                });
 
-                return tempobj;
-            }
-            returnobj[CM.get(C.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT)] = [];
-            $droparea.children().each(function (idx, item)
-            {
-                returnobj[CM.get(C.CONTROL_LAYOUT_EDITOR_RETURN_OBJECT_ROOT)].push(getchildobj(item));
-            });
-
-           debug.log(JSON.stringify(returnobj));
-          //  return JSON.stringify(returnobj);
-               return BaseControlView.prototype.getValue.apply(this, arguments);
+               valueobject[this.model.get(C.ID)] = JSON.stringify(returnobj);
+               return valueobject;
             },
             render: function() {
                BaseControlView.prototype.render.apply(this, arguments);
@@ -257,7 +228,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
 //                                            }
 //                                            $(curdiv).addClass("layoutcontrol-just-item-" + controldef[adata.C[AMC.ID]] + "-" + rootid);
 
-                                            this.$el.find('.available-items .available-item').draggable({
+                                            this.$el.find('.available-items .drop-item').draggable({
                                                 connectToSortable: '.drop-area',
                                                 revert: "invalid",
                                                 helper: "clone",

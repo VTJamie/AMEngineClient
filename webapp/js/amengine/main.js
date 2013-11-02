@@ -10,14 +10,7 @@ require.config({
         'jquerymobile': '../libs/jquery/jquery.mobile-1.3.2',
         'jquerymobile-alphascroll': '../customizedlibs/jquery/jquery.mobile.alphascroll',
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
-
-        'jquerymobile-slickgrid-core': '../libs/jquery/slickgrid/slick.core',
-        'jquerymobile-slickgrid-dataview': '../libs/jquery/slickgrid/slick.dataview',
-        'jquerymobile-slickgrid-editors': '../libs/jquery/slickgrid/slick.editors',
-        'jquerymobile-slickgrid-formatters': '../libs/jquery/slickgrid/slick.formatters',
-        'jquerymobile-slickgrid-grid': '../libs/jquery/slickgrid/slick.grid',
-        'jquerymobile-slickgrid-groupitemmetadataprovider': '../libs/jquery/slickgrid/slick.groupitemmetadataprovider',
-        'jquerymobile-slickgrid-remotemodel': '../libs/jquery/slickgrid/slick.remotemodel',
+        'jquery-ui-touch-punch': '../libs/jquery/jquery.ui.touch-punch.min',
 
         'underscore': '../libs/backbone/underscore-min',
         'backbone': '../libs/backbone/backbone',
@@ -235,26 +228,8 @@ require.config({
         'jqm-iconpack-css': {
             deps: ['jquerymobile-css']
         },
-        'jquerymobile-slickgrid-core': {
-            deps: ['jquery']
-        },
-        'jquerymobile-slickgrid-dataview': {
-            deps: ['jquerymobile-slickgrid-core']
-        },
-        'jquerymobile-slickgrid-editors': {
-           deps: ['jquerymobile-slickgrid-core']
-        },
-        'jquerymobile-slickgrid-formatters': {
-           deps: ['jquerymobile-slickgrid-core']
-        },
-        'jquerymobile-slickgrid-grid': {
-           deps: ['jquerymobile-slickgrid-core', 'jquery-ui']
-        },
-        'jquerymobile-slickgrid-groupitemmetadataprovider': {
-           deps: ['jquerymobile-slickgrid-core']
-        },
-        'jquerymobile-slickgrid-remotemodel': {
-           deps: ['jquerymobile-slickgrid-core']
+        'jquery-ui-touch-punch': {
+            deps: ['jquery-ui']
         }
 
     },
@@ -279,6 +254,7 @@ require([
 //router and routecontroller must be specified in a sub config file
 require(['jquery',
          'jquery-ui',
+         'jquery-ui-touch-punch',
          'jquerymobile-config',
          'jquerymobile',
          'backbone',
@@ -287,6 +263,7 @@ require(['jquery',
          ], function (
          $,
          jQueryUI,
+         jqUIpunch,
          jqConfig,
          jqM,
          Backbone,

@@ -22,20 +22,20 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!texttempla
             var valueobject = {};
             if (this.model.get(C.IS_VISIBLE) && this.model.get(C.EDITABLE)) {
                 if (this.model.get(C.PROTECTED_TEXT_FIELD)) {
-                    valueobject[this.model.get(C.ID)] = this.$el.find('[type=password]').val();
+                    valueobject[this.model.get(C.ID)] = this.$el.find('[type=password]').val().trim();
                 }
                 else {
                     if (this.model.get(C.TEXT_BOX_TYPE) === C.TEXT_BOX_TYPE_TEXT_BOX) {
-                        valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val();
+                        valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val().trim();
                     }
                     else {
                       //  valueobject[this.model.get(C.ID)] = this.$el.find(':jqmData(type=text)').val();    //temporary
-                        valueobject[this.model.get(C.ID)] = this.$el.find('textarea').val();
+                        valueobject[this.model.get(C.ID)] = this.$el.find('textarea').val().trim();
                     }
                 }
             }
             else {
-                valueobject[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE);
+                valueobject[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE).trim();
             }
             return valueobject;
         }

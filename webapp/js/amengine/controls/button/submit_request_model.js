@@ -10,7 +10,9 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
         RESPONSE_BODY: "RESPONSE_BODY",
         ROOT_OBJECT: "ROOT_OBJECT",
         OBJECT_NAME: "OBJECT_NAME",
-        ID: "ID"
+        ID: "ID",
+        ERRORS: "ERRORS",
+        ERROR_FIELD: "ERROR_FIELD"
     }, C = {
         REQUEST_TYPE_IDENTIFIER: "REQUEST_TYPE_IDENTIFIER",
         REQUEST_TYPE_SUB_IDENTIFIER: "REQUEST_TYPE_SUB_IDENTIFIER",
@@ -35,7 +37,19 @@ define(['backbone', 'constantsrequestmodel', 'basefieldrequestmodel', 'submitres
             dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(constants.OBJECT_NAME);
             dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(constants.ID);
             $.extend(dataobject, ControlViewCollection.getFieldValues());
-            this.sendRequestWithPersist(dataobject, success);
+            this.sendRequestWithPersist(dataobject, function(model) {
+                debug.log(JSON.stringify(model.get(constants.RESPONSE_BODY).toJSON()));
+                if(model.get(constants.RESPONSE_BODY).get(constants.ERRORS).length > 0) {
+                    model.get(constants.RESPONSE_BODY).get(constants.ERRORS).each(function (curerror) {
+                        debug.log(ControlViewCollection.getFieldView(curerror.get(constants.ERROR_FIELD)).toJSON());
+                    });
+                } else {
+                    success(model);
+                }
+
+
+
+            });
         }
     });
 

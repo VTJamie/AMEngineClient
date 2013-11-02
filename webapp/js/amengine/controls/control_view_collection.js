@@ -4,7 +4,8 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
     "use strict";
 
     var C ={
-        FIELD_PREFIX: "FIELD_PREFIX"
+        FIELD_PREFIX: "FIELD_PREFIX",
+        ID: "ID"
     },
     ControlViewCollection = Backbone.Collection.extend({
         model : ControlViewModel,
@@ -30,12 +31,21 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
                 }
             }
             return valueobject;
+        },
+        _getFieldView: function (viewid) {
+            return this.find(function(viewmodel) {
+                return viewmodel.get("view").model.get(C.ID) === viewid;
+            });
         }
     }), currentpagecollection;
 
     ControlViewCollection.getFieldValues = function(options) {
         App.vent.trigger('loadactivecontrols.amengine');
         return ControlViewCollection.getCurrentInstance()._getFieldValues(options);
+    };
+
+    ControlViewCollection.getFieldView = function(viewid) {
+        return ControlViewCollection.getCurrentInstance()._getFieldView(viewid);
     };
 
     ControlViewCollection.getCurrentInstance = function () {
@@ -45,6 +55,8 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
         }
         return currentpagecollection;
     };
+
+
 
     ControlViewCollection.setCurrentInstance = function (newinstance) {
         currentpagecollection = newinstance;
