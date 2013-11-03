@@ -85,7 +85,19 @@ module.exports = function (grunt) {
                     'webapp/js/amengine': [ '**.js' ]
                 }
             }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    name: "main",
+                    baseUrl: "webapp/js/amengine",
+                    mainConfigFile: "webapp/js/amengine/main.js",
+                    out: "webapp/js/amengine/main-built.js",
+                  //  optimize: "none",
+                    logLevel: 0
+            }
         }
+    }
 
     });
 
@@ -98,6 +110,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-sloc');
+    grunt.loadNpmTasks('grunt-requirejs');
     grunt.option('force', true);
 
     // Default task(s).

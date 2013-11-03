@@ -1,13 +1,13 @@
 define([
-        'Handlebars'
-    ], function (Handlebars) {
+        'Handlebars', 'underscore'
+    ], function (Handlebars, _) {
         "use strict";
+
         function pad(num, size) {
             var s = num+"";
             while (s.length < size) s = "0" + s;
             return s;
         }
-
         Handlebars.registerHelper('date', function (value, options) {
             var datevalue = new Date(value);
             return  [pad(datevalue.getFullYear(), 4), "-", pad(datevalue.getMonth()+1, 2), "-", pad(datevalue.getDate(), 2)].join("");

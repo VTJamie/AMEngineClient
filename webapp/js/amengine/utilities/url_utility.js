@@ -5,8 +5,11 @@ define(['jquery'], function ($) {
     var URLUtility = function () {
         $.extend(this, {
             getBaseURL: function () {
-                return "http://localhost:8080/ServletProxy/aminterfaces";
-             //   return window.location.href;
+                if(window.location.href.indexOf('localhost') > -1) {
+                    return "http://localhost:8080/ServletProxy/aminterfaces";
+                } else {
+                    return window.location.href;
+                }
             }
         });
     };

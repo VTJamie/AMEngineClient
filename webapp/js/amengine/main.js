@@ -12,7 +12,7 @@ require.config({
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
         'jquery-ui-touch-punch': '../libs/jquery/jquery.ui.touch-punch.min',
 
-        'underscore': '../libs/backbone/underscore-min',
+        'underscore': '../libs/backbone/underscore',
         'backbone': '../libs/backbone/backbone',
         'backbone-localstorage': '../libs/backbone/backbone.localStorage',
         'backbone-jquerymobileview': '../customizedlibs/backbone/jqmView',
@@ -25,6 +25,7 @@ require.config({
         'hbs': '../libs/require/hbs',
         'text': '../libs/require/text',
         'css': '../libs/require/css',
+        'css-builder': '../libs/require/css-builder',
         'normalize': '../libs/require/normalize',
         'i18nprecompile': '../libs/hbs/i18nprecompile',
         'json2': '../libs/hbs/json2',
@@ -34,11 +35,8 @@ require.config({
 
         //CSS
         'jquerymobile-css': '../../css/themes/default/jquery.mobile-1.3.1',
-        'jquerymobile-theme-default-css': '../../css/themes/default/default',
-        'jquerymobile-fluid960-css': '../../css/jquery-mobile-fluid960',
         'amengine-css': '../../css/amengine',
         'jqm-iconpack-css': '../../css/jqm-icon-pack-2.0-original',
-        'jquerymobiletable-css': '../../css/jquery.mobile.table',
 
 
         //General Resources
@@ -200,17 +198,20 @@ require.config({
             'deps': ['jquery', 'underscore'],
             exports: 'Backbone'
         },
+        'underscore': {
+            exports: '_'
+        },
         'jquerymobile': {
             'deps': ['jquery', 'jquerymobile-config']
         },
         'marionette': {
             deps: ['jquery', 'underscore', 'backbone']
         },
-        'Handlebars': {
-            exports: 'Handlebars'
-        },
         'hbs': {
-            deps: ['handlebars-config']
+            deps: ['Handlebars', 'underscore', 'handlebars-config']
+        },
+        'handlebars-config': {
+            deps: ['Handlebars', 'underscore']
         },
         'app': {
             deps: ['jquery', 'jquerymobile', 'logging', 'underscore', 'backbone', 'marionette']
@@ -226,6 +227,12 @@ require.config({
         },
         'jquery-ui-touch-punch': {
             deps: ['jquery-ui']
+        },
+        'router': {
+            deps: ['app']
+        },
+        'routecontroller': {
+            deps: ['app']
         }
 
     },
@@ -236,7 +243,10 @@ require.config({
             'hbs/i18nprecompile': 'i18nprecompile',
             'hbs/json2': 'json2'
         }
-    }
+    },
+    hbs: {
+            disableI18n: true
+        }
 });
 
 //router and routecontroller must be specified in a sub config file
@@ -249,8 +259,13 @@ require(['jquery',
          'underscore',
          'backbone',
          'marionette',
+         'Handlebars',
+         'handlebars-config',
+         'hbs',
          'app',
-         'constantsrequestmodel'
+         'constantsrequestmodel',
+         'router',
+         'routecontroller'
          ], function (
          $,
          jQueryUI,
@@ -261,22 +276,23 @@ require(['jquery',
          _,
          Backbone,
          Marionette,
+         handlebars,
+         hbsconfig,
+         hbs,
          App,
-         ConstantsRequestModel) {
+         ConstantsRequestModel,
+         Router,
+         Controller) {
     "use strict";
-    require([
-             'css!jquerymobile-css',
-             'css!jqm-iconpack-css',
-             'css!amengine-css'
-             ]);
+
     ConstantsRequestModel.request(function () {
-        require(['router', 'routecontroller'], function (Router, Controller) {
+
             debug.log("Creating Router");
             new Router({
                 controller: new Controller()
             });
 
             App.start();
-        });
+
     });
 });
