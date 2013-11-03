@@ -64,6 +64,7 @@ define(['backbone', 'constantsrequestmodel', 'textmodel', 'selectmodel', 'button
                     return new FilterCriteriaControlModel(attrs);
                 } else {
                     debug.log('Control Dropped Through', attrs);
+                    return new Backbone.Model();
                 }
             }
         }

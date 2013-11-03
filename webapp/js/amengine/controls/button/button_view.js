@@ -1,6 +1,6 @@
 /*global $, define, require, window, debug*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!buttontemplate', 'submitrequestmodel', 'pagecollection', 'pageresponsebodymodel', 'complexitemlistsubmitrequestmodel'], function ($, jqM, Backbone, App, BaseControlView, Template, SubmitRequestModel, PageCollection, PageResponseBodyModel, ComplexListItemSubmitRequestModel) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!buttontemplate', 'submitrequestmodel', 'pagecollection', 'pageresponsebodymodel', 'complexitemlistsubmitrequestmodel', 'refreshrequestmodel'], function ($, jqM, Backbone, App, BaseControlView, Template, SubmitRequestModel, PageCollection, PageResponseBodyModel, ComplexListItemSubmitRequestModel, RefreshControlsRequestModel) {
     "use strict";
     var C = {
         LABEL: "LABEL",
@@ -15,7 +15,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
         SUBMIT_RESPONSE_ACTION_TYPE_CLOSE: "SUBMIT_RESPONSE_ACTION_TYPE_CLOSE",
         ERRORS: "ERRORS",
         RESPONSE_BODY: "RESPONSE_BODY",
-        IS_DIALOG: "IS_DIALOG"
+        IS_DIALOG: "IS_DIALOG",
+        CONTROL_ARRAY: "CONTROL_ARRAY"
     }, ButtonView = BaseControlView.extend({
         initialize: function (options) {
             BaseControlView.prototype.initialize.apply(this, arguments);
@@ -26,15 +27,16 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
             App.vent.off('enterpressed.amengine');
             App.vent.off('escapepressed.amengine');
         },
-        events: {
+        events: $.extend({}, {
             'tap': "buttonClicked",
             'keyup': 'keyUp'
-        },
+        }, BaseControlView.prototype.events),
         template: Template,
         render: function () {
             BaseControlView.prototype.render.apply(this, arguments);
-
-            this.setElement(this.$el.html().trim());
+            if(this.el.nodeName.toUpperCase() !== "BUTTON") {
+                this.setElement(this.$el.html().trim());
+            }
             return this.el;
         },
         attributes: {},
@@ -82,6 +84,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
                         REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
                     }, function (model) {
                         handleResponseActionList(model, event);
+                        RefreshControlsRequestModel.request({}, function(model) {});
                     });
                 }
                 else

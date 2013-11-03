@@ -5,7 +5,8 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
 
     var C ={
         FIELD_PREFIX: "FIELD_PREFIX",
-        ID: "ID"
+        ID: "ID",
+        REFRESH_FIELD_PREFIX: "REFRESH_FIELD_PREFIX"
     },
     ControlViewCollection = Backbone.Collection.extend({
         model : ControlViewModel,
@@ -45,7 +46,20 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
     };
 
     ControlViewCollection.getFieldView = function(viewid) {
+        App.vent.trigger('loadactivecontrols.amengine');
         return ControlViewCollection.getCurrentInstance()._getFieldView(viewid);
+    };
+
+    ControlViewCollection.getRefreshFields = function(fieldname) {
+        var returnobject = {};
+        App.vent.trigger('loadactivecontrols.amengine');
+
+        ControlViewCollection.getCurrentInstance().each(function (curmodel) {
+            if(fieldname === undefined || curmodel.get("view").model.get(C.ID) === fieldname) {
+                returnobject[CM.get(C.REFRESH_FIELD_PREFIX) + curmodel.get("view").model.get(C.ID)] = true;
+            }
+        });
+        return returnobject;
     };
 
     ControlViewCollection.getCurrentInstance = function () {
@@ -56,7 +70,13 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
         return currentpagecollection;
     };
 
-
+    ControlViewCollection.reloadControls = function (reloadcontrolcollection) {
+        ControlViewCollection.getCurrentInstance().each(function (curview) {
+            var currentview =  curview.get("view"),
+                newmodel = reloadcontrolcollection.findWhere({ID: currentview.model.get(C.ID)});
+            currentview.reloadModel(newmodel);
+        });
+    };
 
     ControlViewCollection.setCurrentInstance = function (newinstance) {
         currentpagecollection = newinstance;

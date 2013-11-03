@@ -113,6 +113,8 @@ require.config({
         'complexitemlisteditrequestmodel': './controls/complexitemlist/complexitemlistedit_request_model',
         'complexitemlistnewrequestmodel': './controls/complexitemlist/complexitemlistnew_request_model',
         'complexitemlistsubmitrequestmodel': './controls/complexitemlist/complexitemlistsubmit_request_model',
+        'refreshrequestmodel': './requests/refresh_request_model',
+        'refreshresponsebodymodel': './requests/refresh_responsebody_model',
 
         //Controls
         'basecontrolview': './controls/basecontrol_view',

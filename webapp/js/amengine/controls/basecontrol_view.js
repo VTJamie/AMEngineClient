@@ -28,6 +28,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
         },
         setErrorMessage: function(message) {
             this.$el.find('.error').empty().append("<span>" + message + "</span>");
+        },
+        reloadModel: function(newmodel) {
+            this.model = newmodel;
+            this.render();
         }
     });
     return BaseControlView;
