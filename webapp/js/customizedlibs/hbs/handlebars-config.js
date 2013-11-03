@@ -13,6 +13,10 @@ define([
             return  [pad(datevalue.getFullYear(), 4), "-", pad(datevalue.getMonth()+1, 2), "-", pad(datevalue.getDate(), 2)].join("");
         });
 
+        Handlebars.registerHelper('safestring', function (value, options) {
+            new Handlebars.SafeString(value);
+        });
+
 
         Handlebars.registerHelper('partial', function partial(template, context, options) {
             var f = Handlebars.partials[template];

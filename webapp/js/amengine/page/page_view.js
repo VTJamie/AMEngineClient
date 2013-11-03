@@ -47,7 +47,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
             $content.append(runFactory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
             return this.el;
         },
-        events: $.extend({
+        events: $.extend({}, {
             'tap #panel-toggle': 'panelToggle',
             'keyup': 'buttonClicked'
         }, PageContainer.prototype.events),

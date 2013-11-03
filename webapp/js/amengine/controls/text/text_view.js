@@ -37,6 +37,52 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!texttempla
                 valueobject[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE).trim();
             }
             return valueobject;
+        },
+        events: $.extend({}, {
+            'keyup': 'stopKeyUpDefault',
+            'keydown': 'stopKeyDownDefault'
+        }, BaseControlView.prototype.events),
+        stopKeyDownDefault: function (e) {
+            if (this.model.get(C.TEXT_BOX_TYPE) === C.TEXT_BOX_TYPE_TEXT_AREA) {
+                if(e.keyCode === 9)
+                {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }
+        },
+        stopKeyUpDefault: function(e) {
+            if (this.model.get(C.TEXT_BOX_TYPE) === C.TEXT_BOX_TYPE_TEXT_AREA) {
+
+                var start, end, $this, value;
+                if(e.keyCode === 13) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    return false;
+                }
+                else if(e.keyCode === 9)
+                {
+                    start = e.target.selectionStart;
+                    end = e.target.selectionEnd;
+                    $this = $(e.target);
+                    value = $this.val();
+
+                    // set textarea value to: text before caret + tab + text after caret
+                    $this.val([
+                        value.substring(0, start),
+                        "    ",
+                        value.substring(end)].join(""));
+
+                    // put caret at right position again (add one for the tab)
+                    e.target.selectionStart = e.target.selectionEnd = start + 4;
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    return false;
+                }
+            }
         }
     });
     return TextView;
