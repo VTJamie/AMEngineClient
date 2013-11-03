@@ -29,7 +29,7 @@ require.config({
         'i18nprecompile': '../libs/hbs/i18nprecompile',
         'json2': '../libs/hbs/json2',
         'logging': '../libs/logging/ba-debug',
-        'app': 'app',
+        'app': './app',
         'modernizr': '../libs/modernizr/modernizr',
 
         //CSS
@@ -40,8 +40,6 @@ require.config({
         'jqm-iconpack-css': '../../css/jqm-icon-pack-2.0-original',
         'jquerymobiletable-css': '../../css/jquery.mobile.table',
 
-        'slickgrid-grid-css': '../../css/slickgrid/slick.grid',
-        'slickgrid-grid-theme-css': '../../css/slickgrid/slick-default-theme',
 
         //General Resources
         'router': './router',
@@ -198,19 +196,15 @@ require.config({
         'buttongrouptemplate': './groups/button/buttongroup_template'
     },
     shim: {
-        'underscore': {
-            'exports': '_'
-        },
         'backbone': {
             'deps': ['jquery', 'underscore'],
-            'exports': 'Backbone'
+            exports: 'Backbone'
         },
         'jquerymobile': {
             'deps': ['jquery', 'jquerymobile-config']
         },
         'marionette': {
-            deps: ['jquery', 'underscore', 'backbone'],
-            exports: 'Marionette'
+            deps: ['jquery', 'underscore', 'backbone']
         },
         'Handlebars': {
             exports: 'Handlebars'
@@ -245,21 +239,16 @@ require.config({
     }
 });
 
-require([
-         'css!jquerymobile-css',
-         'css!jqm-iconpack-css',
-         'css!amengine-css'
-         ]);
-
-//require(['css!jquerymobile-css', 'css!jquerymobile-fluid960-css', 'css!amengine-css']);
-
 //router and routecontroller must be specified in a sub config file
 require(['jquery',
          'jquery-ui',
          'jquery-ui-touch-punch',
          'jquerymobile-config',
          'jquerymobile',
+         'logging',
+         'underscore',
          'backbone',
+         'marionette',
          'app',
          'constantsrequestmodel'
          ], function (
@@ -268,10 +257,18 @@ require(['jquery',
          jqUIpunch,
          jqConfig,
          jqM,
+         logging,
+         _,
          Backbone,
+         Marionette,
          App,
          ConstantsRequestModel) {
     "use strict";
+    require([
+             'css!jquerymobile-css',
+             'css!jqm-iconpack-css',
+             'css!amengine-css'
+             ]);
     ConstantsRequestModel.request(function () {
         require(['router', 'routecontroller'], function (Router, Controller) {
             debug.log("Creating Router");
