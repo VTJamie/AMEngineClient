@@ -4,11 +4,13 @@
 </div>
 <div>
     {{#if EDITABLE }}
-        <input id="control-{{ ID }}" data-type="text" value="{{ CURRENT_VALUE }}" />
+        <input id="control-{{ ID }}" data-type="file" type="file" />
     {{else}}
         <span>
-            {{ CURRENT_VALUE }}
+            {{{ CURRENT_VALUE }}}
         </span>
     {{/if}}
 </div>
+    <iframe style="display: none"></iframe>
+    <form style="display: none" method="POST" action=""></form>
 {{/if}}

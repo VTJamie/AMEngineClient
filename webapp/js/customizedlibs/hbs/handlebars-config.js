@@ -1,3 +1,4 @@
+/*global window */
 define([
         'Handlebars', 'underscore'
     ], function (Handlebars, _) {
@@ -15,6 +16,10 @@ define([
 
         Handlebars.registerHelper('safestring', function (value, options) {
             new Handlebars.SafeString(value);
+        });
+
+        Handlebars.registerHelper('wsUrl', function (value, options) {
+            return require('urlutility').getBaseURL();
         });
 
 

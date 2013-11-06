@@ -12,6 +12,17 @@ require.config({
         'jquerymobile-config': '../customizedlibs/jquery/jqm-config',
         'jquery-ui-touch-punch': '../libs/jquery/jquery.ui.touch-punch.min',
 
+        //File Upload
+        'jquery-fileupload-iframe': '../libs/jquery/jquery.iframe-transport',
+        'jquery-fileupload': '../libs/jquery/jquery.fileupload',
+        'jquery-fileupload-process': '../libs/jquery/jquery.fileupload-process',
+        'jquery-fileupload-image': '../libs/jquery/jquery.fileupload-image',
+        'jquery-fileupload-audio': '../libs/jquery/jquery.fileupload-audio',
+        'jquery-fileupload-video': '../libs/jquery/jquery.fileupload-video',
+        'jquery-fileupload-validate': '../libs/jquery/jquery.fileupload-validate',
+        'jquery-fileupload-ui': '../libs/jquery/jquery.fileupload-ui',
+        'jquery-fileupload-jquery-ui': '../libs/jquery/jquery.fileupload-jquery-ui',
+
         'underscore': '../libs/backbone/underscore',
         'backbone': '../libs/backbone/backbone',
         'backbone-localstorage': '../libs/backbone/backbone.localStorage',
@@ -233,15 +244,41 @@ require.config({
         },
         'routecontroller': {
             deps: ['app']
+        },
+        'jquery-fileupload': {
+            deps: ['jquery-fileupload-iframe']
+        },
+        'jquery-fileupload-process': {
+            deps: ['jquery-fileupload']
+        },
+        'jquery-fileupload-image': {
+            deps: ['jquery-fileupload']
+        },
+        'jquery-fileupload-audio': {
+            deps: ['jquery-fileupload']
+        },
+        'jquery-fileupload-video': {
+            deps: ['jquery-fileupload']
+        },
+        'jquery-fileupload-validate': {
+            deps: ['jquery-fileupload']
+        },
+        'jquery-fileupload-ui': {
+            deps: ['jquery-fileupload']
+        },
+        'jquery-fileupload-jquery-ui': {
+            deps: ['jquery-fileupload']
         }
-
     },
     map: {
         '*': {
             'jqm': 'jquerymobile',
             'hbs/underscore': 'underscore',
             'hbs/i18nprecompile': 'i18nprecompile',
-            'hbs/json2': 'json2'
+            'hbs/json2': 'json2',
+            'jquery.ui.widget': 'jquery-ui',
+            'jquery.fileupload': 'jquery-fileupload',
+            'jquery.fileupload-process': 'jquery-fileupload-process'
         }
     },
     hbs: {

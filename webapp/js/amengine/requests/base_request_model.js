@@ -18,20 +18,10 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'persistmodel', 'basemode
             C: $.extend(C, BaseModel.prototype.C),
             sendRequestWithPersist: function (data, success) {
                 this.fetch({
-                    data: $.extend(data, this.getPersist()),
+                    data: $.extend(data, PersistModel.getPersist()),
                     success: success,
                     type: "POST"
                 });
-            },
-            getPersist: function () {
-                return this.prependStringToJSON(CM.get(constants.PERSISTED_PREFIX), PersistModel.toJSON());
-            },
-            prependStringToJSON: function (prefix, jsonobject) {
-                var returnjsonobject = {};
-                for (var p in jsonobject) {
-                    returnjsonobject[prefix + p] = jsonobject[p];
-                }
-                return returnjsonobject;
             }
         });
 

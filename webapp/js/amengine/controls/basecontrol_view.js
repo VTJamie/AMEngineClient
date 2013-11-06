@@ -13,9 +13,14 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
             }
             ControlViewCollection.getCurrentInstance().add({view: this});            
         },
+
         render: function () {
 
-            this.$el.empty().append(this.template(this.model.toJSON()));
+            this.$el.empty().append(this.template($.extend(
+                    {},
+                    this.model.toJSON(),
+                    this.additionalModel ? this.additionalModel.toJSON() : {}
+                )));
             this.$el.trigger("create");
             return this.el;
         },

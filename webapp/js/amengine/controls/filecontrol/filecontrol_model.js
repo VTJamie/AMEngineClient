@@ -3,7 +3,7 @@
 define(['backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (Backbone, CM, BaseControlModel) {
     "use strict";
     var constants = {
-
+        CONTROL_TYPE_FILE: "CONTROL_TYPE_FILE"
     };
     var C = {
         EDITABLE: "EDITABLE",
