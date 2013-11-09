@@ -9,7 +9,8 @@ define(['backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (Back
         EDITABLE: "EDITABLE",
         REQUIRED: "REQUIRED",
         CURRENT_VALUE: "CURRENT_VALUE",
-        MAX_LENGTH: "MAX_LENGTH",
+        MAX_FILE_SIZE: "MAX_FILE_SIZE",
+        FILE_NAME: "FILE_NAME",
         PROTECTED_TEXT_FIELD: "PROTECTED_TEXT_FIELD",
         CHANGE_TRIGGERS_REFRESH: "CHANGE_TRIGGERS_REFRESH",
         CONTROL_TYPE: function (value) {

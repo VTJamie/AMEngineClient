@@ -50,12 +50,25 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
         return ControlViewCollection.getCurrentInstance()._getFieldView(viewid);
     };
 
-    ControlViewCollection.getRefreshFields = function(fieldname) {
+    ControlViewCollection.getRefreshFields = function(options) {
         var returnobject = {};
         App.vent.trigger('loadactivecontrols.amengine');
-
+        function isFieldName(curfieldname) {
+            var idx;
+            if(options !== undefined && options.fields !== undefined) {
+                for (idx in options.fields) {
+                    if(options.fields[idx] === curfieldname)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            } else {
+                return true;
+            }
+        }
         ControlViewCollection.getCurrentInstance().each(function (curmodel) {
-            if(fieldname === undefined || curmodel.get("view").model.get(C.ID) === fieldname) {
+            if(isFieldName(curmodel.get("view").model.get(C.ID))) {
                 returnobject[CM.get(C.REFRESH_FIELD_PREFIX) + curmodel.get("view").model.get(C.ID)] = true;
             }
         });
@@ -71,10 +84,13 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
     };
 
     ControlViewCollection.reloadControls = function (reloadcontrolcollection) {
+
         ControlViewCollection.getCurrentInstance().each(function (curview) {
             var currentview =  curview.get("view"),
                 newmodel = reloadcontrolcollection.findWhere({ID: currentview.model.get(C.ID)});
-            currentview.reloadModel(newmodel);
+            if(newmodel !== undefined) {
+                currentview.reloadModel(newmodel);
+            }
         });
     };
 

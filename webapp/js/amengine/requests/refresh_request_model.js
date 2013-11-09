@@ -17,13 +17,13 @@ define(['backbone', 'constantsrequestmodel', 'pageresponsebodymodel', 'baseobjec
         }, 
         RefreshControlsRequestModel = BaseObjectRequestModel.extend({
             C: $.extend({}, C, BaseObjectRequestModel.prototype.C),
-            request: function (data, success) {
+            request: function (data, success, options) {
                 var dataobject = {},
                     currentpageresponsebody = PageResponseBodyModel.getCurrentInstance();
                 dataobject[CM.get(C.REQUEST_TYPE_IDENTIFIER)] = CM.get(C.REQUEST_TYPE_REFRESH_CONTROLS);
                 dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(C.OBJECT_NAME);
                 dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(C.ID);
-                dataobject = $.extend({}, dataobject, ControlViewCollection.getRefreshFields());
+                dataobject = $.extend({}, dataobject, ControlViewCollection.getRefreshFields(options));
 
                 this.sendRequestWithPersist(dataobject, function(refreshmodel) {
                     success(refreshmodel);

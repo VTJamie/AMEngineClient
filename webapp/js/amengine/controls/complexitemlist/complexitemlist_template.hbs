@@ -17,7 +17,7 @@
     <tbody>
         {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA }}
 
-        <tr class="grid-data-row {{#isOdd @index}}ui-bar-c{{else}}ui-bar-d{{/isOdd}}" data-id="{{ ID }}">
+        <tr class="grid-data-row {{#isOdd @index}}ui-bar-c{{else}}ui-bar-d{{/isOdd}}" data-id="{{{nospaces ID }}}">
 
             <td>
                 <button data-role="button" value="Open" class="complexitemlist-item"/>

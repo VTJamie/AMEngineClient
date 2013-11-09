@@ -1,12 +1,12 @@
 {{#if IS_VISIBLE }}
     <div class="error"></div>
     <div>
-        <label  for="control-{{ ID }}">{{ LABEL }}</label>
+        <label  for="control-{{{nospaces ID }}}">{{ LABEL }}</label>
     </div>
 
     <div>
     {{#if EDITABLE }}
-        <input type="date" id="control-{{ ID }}" data-type="date" value="{{#date CURRENT_VALUE }}{{/date}}" />
+        <input type="date" id="control-{{{nospaces ID }}}" data-type="date" value="{{#date CURRENT_VALUE }}{{/date}}" />
     {{else}}
        <span> {{ CURRENT_VALUE }} </span>
     {{/if}}

@@ -4,7 +4,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
     $, jqM, Backbone, ControlViewCollection) {
     
     var C = {
-        ID: "ID"
+        ID: "ID",
+        IS_VISIBLE: "IS_VISIBLE"
     },
     BaseControlView = Backbone.View.extend({
         initialize: function (options) {
@@ -22,6 +23,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
                     this.additionalModel ? this.additionalModel.toJSON() : {}
                 )));
             this.$el.trigger("create");
+            if(this.model.get(C.IS_VISIBLE)) {
+                this.$el.show();
+            } else {
+                this.$el.hide();
+            }
             return this.el;
         },
         attributes: {

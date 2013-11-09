@@ -11,8 +11,9 @@ define(['jquery',
         'urlutility',
         'constantsrequestmodel',
         'pageresponsebodymodel',
-        'persistmodel'
-        ], function ($, jqM, Backbone, BaseControlView, Template, fileuploadarg, fileuploadprocessarg, fileuploadvalidatearg, UrlUtility, CM, PageResponseBodyModel, PersistModel) {
+        'persistmodel',
+        'refreshrequestmodel'
+        ], function ($, jqM, Backbone, BaseControlView, Template, fileuploadarg, fileuploadprocessarg, fileuploadvalidatearg, UrlUtility, CM, PageResponseBodyModel, PersistModel, RefreshControlsRequestModel) {
     "use strict";
 
     var C = {
@@ -47,68 +48,29 @@ define(['jquery',
             render: function () {
                 var that = this;
                 BaseControlView.prototype.render.apply(this, arguments);
-//                $(filenamelink).click(function ()
-//                {
-//                    var tempform = $("<form></form>")[0];
-//                    if ($(controlcell).find("#" + controldef[adata.C[AMC.ID]] + "-iframe").size() > 0)
-//                    {
-//                        var tempiframe = $("<iframe name=" + controldef[adata.C[AMC.ID]] + "-iframe" + " id=" + controldef[adata.C[AMC.ID]] + "-iframe" + "/>")[0];
-//                        $(controlcell).append(tempiframe);
-//                        $(tempiframe).hide();
-//                    }
-//                    $(controlcell).append(tempform);
-//
-//                    $(tempform).hide();
+                this.$el.find(".fileupload-control-link").on("click", function (e)
+                {
+                    var $tempform = that.$el.find('form'),
+                        $persist = $tempform.find('.persist-section').empty(),
+                        persistvalues = PersistModel.getPersist(),
+                        name,
+                        hiddenstr = "<input type='hidden' />",
+                        $persisthidden;
 
 
-//                    $(tempform).attr("name", controldef[adata.C[AMC.ID]] + "-form");
-//                    $(tempform).attr("id", controldef[adata.C[AMC.ID]] + "-form");
-                    // $(tempiframe).attr("name", controldef[adata.C[AMC.ID]] + "-iframe");
-                    //$(tempiframe).attr("id", controldef[adata.C[AMC.ID]] + "-iframe");
-//                    $(tempform).attr("method", "post");
-//                    $(tempform).attr("action", adata.options.url);
-//                    $(tempform).attr("target", $(tempiframe).attr("name"));
-//                    var hiddenstr = "<input type='hidden' />";
-//                    var requesttypeidentifier = $(hiddenstr)[0];
-//                    $(requesttypeidentifier).attr("name", adata.C[AMC.REQUEST_TYPE_IDENTIFIER]);
-//                    $(requesttypeidentifier).attr("value", adata.C[AMC.REQUEST_TYPE_FIELD_REQUEST]);
-//                    $(tempform).append(requesttypeidentifier);
-//
-//                    var requesttypesubidentifier = $(hiddenstr)[0];
-//                    $(requesttypesubidentifier).attr("name", adata.C[AMC.REQUEST_TYPE_SUB_IDENTIFIER]);
-//                    $(requesttypesubidentifier).attr("value", adata.C[AMC.REQUEST_TYPE_GET_FILE]);
-//                    $(tempform).append(requesttypesubidentifier);
-//
-//                    var requestfieldactionpropname = $(hiddenstr)[0];
-//                    $(requestfieldactionpropname).attr("name", adata.C[AMC.REQUEST_FIELD_ACTION_PROPERTY_NAME]);
-//                    $(requestfieldactionpropname).attr("value", controldef[adata.C[AMC.ID]]);
-//                    $(tempform).append(requestfieldactionpropname);
-//
-//                    var requestobjectname = $(hiddenstr)[0];
-//                    $(requestobjectname).attr("name", adata.C[AMC.REQUEST_OBJECT_NAME]);
-//                    $(requestobjectname).attr("value", $(control).data(C.rootdefinition)[adata.C[AMC.RESPONSE_BODY]][adata.C[AMC.OBJECT_NAME]]);
-//                    $(tempform).append(requestobjectname);
-//
-//                    var requestdataobjectid = $(hiddenstr)[0];
-//                    $(requestdataobjectid).attr("name", adata.C[AMC.REQUEST_DATA_OBJECT_ID]);
-//                    $(requestdataobjectid).attr("value", $(control).data(C.rootdefinition)[adata.C[AMC.RESPONSE_BODY]][adata.C[AMC.ID]]);
-//                    $(tempform).append(requestdataobjectid);
-//
-//                    var persistdata = methods.getPersistPostCriteria.apply(curthis, []);
-//                    for (var p in persistdata)
-//                    {
-//                        var persisthidden = $(hiddenstr)[0];
-//                        $(persisthidden).attr("name", p);
-//                        $(persisthidden).attr("value", persistdata[p]);
-//                        $(tempform).append(persisthidden);
-//                    }
-//
-//                    $(tempform).submit();
-//
-//                    $(tempform).remove();
-//
-//                    return false;
-//                });
+                    for (name in persistvalues)
+                    {
+                        $persisthidden = $(hiddenstr);
+                        $persisthidden.attr("name", name);
+                        $persisthidden.attr("value", persistvalues[name]);
+                        $persist.append($persisthidden);
+                    }
+                    $tempform.submit();
+                    e.preventDefault();
+                    return false;
+                });
+
+
                 this.$el.find('[type=file]').fileupload(
                 {
                     url: UrlUtility.getBaseURL(),
@@ -147,27 +109,29 @@ define(['jquery',
                                 value: persistvalues[name]
                             });
                         }
-
-                        // postc[adata.C[AMC.REQUEST_DATA_OBJECT_ID]] = $(control).data(C.rootdefinition)[adata.C[AMC.RESPONSE_BODY]][adata.C[AMC.ID]];
-                        //postc[adata.C[AMC.REQUEST_OBJECT_NAME]] = $(control).data(C.rootdefinition)[adata.C[AMC.RESPONSE_BODY]][adata.C[AMC.OBJECT_NAME]];
                         return criteriaarray;
                     },
                     done: function (e, data)
                     {
-//                        var returndata = undefined;
-//                        if (data.result.contents != undefined)
-//                        {
-//                            returndata = eval("(" + data.result.contents().find('pre').html() + ")");
-//                        }
-//                        else
-//                        {
-//                            returndata = eval("(" + data.result + ")");
-//                        }
-//
-//                        if (methods.handlepostresponse.apply(curthis, [returndata]))
-//                        {
-//                            requests.reloadcontrol.apply(curthis, [control]);
-//                        }
+
+                        var returndata = undefined;
+                        if (data.result.contents != undefined)
+                        {
+                            returndata = eval("(" + data.result.contents().find('pre').html() + ")");
+                        }
+                        else
+                        {
+                            returndata = eval("(" + data.result + ")");
+                        }
+
+                        RefreshControlsRequestModel.request({}, function (model) {
+                            debug.log(model);
+                        }, {
+                            fields: [
+                                that.model.get(C.ID)
+                            ]
+                        });
+
                     }
                 });
                 return this.el;

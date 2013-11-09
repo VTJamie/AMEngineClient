@@ -18,10 +18,23 @@ define([
             new Handlebars.SafeString(value);
         });
 
+        Handlebars.registerHelper('const', function (value, options) {
+            var CM = require('constantsrequestmodel');
+            return CM.get(value);
+        });
+
+        Handlebars.registerHelper('responseBodyValue', function (value, options) {
+            var pageresponsebody = require('pageresponsebodymodel').getCurrentInstance().get("RESPONSE_BODY");
+            return pageresponsebody.get(value);
+        });
+
         Handlebars.registerHelper('wsUrl', function (value, options) {
             return require('urlutility').getBaseURL();
         });
 
+        Handlebars.registerHelper('nospaces', function (value, options) {
+            return value.replace('_', '__').replace(' ', '_');
+        });
 
         Handlebars.registerHelper('partial', function partial(template, context, options) {
             var f = Handlebars.partials[template];

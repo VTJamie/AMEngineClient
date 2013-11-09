@@ -1,16 +1,30 @@
 {{#if IS_VISIBLE }}
 <div>
-    <label for="control-{{ ID }}">{{ LABEL }}</label>
+    <label for="control-{{{nospaces ID }}}">{{ LABEL }}</label>
 </div>
 <div>
     {{#if EDITABLE }}
-        <input id="control-{{ ID }}" data-type="file" type="file" />
-    {{else}}
-        <span>
-            {{{ CURRENT_VALUE }}}
+        <span data-role="button" data-mini="true" class="fileinput-button">
+            <span>Upload File</span>
+            <input id="control-{{{nospaces ID }}}" data-type="file" type="file" data-role="none" />
         </span>
     {{/if}}
+    {{#ifCond FILE_NAME "!==" ""}}
+        <a href="#" data-mini="true" data-role="button" class="fileupload-control-link">
+            Download {{ FILE_NAME }}
+        </a>
+        <iframe name="iframe-{{{nospaces ID }}}" style="display: none"></iframe>
+        <form style="display: none" method="POST" target="iframe-{{{nospaces ID }}}" action="{{wsUrl }}">
+            <input type='hidden' name="{{const "REQUEST_TYPE_IDENTIFIER"}}" value="{{const "REQUEST_TYPE_FIELD_REQUEST"}}" />
+            <input type='hidden' name="{{const "REQUEST_TYPE_SUB_IDENTIFIER"}}" value="{{const "REQUEST_TYPE_GET_FILE"}}" />
+            <input type='hidden' name="{{const "REQUEST_FIELD_ACTION_PROPERTY_NAME"}}" value="{{ ID }}" />
+            <input type='hidden' name="{{const "REQUEST_OBJECT_NAME"}}" value="{{responseBodyValue "OBJECT_NAME" }}" />
+            <input type='hidden' name="{{const "REQUEST_DATA_OBJECT_ID"}}" value="{{responseBodyValue "ID" }}" />
+            <span class="persist-section">
+
+            </span>
+        </form>
+    {{/ifCond}}
 </div>
-    <iframe style="display: none"></iframe>
-    <form style="display: none" method="POST" action=""></form>
+
 {{/if}}
