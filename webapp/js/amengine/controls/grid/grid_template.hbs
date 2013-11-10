@@ -1,3 +1,7 @@
+{{#if IS_VISIBLE }}
+<div>{{ LABEL }}</div>
+{{#ifCond GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER ">" 0 }}
+
 <table id="{{{nospaces ID }}}-grid" data-inset="true" data-role="table" data-sortable="true" data-mode="reflow" class="ui-responsive">
     <thead>
         <tr class="ui-bar-a">
@@ -38,3 +42,10 @@
 </table>
 <div id="{{{nospaces ID }}}-pager" data-role="pager"></div>
 
+{{else}}
+
+ <div>No Records.</div>
+
+{{/ifCond}}
+
+{{/if}}

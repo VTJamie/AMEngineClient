@@ -51,7 +51,6 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!gridtempla
             },
             render: function () {
                 BaseControlView.prototype.render.apply(this, arguments);
-
                 return this.el;
             },
             onShow: function() {
