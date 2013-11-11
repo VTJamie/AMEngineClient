@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!gridtemplate'], function (
-    $, jqM, Backbone, BaseControlView, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowrequestmodel', 'refreshrequestmodel', 'hbs!gridtemplate'], function (
+    $, jqM, Backbone, BaseControlView, GridDeleteRowRequestModel, RefreshControlsRequestModel, Template) {
     "use strict";
     var C = {
         LABEL: "LABEL",
@@ -35,8 +35,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!gridtempla
         GridView = BaseControlView.extend({
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
-                this.template = Template;                
             },
+            template: Template,
             attributes: {
                  "class": "ui-corner-all amengine-table"
             },
@@ -44,13 +44,28 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!gridtempla
                 return {};
             },
             events: {
-                'tap .ui-icon-delete': 'closeButtonPressed'
+                'tap .grid-delete-button': 'deleteButtonPressed'
             },
-            closeButtonPressed: function() {
-
+            deleteButtonPressed: function(e) {
+                var that = this;
+                GridDeleteRowRequestModel.request({
+                    REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID),
+                    REQUEST_GRID_VIEW_ITEM_ID: $(e.target).closest('a').attr('data-id')
+                }, function(model) {
+                    RefreshControlsRequestModel.request({}, function (model) {
+                      //  debug.log(model);
+                    }, {
+                        fields: [
+                            that.model.get(C.ID)
+                        ]
+                    });
+                });
+                e.preventDefault();
+                return false;
             },
             render: function () {
                 BaseControlView.prototype.render.apply(this, arguments);
+              //  debug.log(this.model.toJSON());
                 return this.el;
             },
             onShow: function() {

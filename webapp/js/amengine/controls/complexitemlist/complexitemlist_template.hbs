@@ -12,6 +12,7 @@
                 <th data-priority="{{ @index }}">{{ GRID_VIEW_COLUMN_NAME }}</th>
             {{/if}}
         {{/each}}
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +33,10 @@
                     {{/if}}
                 {{/usearrayindex}}
             {{/each}}
+
+            <td>
+                <button data-role="button" value="Delete" class="amengine-complexitemlist-delete"/>
+            </td>
         </tr>
         {{/each}}
     </tbody>

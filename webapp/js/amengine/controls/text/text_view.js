@@ -33,7 +33,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!texttempla
                     }
                 }
             }
-            else if (this.model.get(C.IS_VISIBLE)) {
+            else {
                 valueobject[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE).trim();
             }
             return valueobject;

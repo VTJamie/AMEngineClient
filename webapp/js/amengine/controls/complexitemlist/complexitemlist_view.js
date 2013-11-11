@@ -1,7 +1,7 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistnewrequestmodel', 'hbs!complexitemlisttemplate'], function (
-    $, jqM, Backbone, App, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemNewRequestModel, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistdeleterequestmodel', 'complexitemlistnewrequestmodel', 'refreshrequestmodel', 'hbs!complexitemlisttemplate'], function (
+    $, jqM, Backbone, App, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemDeleteRequestModel, ComplexListItemNewRequestModel, RefreshControlsRequestModel, Template) {
     "use strict";
     var C = {
         ID: "ID",
@@ -14,7 +14,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
             },
             events: $.extend({
                 'click .complexitemlist-item': 'linkItemClicked',
-                'click .amengine-complexitemlist-add': 'addItem'
+                'click .amengine-complexitemlist-add': 'addItem',
+                'click .amengine-complexitemlist-delete': 'deleteItem'
             }, BaseControlView.prototype.events),
             getValue : function () {
                 return {};
@@ -37,6 +38,25 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
                         Backbone.history.navigate('', {trigger: true});
                     }
                 });
+            },
+            deleteItem: function (e) {
+                var that = this;
+                App.showLoader();
+                ComplexListItemDeleteRequestModel.request({
+                    REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID),
+                    REQUEST_COMPLEX_ITEM_ID: $(e.target).closest('tr').attr('data-id')
+                }, function(responsemodel){
+                     RefreshControlsRequestModel.request({}, function (model) {
+                        App.hideLoader();
+                    }, {
+                        fields: [
+                            that.model.get(C.ID)
+                        ]
+                    });
+                });
+
+                e.preventDefault();
+                return false;
             },
             linkItemClicked: function(e) {
                 App.showLoader();

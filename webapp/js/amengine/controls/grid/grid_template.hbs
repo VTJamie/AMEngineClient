@@ -14,19 +14,22 @@
                 <th data-priority="{{ @index }}">{{ GRID_VIEW_COLUMN_NAME }}</th>
             {{/if}}
         {{/each}}
+        {{#if GRID_VIEW_GRID_DETAILS.GRID_VIEW_DELETE_ACTION }}
+            <th></th>
+        {{/if}}
         </tr>
     </thead>
     <tbody>
         {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA }}
 
             <tr class="grid-data-row {{#isOdd @index}}ui-bar-b{{else}}ui-bar-c{{/isOdd}}" data-id="{{{nospaces ID }}}">
-                {{#ifCond ../GRID_VIEW_DATA_OBJECT_LAUNCH "!==" undefined}}
+                {{#if ../GRID_VIEW_DATA_OBJECT_LAUNCH }}
                     <td>
                         <a href="#{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_OBJECT_NAME }}/{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_TARGET_FIELD }}/{{{nospaces ID }}}" data-role="button">
                             Open
                         </a>
                     </td>
-                {{/ifCond}}
+                {{/if}}
                 {{#each GRID_VIEW_ROW_CELL_DATA_ARRAY }}
                     {{#usearrayindex ../../GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST index=@index}}
                         {{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
@@ -36,6 +39,13 @@
                         {{/if}}
                     {{/usearrayindex}}
                 {{/each}}
+                {{#if ../GRID_VIEW_GRID_DETAILS.GRID_VIEW_DELETE_ACTION }}
+                    <td>
+                        <a href="#" data-id="{{ ID }}" class="grid-delete-button" data-role="button">
+                            Delete
+                        </a>
+                    </td>
+                {{/if}}
             </tr>
         {{/each}}
     </tbody>

@@ -57,8 +57,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'hbs!pagemenuitemtemplate',
                          hash.push("/");
                          hash.push(encodeURI(controlcollection[curmodel.get(constants.DATA_OBJECT_MENU_FIELD_DATA_COUPLING_SOURCE)]));
                     });
-
-                    $(event.target).parent().attr('href', hash.join(""));
+                    debug.log(controlcollection, hash.join(""));
+                    $(event.target).closest('a').attr('href', hash.join(""));
                     return true;
                 }
             },
