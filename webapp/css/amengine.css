@@ -25,7 +25,8 @@
 }
 
 .layouteditor-label {
-    cursor: move
+    cursor: move;
+    width: 100%;
 }
 
 .amengine-layouteditor-identifier {
@@ -38,6 +39,14 @@
 
 .amengine-layouteditor li {
     list-style: none;
+}
+
+.available-items ul {
+    display: none;
+}
+
+.available-items .layouteditor-trash-button {
+    display: none;
 }
 
 .ui-panel-inner {
