@@ -1,33 +1,32 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'factory',
-        'hbs!collapsiblegrouptemplate'
-], function ($, jqM, Backbone, runFactory, Template) {
-
+define(['jquery', 'jquerymobile', 'backbone', 'factory', 'hbs!collapsiblegrouptemplate'], function ($, jqM, Backbone, runFactory, Template) {
+    "use strict";
     var C = {
-        CONTROL_ARRAY: "CONTROL_ARRAY"
-    };
-
-    var CollapsibleGroupView = Backbone.View.extend({
-        initialize: function (options) {
-            if (typeof options !== "undefined") {
-                this.model = options.model;
-            }
+            CONTROL_ARRAY: "CONTROL_ARRAY"
         },
-        render: function () {
-            this.$el.empty().append(Template(this.model.toJSON()));
-            var controlarray = this.model.get(C.CONTROL_ARRAY);
-            for (var idx = 0; idx < controlarray.length; idx++) {
-                var newitem = runFactory(controlarray.at(idx));
-                this.$el.append(newitem);
+        CollapsibleGroupView = Backbone.View.extend({
+            initialize: function (options) {
+                if (options !== undefined) {
+                    this.model = options.model;
+                }
+            },
+            template: Template,
+            render: function () {
+                var idx, controlarray, newitem;
+                this.$el.empty().append(this.template(this.model.toJSON()));
+                controlarray = this.model.get(C.CONTROL_ARRAY);
+                for (idx = 0; idx < controlarray.length; idx += 1) {
+                    newitem = runFactory(controlarray.at(idx));
+                    this.$el.append(newitem);
+                }
+                this.$el.trigger("create");
+                return this.el;
+            },
+            attributes: {
+                "data-role": "collapsible",
+                "data-collapsed": false
             }
-            this.$el.trigger("create");
-            return this.el;
-        },
-        attributes: {
-            "data-role": "collapsible",
-            "data-collapsed": false
-        }
-    });
+        });
     return CollapsibleGroupView;
 });

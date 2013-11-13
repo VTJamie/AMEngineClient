@@ -1,10 +1,10 @@
 /*global $, define, require*/
-
+/*jslint forin: true */
 define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
-
+    "use strict";
     var C = {
-        PERSISTED_PREFIX: "PERSISTED_PREFIX"
-    },
+            PERSISTED_PREFIX: "PERSISTED_PREFIX"
+        },
         PersistModel = Backbone.Model.extend({
 
             getPersist: function () {
@@ -18,7 +18,7 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
                 }
                 return returnjsonobject;
             }
-    });
+        });
 
     return new PersistModel();
 });

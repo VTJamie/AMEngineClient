@@ -1,5 +1,5 @@
 /*global $, define, require*/
-
+/*jslint evil: true */
 define(['jquery',
         'jquerymobile',
         'backbone',
@@ -114,8 +114,8 @@ define(['jquery',
                     done: function (e, data)
                     {
 
-                        var returndata = undefined;
-                        if (data.result.contents != undefined)
+                        var returndata;
+                        if (data.result.contents !== undefined)
                         {
                             returndata = eval("(" + data.result.contents().find('pre').html() + ")");
                         }

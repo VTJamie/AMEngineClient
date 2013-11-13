@@ -6,12 +6,12 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            webapp: ['webapp/js/'+appname+'/**/*.js']
+            webapp: ['webapp/js/'+appname+'/**/*.js', '!**/r.js', '!webapp/js/'+appname+'/main-built.js', '!webapp/js/'+appname+'/build.js']
         },
         jslint: {// configure the task
 	    all: {
             src: ['webapp/js/'+appname+'/**/*.js'],
-            exclude: ['**/ignore-*.js', '**/*-min.js'],
+            exclude: ['**/ignore-*.js', '**/*-min.js', '**/r.js', 'webapp/js/'+appname+'/main-built.js', 'webapp/js/'+appname+'/build.js'],
             directives: {// example directives
                 browser: true,
                 unparam: true,

@@ -10,13 +10,12 @@ define(['jquery'], function ($) {
 
             guid: function () {
                 return this.s4() + this.s4() + '-' +
-                this.s4() + '-' +
-                this.s4() + '-' +
-                this.s4() + '-' +
-                this.s4() + this.s4() + this.s4();
+                    this.s4() + '-' +
+                    this.s4() + '-' +
+                    this.s4() + '-' +
+                    this.s4() + this.s4() + this.s4();
             }
         });
     };
-
-    return new GeneralUtility ();
+    return new GeneralUtility();
 });

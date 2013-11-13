@@ -1,28 +1,24 @@
 /*global $, define, require*/
-
+/*jslint forin: true */
 define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
     "use strict";
-    var C = {
-
-    }, BaseModel = Backbone.Model.extend({
+    var BaseModel = Backbone.Model.extend({
             initialize: function () {
-                var currentParam, cm, CurrentParamModel, lazymodel;
+                var currentParam,
+                    cm,
+                    CurrentParamModel;
                 for (cm in this.C) {
                     currentParam = this.C[cm];
                     if (currentParam && this.get(CM.get(cm)) !== undefined) {
-                   
+
                         if (typeof currentParam === "function") {
                             if (currentParam.prototype instanceof Backbone.Model || currentParam.prototype instanceof Backbone.Collection) {
                                 CurrentParamModel = currentParam;
                                 this.set(cm, new CurrentParamModel(this.get(CM.get(cm))));
-                
-                            }
-
-                            else {
+                            } else {
                                 this.set(cm, currentParam(this.get(CM.get(cm))));
                             }
-                        } 
-                        else {
+                        } else {
                             this.set(cm, this.get(CM.get(cm)));
                         }
 
@@ -35,7 +31,7 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
             },
             toJSON: function () {
                 var returnjsonobj = Backbone.Model.prototype.toJSON.apply(this, arguments),
-                p;
+                    p;
                 for (p in returnjsonobj) {
                     if (returnjsonobj[p] instanceof Backbone.Model || returnjsonobj[p] instanceof Backbone.Collection) {
                         returnjsonobj[p] = returnjsonobj[p].toJSON();
@@ -45,7 +41,7 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
             },
             parse: function (data) {
                 var CurrentConstantParam,
-                cm;
+                    cm;
                 for (cm in this.C) {
                     CurrentConstantParam = this.C[cm];
                     if (CurrentConstantParam && data[CM.get(cm)] !== undefined) {
@@ -61,7 +57,7 @@ define(['backbone', 'constantsrequestmodel'], function (Backbone, CM) {
                 }
                 return data;
             },
-            C: C
+            C: {}
         });
 
     return BaseModel;

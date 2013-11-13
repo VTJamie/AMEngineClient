@@ -1,13 +1,12 @@
 /*global $, define, require*/
 
-define(['backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (
-    Backbone, CM, BaseControlModel) {
-
+define(['backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (Backbone, CM, BaseControlModel) {
+    "use strict";
     var constants = {
             TEXT_BOX_TYPE_TEXT_BOX: "TEXT_BOX_TYPE_TEXT_BOX",
             TEXT_BOX_TYPE_TEXT_AREA: "TEXT_BOX_TYPE_TEXT_AREA",
             CONTROL_TYPE_TEXT: "CONTROL_TYPE_TEXT"
-    },
+        },
         C = {
             EDITABLE: "EDITABLE",
             REQUIRED: "REQUIRED",
@@ -19,19 +18,20 @@ define(['backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (
                 return constants.CONTROL_TYPE_TEXT;
             },
             TEXT_BOX_TYPE: function (value) {
+                var returnvalue;
                 if (value === CM.get(constants.TEXT_BOX_TYPE_TEXT_BOX)) {
-                    return constants.TEXT_BOX_TYPE_TEXT_BOX;
+                    returnvalue = constants.TEXT_BOX_TYPE_TEXT_BOX;
                 } else if (value === CM.get(constants.TEXT_BOX_TYPE_TEXT_AREA)) {
-                    return constants.TEXT_BOX_TYPE_TEXT_AREA;
+                    returnvalue = constants.TEXT_BOX_TYPE_TEXT_AREA;
                 } else {
-                    return value;
+                    returnvalue = value;
                 }
+                return returnvalue;
             }
-        };
-
-    var TextControlModel = BaseControlModel.extend({
-        C: $.extend({}, C, BaseControlModel.prototype.C)
-    });
+        },
+        TextControlModel = BaseControlModel.extend({
+            C: $.extend({}, C, BaseControlModel.prototype.C)
+        });
 
     return TextControlModel;
 });

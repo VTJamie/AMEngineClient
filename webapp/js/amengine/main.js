@@ -1,5 +1,5 @@
-/*global $, define, require*/
-
+/*global $, define, require, debug*/
+/*jslint nomen: true */
 require.config({
     //urlArgs: "bust=" + (new Date ()).getTime(),
     paths: {
@@ -285,54 +285,22 @@ require.config({
         }
     },
     hbs: {
-            disableI18n: true
-        }
+        disableI18n: true
+    }
 });
 
 //router and routecontroller must be specified in a sub config file
-require(['jquery',
-         'jquery-ui',
-         'jquery-ui-touch-punch',
-         'jquerymobile-config',
-         'jquerymobile',
-         'logging',
-         'underscore',
-         'backbone',
-         'marionette',
-         'Handlebars',
-         'handlebars-config',
-         'hbs',
-         'app',
-         'constantsrequestmodel',
-         'router',
-         'routecontroller'
-         ], function (
-         $,
-         jQueryUI,
-         jqUIpunch,
-         jqConfig,
-         jqM,
-         logging,
-         _,
-         Backbone,
-         Marionette,
-         handlebars,
-         hbsconfig,
-         hbs,
-         App,
-         ConstantsRequestModel,
-         Router,
-         Controller) {
-    "use strict";
-
-    ConstantsRequestModel.request(function () {
+require(['jquery', 'jquery-ui', 'jquery-ui-touch-punch', 'jquerymobile-config', 'jquerymobile', 'logging', 'underscore', 'backbone', 'marionette', 'Handlebars', 'handlebars-config', 'hbs', 'app', 'constantsrequestmodel', 'router', 'routecontroller'],
+    function ($, jQueryUI, jqUIpunch, jqConfig, jqM, logging, _, Backbone, Marionette, handlebars, hbsconfig, hbs, App, ConstantsRequestModel, Router, Controller) {
+        "use strict";
+        ConstantsRequestModel.request(function () {
 
             debug.log("Creating Router");
-            new Router({
+            (function () { return new Router({
                 controller: new Controller()
-            });
+            }); }());
 
             App.start();
 
+        });
     });
-});

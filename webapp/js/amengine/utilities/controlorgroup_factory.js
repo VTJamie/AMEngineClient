@@ -6,10 +6,12 @@ define(['controlfactory', 'groupfactory'], function (controlFactory, groupFactor
         GROUP_TYPE: "GROUP_TYPE"
     };
     return function (model) {
+        var returnvalue;
         if (model.get(C.GROUP_TYPE) !== undefined) {
-            return groupFactory(model);
+            returnvalue = groupFactory(model);
         } else {
-            return controlFactory(model);
+            returnvalue = controlFactory(model);
         }
+        return returnvalue;
     };
 });
