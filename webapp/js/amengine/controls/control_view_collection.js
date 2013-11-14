@@ -1,74 +1,73 @@
-/*global $, define, require*/
-
+/*global $, define, require, debug*/
+/*jslint nomen: true, forin: true */
 define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'], function ($, Backbone, CM, ControlViewModel, App) {
     "use strict";
-
-    var C ={
-        FIELD_PREFIX: "FIELD_PREFIX",
-        ID: "ID",
-        REFRESH_FIELD_PREFIX: "REFRESH_FIELD_PREFIX"
-    },
-    ControlViewCollection = Backbone.Collection.extend({
-        model : ControlViewModel,
-        _getFieldValues : function (inputoptions) {
-            var valueobject = {},
-            p,
-            options = $.extend({withoutprefix: false, controlid: undefined}, inputoptions);
-
-            this.each(function (model) {
-                $.extend(valueobject, model.get("view").getValue());
-            });
-            for(p in valueobject){
-                if(options.controlid === undefined || options.controlid === p) {
-                    if(!options.withoutprefix) {
-                        valueobject[CM.get(C.FIELD_PREFIX) + p] = valueobject[p];
-                        delete valueobject[p];
-                    }
-                }
-                else {
-                    if(options.controlid !== p) {
-                        delete valueobject[p];
-                    }
-                }
-            }
-            return valueobject;
+    var C = {
+            FIELD_PREFIX: "FIELD_PREFIX",
+            ID: "ID",
+            REFRESH_FIELD_PREFIX: "REFRESH_FIELD_PREFIX"
         },
-        _getFieldView: function (viewid) {
-            return this.find(function(viewmodel) {
-                return viewmodel.get("view").model.get(C.ID) === viewid;
-            });
-        }
-    }), currentpagecollection;
+        ControlViewCollection = Backbone.Collection.extend({
+            model : ControlViewModel,
+            _getFieldValues : function (inputoptions) {
+                var valueobject = {},
+                    p,
+                    options = $.extend({withoutprefix: false, controlid: undefined}, inputoptions);
 
-    ControlViewCollection.getFieldValues = function(options) {
+                this.each(function (model) {
+                    $.extend(valueobject, model.get("view").getValue());
+                });
+                for (p in valueobject) {
+                    if (options.controlid === undefined || options.controlid === p) {
+                        if (!options.withoutprefix) {
+                            valueobject[CM.get(C.FIELD_PREFIX) + p] = valueobject[p];
+                            delete valueobject[p];
+                        }
+                    } else {
+                        if (options.controlid !== p) {
+                            delete valueobject[p];
+                        }
+                    }
+                }
+                return valueobject;
+            },
+            _getFieldView: function (viewid) {
+                return this.find(function (viewmodel) {
+                    return viewmodel.get("view").model.get(C.ID) === viewid;
+                });
+            }
+        }),
+        currentpagecollection;
+
+    ControlViewCollection.getFieldValues = function (options) {
         App.vent.trigger('loadactivecontrols.amengine');
         return ControlViewCollection.getCurrentInstance()._getFieldValues(options);
     };
 
-    ControlViewCollection.getFieldView = function(viewid) {
+    ControlViewCollection.getFieldView = function (viewid) {
         App.vent.trigger('loadactivecontrols.amengine');
         return ControlViewCollection.getCurrentInstance()._getFieldView(viewid);
     };
 
-    ControlViewCollection.getRefreshFields = function(options) {
+    ControlViewCollection.getRefreshFields = function (options) {
         var returnobject = {};
         App.vent.trigger('loadactivecontrols.amengine');
         function isFieldName(curfieldname) {
             var idx;
-            if(options !== undefined && options.fields !== undefined) {
+            if (options !== undefined && options.fields !== undefined) {
                 for (idx in options.fields) {
-                    if(options.fields[idx] === curfieldname)
-                    {
+                    if (options.fields[idx] === curfieldname) {
                         return true;
                     }
                 }
                 return false;
-            } else {
-                return true;
             }
+
+            return true;
+
         }
         ControlViewCollection.getCurrentInstance().each(function (curmodel) {
-            if(isFieldName(curmodel.get("view").model.get(C.ID))) {
+            if (isFieldName(curmodel.get("view").model.get(C.ID))) {
                 returnobject[CM.get(C.REFRESH_FIELD_PREFIX) + curmodel.get("view").model.get(C.ID)] = true;
             }
         });
@@ -88,7 +87,7 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
         ControlViewCollection.getCurrentInstance().each(function (curview) {
             var currentview =  curview.get("view"),
                 newmodel = reloadcontrolcollection.findWhere({ID: currentview.model.get(C.ID)});
-            if(newmodel !== undefined) {
+            if (newmodel !== undefined) {
                 currentview.reloadModel(newmodel);
             }
         });

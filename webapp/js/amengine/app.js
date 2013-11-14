@@ -45,7 +45,7 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette', 'pagecollection'
     });
 
     $(TheApplication.bodyRegion.el).on('pagehide', function (event, options) {
-        if($.mobile.pageContainer.find(".ui-page-active").is('.ui-dialog')) {
+        if ($.mobile.pageContainer.find(".ui-page-active").is('.ui-dialog')) {
             debug.log('save old page', event.target);
 
             PageCollection.push({page: event.target});
@@ -55,18 +55,18 @@ define(['jquerymobile', 'underscore', 'backbone', 'marionette', 'pagecollection'
     });
 
     TheApplication.showLoader = function () {
-       if($.mobile.pageContainer) {
-           $.mobile.loading('show', {
-               text: 'Loading...',
-               textVisible: true,
-               theme: 'a',
-               html: ""
-           });
-       }
+        if ($.mobile.pageContainer) {
+            $.mobile.loading('show', {
+                text: 'Loading...',
+                textVisible: true,
+                theme: 'a',
+                html: ""
+            });
+        }
     };
 
     TheApplication.hideLoader = function () {
-        if($.mobile.pageContainer) {
+        if ($.mobile.pageContainer) {
             $.mobile.loading('hide');
         }
     };

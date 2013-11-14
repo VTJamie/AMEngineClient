@@ -3,8 +3,9 @@
 define(['backbone', 'constantsrequestmodel', 'basemodel'], function (Backbone, CM, BaseModel) {
     "use strict";
     var constants = {
-        GRID_VIEW_COLUMN_TYPE_DISPLAY: "GRID_VIEW_COLUMN_TYPE_DISPLAY"
-    }, C = {
+            GRID_VIEW_COLUMN_TYPE_DISPLAY: "GRID_VIEW_COLUMN_TYPE_DISPLAY"
+        },
+        C = {
             GRID_VIEW_COLUMN_NAME: "GRID_VIEW_COLUMN_NAME",
             GRID_VIEW_COLUMN_IS_VISIBLE: "GRID_VIEW_COLUMN_IS_VISIBLE",
             GRID_VIEW_COLUMN_TYPE: function (value) {
@@ -12,8 +13,9 @@ define(['backbone', 'constantsrequestmodel', 'basemodel'], function (Backbone, C
                     return constants.GRID_VIEW_COLUMN_TYPE_DISPLAY;
                 }
             }
-        }, GridColumnItemModel = BaseModel.extend({
-            C: $.extend(C, BaseModel.prototype.C)
+        },
+        GridColumnItemModel = BaseModel.extend({
+            C: $.extend({}, C, BaseModel.prototype.C)
         });
 
     return GridColumnItemModel;

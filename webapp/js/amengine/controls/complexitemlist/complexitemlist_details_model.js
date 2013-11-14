@@ -2,9 +2,7 @@
 
 define(['backbone', 'constantsrequestmodel', 'basemodel', 'complexitemlistcolumnitemcollection', 'complexitemlistgriddatacollection'], function (Backbone, CM, BaseModel, ComplexItemListColumnListCollection, ComplexItemListGridDataCollection) {
     "use strict";
-    var constants = {
-
-    }, C = {
+    var C = {
             GRID_VIEW_CURRENT_PAGE: "GRID_VIEW_CURRENT_PAGE",
             GRID_VIEW_PAGE_SIZE: "GRID_VIEW_PAGE_SIZE",
             GRID_VIEW_TOTAL_NUMBER: "GRID_VIEW_TOTAL_NUMBER",
@@ -19,8 +17,9 @@ define(['backbone', 'constantsrequestmodel', 'basemodel', 'complexitemlistcolumn
             GRID_VIEW_RELOAD_REQUEST_ROWS: "GRID_VIEW_RELOAD_REQUEST_ROWS",
             GRID_VIEW_RELOAD_REQUEST_SORT_NAME: "GRID_VIEW_RELOAD_REQUEST_SORT_NAME",
             GRID_VIEW_RELOAD_REQUEST_SORT_ORDER: "GRID_VIEW_RELOAD_REQUEST_SORT_ORDER"
-        }, ComplexItemListDetailsModel = BaseModel.extend({
-            C: $.extend(C, BaseModel.prototype.C)
+        },
+        ComplexItemListDetailsModel = BaseModel.extend({
+            C: $.extend({}, C, BaseModel.prototype.C)
         });
 
     return ComplexItemListDetailsModel;

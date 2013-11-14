@@ -1,17 +1,16 @@
-/*global $, define, require*/
+/*global $, define, require, debug*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistdeleterequestmodel', 'complexitemlistnewrequestmodel', 'refreshrequestmodel', 'hbs!complexitemlisttemplate'], function (
-    $, jqM, Backbone, App, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemDeleteRequestModel, ComplexListItemNewRequestModel, RefreshControlsRequestModel, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complexitemlisteditrequestmodel', 'complexitemlistdeleterequestmodel', 'complexitemlistnewrequestmodel', 'refreshrequestmodel', 'hbs!complexitemlisttemplate'], function ($, jqM, Backbone, App, BaseControlView, ComplexListItemEditRequestModel, ComplexListItemDeleteRequestModel, ComplexListItemNewRequestModel, RefreshControlsRequestModel, Template) {
     "use strict";
     var C = {
-        ID: "ID",
-        SESSION_VALID: "SESSION_VALID"
-    },
-    ComplexItemListView = BaseControlView.extend({
+            ID: "ID",
+            SESSION_VALID: "SESSION_VALID"
+        },
+        ComplexItemListView = BaseControlView.extend({
             initialize: function (options) {
                 BaseControlView.prototype.initialize.apply(this, arguments);
-                this.template = Template;
             },
+            template: Template,
             events: $.extend({
                 'click .complexitemlist-item': 'linkItemClicked',
                 'click .amengine-complexitemlist-add': 'addItem',
@@ -20,20 +19,19 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
             getValue : function () {
                 return {};
             },
-            addItem: function() {
+            addItem: function () {
                 App.showLoader();
                 ComplexListItemNewRequestModel.request({
                     REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
-                }, function(responsemodel){
+                }, function (responsemodel) {
                     if (responsemodel.get(C.SESSION_VALID)) {
                         debug.log("Loading", responsemodel);
-                        require(['app', 'dialogview'], function(App, DialogView){
+                        require(['app', 'dialogview'], function (App, DialogView) {
                             App.loadPage(new DialogView({model: responsemodel}));
                             App.hideLoader();
                         });
 
-                    }
-                    else {
+                    } else {
                         App.hideLoader();
                         Backbone.history.navigate('', {trigger: true});
                     }
@@ -45,8 +43,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
                 ComplexListItemDeleteRequestModel.request({
                     REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID),
                     REQUEST_COMPLEX_ITEM_ID: $(e.target).closest('tr').attr('data-id')
-                }, function(responsemodel){
-                     RefreshControlsRequestModel.request({}, function (model) {
+                }, function (responsemodel) {
+                    RefreshControlsRequestModel.request({}, function (model) {
                         App.hideLoader();
                     }, {
                         fields: [
@@ -58,27 +56,26 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
                 e.preventDefault();
                 return false;
             },
-            linkItemClicked: function(e) {
+            linkItemClicked: function (e) {
                 App.showLoader();
                 ComplexListItemEditRequestModel.request({
                     REQUEST_COMPLEX_ITEM_ID: $(e.target).closest('tr').attr('data-id'),
                     REQUEST_FIELD_ACTION_PROPERTY_NAME: this.model.get(C.ID)
-                }, function(responsemodel){
+                }, function (responsemodel) {
                     if (responsemodel.get(C.SESSION_VALID)) {
                         debug.log("Loading", responsemodel);
-                        require(['app', 'dialogview'], function(App, DialogView){
+                        require(['app', 'dialogview'], function (App, DialogView) {
                             App.loadPage(new DialogView({model: responsemodel}));
                             App.hideLoader();
                         });
 
-                    }
-                    else {
+                    } else {
                         App.hideLoader();
                         Backbone.history.navigate('', {trigger: true});
                     }
                 });
                 return false;
             }
-    });
+        });
     return ComplexItemListView;
 });

@@ -2,9 +2,7 @@
 
 define(['backbone', 'constantsrequestmodel', 'basemodel', 'gridcolumnitemcollection', 'gridgriddatacollection'], function (Backbone, CM, BaseModel, GridColumnListCollection, GridGridDataCollection) {
     "use strict";
-    var constants = {
-
-    }, C = {
+    var C = {
             GRID_VIEW_CURRENT_PAGE: "GRID_VIEW_CURRENT_PAGE",
             GRID_VIEW_PAGE_SIZE: "GRID_VIEW_PAGE_SIZE",
             GRID_VIEW_TOTAL_NUMBER: "GRID_VIEW_TOTAL_NUMBER",
@@ -19,8 +17,9 @@ define(['backbone', 'constantsrequestmodel', 'basemodel', 'gridcolumnitemcollect
             GRID_VIEW_RELOAD_REQUEST_ROWS: "GRID_VIEW_RELOAD_REQUEST_ROWS",
             GRID_VIEW_RELOAD_REQUEST_SORT_NAME: "GRID_VIEW_RELOAD_REQUEST_SORT_NAME",
             GRID_VIEW_RELOAD_REQUEST_SORT_ORDER: "GRID_VIEW_RELOAD_REQUEST_SORT_ORDER"
-        }, GridDetailsModel = BaseModel.extend({
-            C: $.extend(C, BaseModel.prototype.C)
+        },
+        GridDetailsModel = BaseModel.extend({
+            C: $.extend({}, C, BaseModel.prototype.C)
         });
 
     return GridDetailsModel;

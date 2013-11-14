@@ -1,18 +1,18 @@
 /*global $, define, require*/
 
-define(['require', 'backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (
-    RequireNow, Backbone, CM, BaseControlModel) {
-    var LazyCollection, constants, C;
+define(['require', 'backbone', 'constantsrequestmodel', 'basecontrolmodel'], function (RequireNow, Backbone, CM, BaseControlModel) {
+    "use strict";
+    var LazyCollection, constants, C, LayoutEditorItemModel;
     require(['layouteditoritemcollection'], function (collectionval) {
         LazyCollection = collectionval;
-    }),
+    });
     constants = {
         CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_ITEM",
         CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP: "CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP"
     };
     C = {
         CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER: "CONTROL_LAYOUT_EDITOR_ITEM_IDENTIFIER",
-        CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS: function(value) {
+        CONTROL_LAYOUT_EDITOR_ITEM_CHILD_ITEMS: function (value) {
             return new LazyCollection(value);
         },
         CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS: "CONTROL_LAYOUT_EDITOR_ITEM_NUMBER_OF_COLUMNS",

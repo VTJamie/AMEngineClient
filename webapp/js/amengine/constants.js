@@ -1,6 +1,7 @@
 /*global $, define, require*/
 
 define([], function () {
+    "use strict";
     return {
         REQUEST_TYPE_IDENTIFIER: "REQUEST_TYPE_IDENTIFIER",
         REQUEST_TYPE_SUB_IDENTIFIER: "REQUEST_TYPE_SUB_IDENTIFIER",
