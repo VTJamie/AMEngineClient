@@ -95,9 +95,9 @@ module.exports = function (grunt) {
                     out: "webapp/js/amengine/main-built.js",
                   //  optimize: "none",
                     logLevel: 0
+                }
             }
         }
-    }
 
     });
 
