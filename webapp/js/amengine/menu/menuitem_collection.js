@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['backbone'], function (Backbone) {
+define(['backbone', 'menuitemmodel'], function (Backbone) {
     "use strict";
     var MenuItemCollection = Backbone.Collection.extend({
             model: function (attrs, options) {
