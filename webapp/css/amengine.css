@@ -94,3 +94,28 @@ tr:last-child td:last-child{
 border-collapse: separate;
 border-spacing: 0px;
 }
+
+.amengine-nopadding-vertical {
+   /* padding-top: 0px !important;
+    padding-bottom: 0px !important;    */
+}
+
+.amengine-nopadding-vertical .ui-collapsible-content {
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+   padding-left: 5px !important;
+   padding-right: 5px !important;
+}
+
+.amengine-nomargin-vertical {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.menulist * {
+    white-space: normal !important;
+}
+
+.amengine-nopadding .ui-btn-text {
+    white-space: normal !important;
+}
