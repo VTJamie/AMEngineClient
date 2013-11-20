@@ -119,3 +119,7 @@ border-spacing: 0px;
 .amengine-nopadding .ui-btn-text {
     white-space: normal !important;
 }
+
+.ui-header .ui-title, .ui-footer .ui-title {
+    margin: .6em 25% .8em;
+}
