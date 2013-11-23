@@ -1,61 +1,57 @@
-{{#if IS_VISIBLE }}
-<div>{{ LABEL }}</div>
-{{#ifCond GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER ">" 0 }}
+<div ng-show="model.IS_VISIBLE" ng-controller="gridControl">
 
-<table id="{{{nospaces ID }}}-grid" data-inset="true" data-role="table" data-sortable="true" data-mode="reflow" class="ui-responsive">
-    <thead>
-        <tr class="ui-bar-a">
+    <div>\{{ model.LABEL }}</div>
+    <div ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER > 0">
+        <table id="\{{ model.ID.replace('_', '__').replace(' ', '_') }}-grid" data-inset="true" data-role="table"
+               data-sortable="true" data-mode="reflow" class="ui-responsive">
+            <thead>
+            <tr class="ui-bar-a">
 
-        {{#if GRID_VIEW_DATA_OBJECT_LAUNCH }}
-            <th></th>
-        {{/if}}
-        {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST}}
-            {{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
-                <th data-priority="{{ @index }}">{{ GRID_VIEW_COLUMN_NAME }}</th>
-            {{/if}}
-        {{/each}}
-        {{#if GRID_VIEW_GRID_DETAILS.GRID_VIEW_DELETE_ACTION }}
-            <th></th>
-        {{/if}}
-        </tr>
-    </thead>
-    <tbody>
-        {{#each GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA }}
+                <th ng-show="model.GRID_VIEW_DATA_OBJECT_LAUNCH"></th>
+                <th ng-repeat="gridcolumn in model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST"
+                    data-priority="\{{ $index }}" ng-show="gridcolumn.GRID_VIEW_COLUMN_IS_VISIBLE">\{{
+                    gridcolumn.GRID_VIEW_COLUMN_NAME }}
+                </th>
 
-            <tr class="grid-data-row {{#isOdd @index}}ui-bar-b{{else}}ui-bar-c{{/isOdd}}" data-id="{{{nospaces ID }}}">
-                {{#if ../GRID_VIEW_DATA_OBJECT_LAUNCH }}
-                    <td>
-                        <a href="#{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_OBJECT_NAME }}/{{ ../../GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_TARGET_FIELD }}/{{{nospaces ID }}}" data-role="button">
-                            Open
-                        </a>
-                    </td>
-                {{/if}}
-                {{#each GRID_VIEW_ROW_CELL_DATA_ARRAY }}
-                    {{#usearrayindex ../../GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST index=@index}}
-                        {{#if GRID_VIEW_COLUMN_IS_VISIBLE }}
-                            <td>
-                                {{ ../../this }}
-                            </td>
-                        {{/if}}
-                    {{/usearrayindex}}
-                {{/each}}
-                {{#if ../GRID_VIEW_GRID_DETAILS.GRID_VIEW_DELETE_ACTION }}
-                    <td>
-                        <a href="#" data-id="{{ ID }}" class="grid-delete-button" data-role="button">
-                            Delete
-                        </a>
-                    </td>
-                {{/if}}
+                <th ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_DELETE_ACTION"></th>
             </tr>
-        {{/each}}
-    </tbody>
-</table>
-<div id="{{{nospaces ID }}}-pager" data-role="pager"></div>
+            </thead>
+            <tbody>
+            <tr ng-repeat="gridrow in model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA"
+                ng-class="$index % 2 == 0 ? 'ui-bar-c' : 'ui-bar-b' " class="grid-data-row" data-id="\{{ gridrow.ID }}">
 
-{{else}}
+                <td ng-show="model.GRID_VIEW_DATA_OBJECT_LAUNCH">
+                    <a href="#\{{ model.GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_OBJECT_NAME }}/\{{ model.GRID_VIEW_DATA_OBJECT_LAUNCH.GRID_VIEW_DATA_OBJECT_LAUNCH_TARGET_FIELD }}/\{{ gridrow.ID }}"
+                       data-role="button">
+                        Open
+                    </a>
+                </td>
 
- <div>No Records.</div>
+                <td ng-repeat="datacol in gridrow.GRID_VIEW_ROW_CELL_DATA_ARRAY"
+                    ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST[$index].GRID_VIEW_COLUMN_IS_VISIBLE">
+                    \{{ datacol }}
+                </td>
 
-{{/ifCond}}
+                <td ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_DELETE_ACTION">
+                    <a href="#" data-id="\{{ gridrow.ID }}" class="grid-delete-button" data-role="button">
+                        Delete
+                    </a>
+                </td>
 
-{{/if}}
+            </tr>
+            </tbody>
+        </table>
+
+        <div id="\{{ model.ID.replace('_', '__').replace(' ', '_') }}-pager" data-role="pager"> Page: \{{
+            model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_CURRENT_PAGE}} of \{{
+            model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_NUMBER_OF_PAGES}}
+            Records: \{{ (model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_CURRENT_PAGE - 1) * model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE + 1 }}
+            - \{{ (model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_CURRENT_PAGE - 1) * model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE + model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA.length }}  of \{{ model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER}}
+            Page Size: \{{ model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE }}
+        </div>
+    </div>
+    <div ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER == 0">
+        <div>No Records.</div>
+        <br/>
+    </div>
+</div>

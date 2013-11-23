@@ -2,6 +2,7 @@
 
 define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'controlviewcollection', 'pagemenuview', 'pagecontainer', 'menuview', 'app', 'pageresponsebodymodel'], function ($, jqM, Backbone, Template, runFactory, ControlViewCollection, PageMenuView, PageContainer, MenuView, App, PageResponseBodyModel) {
     "use strict";
+
     var constants = {
             RESPONSE_BODY: "RESPONSE_BODY",
             ROOT_OBJECT: "ROOT_OBJECT",

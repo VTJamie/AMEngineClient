@@ -22,7 +22,7 @@ require.config({
         'jquery-fileupload-validate': '../libs/jquery/jquery.fileupload-validate',
         'jquery-fileupload-ui': '../libs/jquery/jquery.fileupload-ui',
         'jquery-fileupload-jquery-ui': '../libs/jquery/jquery.fileupload-jquery-ui',
-
+        'angular': '../libs/angular/angular.min',
         'underscore': '../libs/backbone/underscore',
         'backbone': '../libs/backbone/backbone',
         'backbone-localstorage': '../libs/backbone/backbone.localStorage',

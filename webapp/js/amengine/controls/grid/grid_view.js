@@ -1,8 +1,9 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowrequestmodel', 'refreshrequestmodel', 'hbs!gridtemplate'], function ($, jqM, Backbone, BaseControlView, GridDeleteRowRequestModel, RefreshControlsRequestModel, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowrequestmodel', 'refreshrequestmodel', 'hbs!gridtemplate', 'angular'], function ($, jqM, Backbone, BaseControlView, GridDeleteRowRequestModel, RefreshControlsRequestModel, Template, Angular) {
     "use strict";
-    var C = {
+    var angularAppModule = angular.module('amengineAngularControl'),
+        C = {
             LABEL: "LABEL",
             firstloaddataobj: "firstload",
             ID: "ID",
@@ -34,9 +35,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
                 BaseControlView.prototype.initialize.apply(this, arguments);
             },
             template: Template,
-            attributes: {
-                "class": "ui-corner-all amengine-table"
-            },
+            attributes: $.extend({}, {
+                "class": "ui-corner-all amengine-table",
+               'ng-app': 'amengineAngularControl'
+            }, BaseControlView.prototype.attributes),
             getValue : function () {
                 return {};
             },
@@ -63,10 +65,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
             render: function () {
                 BaseControlView.prototype.render.apply(this, arguments);
                 return this.el;
-            },
-            onShow: function () {
-                return;
             }
+        });
+
+    angularAppModule.controller('gridControl', function($scope) {
+
         });
     return GridView;
 });

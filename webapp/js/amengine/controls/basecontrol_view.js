@@ -1,8 +1,9 @@
 /*global $, define, require, debug*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function ($, jqM, Backbone, ControlViewCollection) {
+define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'], function ($, jqM, Backbone, ControlViewCollection, Angular) {
     "use strict";
-    var C = {
+    var angularAppModule = angular.module('amengineAngularControl', []),
+        C = {
             ID: "ID",
             IS_VISIBLE: "IS_VISIBLE"
         },
@@ -41,8 +42,38 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection'], function
             },
             reloadModel: function (newmodel) {
                 this.model = newmodel;
-                this.render();
+                if(this.$el.is('[ng-app]')) {
+                    this.syncScope();
+                    this.$el.trigger("create");
+                } else {
+                    this.render();
+                }
+
+            },
+            setupAngular: function () {
+                 if(this.$el.is('[ng-app]')) {
+                    debug.log('Attempting to Bootstrap Angular', this.model.get("ID"));
+
+                    angular.bootstrap(this.el, ['amengineAngularControl']);
+                    this.syncScope();
+                }
+            },
+            syncScope: function () {
+                var ngcontroller = this.$el.find('[ng-controller]'),
+                    scope;
+                if(ngcontroller.size() > 0) {
+                    scope = angular.element(ngcontroller).scope();
+                    scope.model = this.model.toJSON();
+
+                    scope.$apply();
+                }
+            },
+            onShow: function () {
+
+                this.setupAngular();
             }
         });
+
+
     return BaseControlView;
 });

@@ -93,8 +93,9 @@ module.exports = function (grunt) {
                     baseUrl: "webapp/js/amengine",
                     mainConfigFile: "webapp/js/amengine/main.js",
                     out: "webapp/js/amengine/main-built.js",
-                  //  optimize: "none",
-                    logLevel: 0
+                    optimize: "uglify2",
+                    logLevel: 0,
+                    preserveLicenseComments: false
                 }
             }
         }
