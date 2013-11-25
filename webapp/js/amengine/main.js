@@ -119,6 +119,7 @@ require.config({
         'logoutrequestmodel': './requests/logout_request_model',
         'refreshrequestmodel': './requests/refresh_request_model',
         'refreshresponsebodymodel': './requests/refresh_responsebody_model',
+        'reloadgridrequestmodel': './requests/reloadgrid_request_model',
 
         //Controls
         'basecontrolview': './controls/basecontrol_view',
@@ -290,8 +291,8 @@ require.config({
 });
 
 //router and routecontroller must be specified in a sub config file
-require(['jquery', 'jquery-ui', 'jquery-ui-touch-punch', 'jquerymobile-config', 'jquerymobile', 'logging', 'underscore', 'backbone', 'marionette', 'Handlebars', 'handlebars-config', 'hbs', 'app', 'constantsrequestmodel', 'router', 'routecontroller'],
-    function ($, jQueryUI, jqUIpunch, jqConfig, jqM, logging, _, Backbone, Marionette, handlebars, hbsconfig, hbs, App, ConstantsRequestModel, Router, Controller) {
+require(['jquery', 'jquery-ui', 'jquery-ui-touch-punch', 'modernizr', 'jquerymobile-config', 'jquerymobile', 'logging', 'underscore', 'backbone', 'marionette', 'Handlebars', 'handlebars-config', 'hbs', 'app', 'constantsrequestmodel', 'router', 'routecontroller'],
+    function ($, jQueryUI, jqUIpunch, Modernizr, jqConfig, jqM, logging, _, Backbone, Marionette, handlebars, hbsconfig, hbs, App, ConstantsRequestModel, Router, Controller) {
         "use strict";
         ConstantsRequestModel.request(function () {
 

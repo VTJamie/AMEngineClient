@@ -123,3 +123,11 @@ border-spacing: 0px;
 .ui-header .ui-title, .ui-footer .ui-title {
     margin: .6em 25% .8em;
 }
+
+.grid-pager .grid-pager-page div.ui-input-text {
+    width: 3em;
+}
+
+.table-group {
+    width: 100%;
+}
