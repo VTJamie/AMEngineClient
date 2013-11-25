@@ -1,6 +1,6 @@
 module.exports = function (grunt) {
 
-    var appname = "amengine", webdestination = process.env.CATALINA_HOME + "/webapps/" + appname;
+    var appname = "mercury", webdestination = process.env.CATALINA_HOME + "/webapps/" + appname;
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
         sloc: {
             main: {
                 files: {
-                    'webapp/js/amengine': [ '**.js' ]
+                    'webapp/js/mercury': [ '**.js' ]
                 }
             }
         },
@@ -90,9 +90,9 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     name: "main",
-                    baseUrl: "webapp/js/amengine",
-                    mainConfigFile: "webapp/js/amengine/main.js",
-                    out: "webapp/js/amengine/main-built.js",
+                    baseUrl: "webapp/js/mercury",
+                    mainConfigFile: "webapp/js/mercury/main.js",
+                    out: "webapp/js/mercury/main-built.js",
                     optimize: "uglify2",
                     logLevel: 0,
                     preserveLicenseComments: false

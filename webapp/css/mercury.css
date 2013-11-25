@@ -1,0 +1,133 @@
+.ui-table th, .ui-table td {
+    line-height: 1em;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.error {
+    color: white;
+    background-color: red;
+    -moz-border-radius: 6px 6px 6px 6px;
+       -webkit-border-radius: 6px 6px 6px 6px;
+       border-radius: 6px 6px 6px 6px;
+}
+
+.error span {
+    margin: 5px;
+}
+
+.ui-table {
+    border-spacing: 0;
+}
+
+.ui-table .ui-btn {
+    margin: 0;
+}
+
+.layouteditor-label {
+    cursor: move;
+    width: 100%;
+}
+
+.mercury-layouteditor-identifier {
+    width: 100%;
+}
+
+.mercury-layouteditor {
+    font-size: 13px;
+}
+
+.mercury-layouteditor li {
+    list-style: none;
+}
+
+.available-items ul {
+    display: none;
+}
+
+.available-items .layouteditor-trash-button {
+    display: none;
+}
+
+.ui-panel-inner {
+padding: 0 !important;
+}
+
+.mercury-nopadding {
+padding: 0 !important;
+margin: 0 !important;
+border 0 !important;
+}
+
+table {
+    -moz-border-radius: 9px 0 0 0;
+       -webkit-border-radius: 9px 0 0 0;
+       border-radius: 9px 0 0 0;
+}
+
+thead tr:first-child th:first-child {
+   -moz-border-radius: 9px 0 0 0;
+   -webkit-border-radius: 9px 0 0 0;
+   border-radius: 9px 0 0 0;
+
+}
+
+thead tr:first-child th:last-child {
+   -moz-border-radius: 0px 9px 0 0;
+   -webkit-border-radius: 0px 9px 0 0;
+   border-radius: 0px 9px 0 0;
+}
+
+tr:last-child td:first-child{
+   -moz-border-radius: 0px 0px 0px 6px;
+   -webkit-border-radius: 0px 0px 0px 6px;
+   border-radius: 0px 0px 0px 6px;
+}
+
+tr:last-child td:last-child{
+   -moz-border-radius: 0px 0px 6px 0px;
+   -webkit-border-radius: 0px 0px 6px 0px;
+   border-radius: 0px 0px 6px 0px;
+}
+
+.ui-table {
+border-collapse: separate;
+border-spacing: 0px;
+}
+
+.mercury-nopadding-vertical {
+   /* padding-top: 0px !important;
+    padding-bottom: 0px !important;    */
+}
+
+.mercury-nopadding-vertical .ui-collapsible-content {
+   padding-top: 0px !important;
+   padding-bottom: 0px !important;
+   padding-left: 5px !important;
+   padding-right: 5px !important;
+}
+
+.mercury-nomargin-vertical {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
+.menulist * {
+    white-space: normal !important;
+}
+
+.mercury-nopadding .ui-btn-text {
+    white-space: normal !important;
+}
+
+.ui-header .ui-title, .ui-footer .ui-title {
+    margin: .6em 25% .8em;
+}
+
+.grid-pager .grid-pager-page div.ui-input-text {
+    width: 3em;
+}
+
+.table-group {
+    width: 100%;
+}

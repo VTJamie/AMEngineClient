@@ -1,0 +1,52 @@
+<div ng-show="model.IS_VISIBLE" ng-controller="complexItemListControl">
+
+    <div>\{{ model.LABEL }}</div>
+    <button data-icon="plus" data-role="button" value="Add New \{{ model.LABEL }}" class="mercury-complexitemlist-add" />
+    <div ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER > 0">
+        <table id="\{{ model.ID.replace('_', '__').replace(' ', '_') }}-grid" data-inset="true" data-role="table"
+               data-sortable="true" data-mode="reflow" class="ui-responsive ui-corner-all">
+            <thead>
+            <tr class="ui-bar-a">
+                <th></th>
+
+                <th ng-repeat="gridcolumn in model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST track by $index"
+                    data-priority="\{{ $index }}" ng-show="gridcolumn.GRID_VIEW_COLUMN_IS_VISIBLE">
+                    \{{ gridcolumn.GRID_VIEW_COLUMN_NAME }}
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="gridrow in model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_DATA"
+                    ng-class="$index % 2 == 0 ? 'ui-bar-c' : 'ui-bar-b' " class="grid-data-row" data-id="\{{ gridrow.ID }}">
+
+                    <td>
+                        <button data-role="button" value="Open" class="complexitemlist-item"/>
+                    </td>
+
+                    <td ng-repeat="datacol in gridrow.GRID_VIEW_ROW_CELL_DATA_ARRAY track by $index"
+                        ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_COLUMN_LIST[$index].GRID_VIEW_COLUMN_IS_VISIBLE">
+                        \{{ datacol }}
+                    </td>
+                    <td>
+                        <button data-role="button" value="Delete" class="mercury-complexitemlist-delete"/>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <div id="\{{ model.ID.replace('_', '__').replace(' ', '_') }}-pager" class="grid-pager" data-role="pager">
+            Page:
+            <span class="grid-pager-page"><input type="text" ng-keyup="preventKeyUp($event)" ng-keydown="reloadOnKeyDown($event)" ng-blur="pageNumberBlur($event)" page-number="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_NUMBER_OF_PAGES" ng-model="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_CURRENT_PAGE" /></span>
+
+            Page Size:
+            <span class="grid-pager-page"><input type="text" ng-keyup="preventKeyUp($event)"  ng-keydown="reloadOnKeyDown($event)" ng-blur="pageSizeBlur($event)" page-size ng-model="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE" /></span>
+
+            Total Records:     \{{ model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER}}
+        </div>
+    </div>
+    <div ng-show="model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_TOTAL_NUMBER == 0">
+        <div>No Records.</div>
+        <br/>
+    </div>
+</div>
