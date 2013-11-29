@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'factory', 'hbs!buttongrouptemplate'], function ($, jqM, Backbone, runFactory, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!buttongrouptemplate'], function ($, jqM, Backbone, Template) {
     "use strict";
     var C = {
             CONTROL_ARRAY: "CONTROL_ARRAY"
@@ -13,7 +13,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'factory', 'hbs!buttongrouptemplat
             },
             template: Template,
             render: function () {
-                var idx, newitem, controlarray;
+                var
+                idx,
+                newitem,
+                controlarray,
+                runFactory = require('factory');
                 this.$el.empty().append(this.template(this.model.toJSON()));
                 controlarray = this.model.get(C.CONTROL_ARRAY);
                 for (idx = 0; idx < controlarray.length; idx += 1) {

@@ -1,6 +1,6 @@
 /*global $, require, define */
 
-define(['jquery', 'jquerymobile', 'backbone', 'factory', 'hbs!tablegrouptemplate'], function ($, jqM, Backbone, runFactory, Template) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!tablegrouptemplate'], function ($, jqM, Backbone, Template) {
     "use strict";
     var C = {
             CONTROL_ARRAY: "CONTROL_ARRAY",
@@ -22,7 +22,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'factory', 'hbs!tablegrouptemplate
                     grouparray = ["a", "b", "c", "d", "e", "f", "g", "h"],
                     curgroup = 0,
                     numcolumns = this.model.get(C.GROUP_TABLE_NUMBER_OF_COLUMNS),
-                    idx;
+                    idx,
+                    runFactory = require('factory');
                 if (numcolumns > 1) {
                     this.$el.addClass('ui-grid-' + grouparray[numcolumns - 2]);
                 }

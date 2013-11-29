@@ -75,6 +75,7 @@ module.exports = function (grunt) {
                     force: true,
                     clean: false,
                     outputStyle: "nested",
+                    noLineComments: true,
                     raw: 'preferred_syntax = :sass\n' // Use `raw` since it's not directly available
                 }
             }

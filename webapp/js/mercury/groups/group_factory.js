@@ -1,11 +1,8 @@
 /*global $, define, require*/
 
-define([], function () {
+define(['tablegroupview', 'collapsiblegroupview', 'buttongroupview'], function (TableGroupView, CollapsibleGroupView, ButtonGroupView) {
     "use strict";
-    var TableGroupView,
-        CollapsibleGroupView,
-        ButtonGroupView,
-        C = {
+    var C = {
             GROUP_TYPE: "GROUP_TYPE",
             GROUP_TYPE_TABLE: "GROUP_TYPE_TABLE",
             GROUP_TYPE_COLLAPSIBLE: "GROUP_TYPE_COLLAPSIBLE",
@@ -24,11 +21,6 @@ define([], function () {
             CONTROL_TYPE_WORKFLOW_INDICATOR: "CONTROL_TYPE_WORKFLOW_INDICATOR",
             CONTROL_TYPE_LAYOUT_EDITOR: "CONTROL_TYPE_LAYOUT_EDITOR"
         };
-    require(['tablegroupview', 'collapsiblegroupview', 'buttongroupview'], function (tgv, cgv, bgv) {
-        TableGroupView = tgv;
-        CollapsibleGroupView = cgv;
-        ButtonGroupView = bgv;
-    });
 
     return function (groupmodel) {
         var returnvalue;

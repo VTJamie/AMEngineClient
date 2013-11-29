@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../AM Interfaces/HephaestusCMS/HephaestusMVCWeb/HephaestusMVCWeb.iml" filepath="$PROJECT_DIR$/../AM Interfaces/HephaestusCMS/HephaestusMVCWeb/HephaestusMVCWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/MercuryClient.iml" filepath="$PROJECT_DIR$/MercuryClient.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MercuryClient.iml" filepath="$PROJECT_DIR$/MercuryClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ServletProxy/ServletProxy.iml" filepath="$PROJECT_DIR$/../ServletProxy/ServletProxy.iml" />
     </modules>
   </component>
