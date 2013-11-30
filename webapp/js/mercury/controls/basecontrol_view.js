@@ -1,9 +1,9 @@
-/*global $, define, require, debug*/
+/*global $, define, require, debug, angular*/
 
 define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'], function ($, jqM, Backbone, ControlViewCollection, Angular) {
     "use strict";
-    var angularAppModule = angular.module('mercuryAngularControl', []),
-        C = {
+    angular.module('mercuryAngularControl', []);
+    var C = {
             ID: "ID",
             IS_VISIBLE: "IS_VISIBLE"
         },
@@ -42,7 +42,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'
             },
             reloadModel: function (newmodel) {
                 this.model = newmodel;
-                if(this.$el.is('[ng-app]')) {
+                if (this.$el.is('[ng-app]')) {
                     this.syncScope();
                     this.$el.trigger("create");
                 } else {
@@ -51,7 +51,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'
 
             },
             setupAngular: function () {
-                 if(this.$el.is('[ng-app]')) {
+                if (this.$el.is('[ng-app]')) {
                     debug.log('Attempting to Bootstrap Angular', this.model.get("ID"));
 
                     angular.bootstrap(this.el, ['mercuryAngularControl']);
@@ -61,7 +61,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'
             syncScope: function () {
                 var ngcontroller = this.$el.find('[ng-controller]'),
                     scope;
-                if(ngcontroller.size() > 0) {
+                if (ngcontroller.size() > 0) {
                     scope = angular.element(ngcontroller).scope();
                     scope.model = this.model.toJSON();
 

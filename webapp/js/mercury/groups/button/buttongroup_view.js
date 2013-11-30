@@ -13,11 +13,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!buttongrouptemplate'], functi
             },
             template: Template,
             render: function () {
-                var
-                idx,
-                newitem,
-                controlarray,
-                runFactory = require('factory');
+                var idx,
+                    newitem,
+                    controlarray,
+                    runFactory = require('factory');
                 this.$el.empty().append(this.template(this.model.toJSON()));
                 controlarray = this.model.get(C.CONTROL_ARRAY);
                 for (idx = 0; idx < controlarray.length; idx += 1) {

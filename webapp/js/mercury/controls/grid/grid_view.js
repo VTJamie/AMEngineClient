@@ -1,4 +1,4 @@
-/*global $, define, require*/
+/*global $, define, require, angular*/
 
 define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowrequestmodel', 'refreshrequestmodel', 'hbs!gridtemplate', 'angular', 'reloadgridrequestmodel'], function ($, jqM, Backbone, BaseControlView, GridDeleteRowRequestModel, RefreshControlsRequestModel, Template, Angular, ReloadGridRequestModel) {
     "use strict";
@@ -37,7 +37,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
             template: Template,
             attributes: $.extend({}, {
                 "class": "ui-corner-all mercury-table",
-               'ng-app': 'mercuryAngularControl'
+                'ng-app': 'mercuryAngularControl'
             }, BaseControlView.prototype.attributes),
             getValue : function () {
                 return {};
@@ -68,7 +68,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
             }
         });
 
-    angularAppModule.controller('gridControl', ['$scope', '$element', function($scope, $element) {
+    angularAppModule.controller('gridControl', ['$scope', '$element', function ($scope, $element) {
         $scope.preventKeyUp = function (event) {
             if (event.keyCode === 13) {
                 event.stopPropagation();
@@ -90,7 +90,6 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
                     REQUEST_FIELD_ACTION_PROPERTY_NAME: $scope.model.ID
                 }, function (model) {
                     $scope.model.GRID_VIEW_GRID_DETAILS = $.extend($scope.model.GRID_VIEW_GRID_DETAILS, model.toJSON().RESPONSE_BODY);
-                    debug.log(model.toJSON().RESPONSE_BODY.GRID_VIEW_DATA);
                     $scope.$apply();
                     $($element).trigger("create");
                 });
@@ -103,10 +102,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
             }
         };
         $scope.pageSizeBlur = function () {
-           if ($scope.model && $scope.model.GRID_VIEW_GRID_DETAILS && $scope.model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE === "") {
-               $scope.model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE = 1;
-           }
-       };
+            if ($scope.model && $scope.model.GRID_VIEW_GRID_DETAILS && $scope.model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE === "") {
+                $scope.model.GRID_VIEW_GRID_DETAILS.GRID_VIEW_PAGE_SIZE = 1;
+            }
+        };
     }]).directive('pageNumber', function () {
         return {
             require: 'ngModel',
@@ -114,14 +113,14 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
                 scope.$watch(attrs.ngModel, function (newvalue) {
 
                     var numpages = scope.$eval(attrs.pageNumber),
-                        intvalue = (newvalue !== "" ? parseInt(newvalue) : newvalue);
+                        intvalue = (newvalue !== "" ? parseInt(newvalue, 10) : newvalue);
                     if (newvalue !== "" && intvalue > numpages) {
                         intvalue = numpages;
                     } else if (newvalue !== "" && intvalue <= 0) {
                         intvalue = 1;
                     }
 
-                    if(ngModel.$viewValue !== intvalue && numpages > 0) {
+                    if (ngModel.$viewValue !== intvalue && numpages > 0) {
                         ngModel.$setViewValue(intvalue);
                         ngModel.$render();
                     }
@@ -133,9 +132,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
             require: 'ngModel',
             link: function (scope, elem, attrs, ngModel) {
                 scope.$watch(attrs.ngModel, function (newvalue) {
-                    var intvalue = (newvalue !== "" ? parseInt(newvalue) : newvalue);
+                    var intvalue = (newvalue !== "" ? parseInt(newvalue, 10) : newvalue);
 
-                    if(ngModel.$viewValue !== intvalue) {
+                    if (ngModel.$viewValue !== intvalue) {
                         ngModel.$setViewValue(intvalue);
                         ngModel.$render();
                     }
