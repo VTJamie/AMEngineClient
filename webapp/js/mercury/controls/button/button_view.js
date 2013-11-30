@@ -42,7 +42,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
             },
             attributes: {},
             enterPressed: function (e) {
-                if (this.$el.closest('.ui-page-active').size() > 0 && this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_SUBMIT) {
+                if (this.$el.closest('.ui-page-active').size() > 0 && this.model.get(C.BUTTON_TYPE) === C.BUTTON_TYPE_SUBMIT && this.model.get(C.BUTTON_ALLOW_RETURN_CLICK)) {
                     debug.log("Button", "enter pressed");
                     this.buttonClicked(e);
                 }
