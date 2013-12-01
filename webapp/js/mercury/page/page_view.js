@@ -11,20 +11,20 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
         PageView = PageContainer.extend({
             initialize: function (options) {
                 PageContainer.prototype.initialize.apply(this, arguments);
-                this.responseobject = options.model;
+                this.model = options.model;
                 this.controlcollection = new ControlViewCollection();
                 App.vent.on('loadactivecontrols.mercury', this.loadActiveControls, this);
                 App.vent.on('loadactivepage.mercury', this.loadResponseBody, this);
             },
             loadActiveControls: function () {
-                if (this.$el.closest('.ui-page-active').size() > 0) {
+                if (this.$el.closest('.ui-page-active').size() > 0 || !$.mobile.pageContainer) {
                     debug.log('Loading Controls', this.controlcollection.toJSON());
                     ControlViewCollection.setCurrentInstance(this.controlcollection);
                 }
             },
             loadResponseBody: function () {
                 if (this.$el.closest('.ui-page-active').size() > 0 || !$.mobile.pageContainer) {
-                    PageResponseBodyModel.setCurrentInstance(this.responseobject);
+                    PageResponseBodyModel.setCurrentInstance(this.model);
                 }
             },
             template: Template,
@@ -34,7 +34,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
                     $content =  this.getContent(),
                     $menu = this.getMenu(),
                     $header = this.getHeader(),
-                    pagemenuarray = that.responseobject.get(constants.RESPONSE_BODY).get(constants.MENU_ARRAY);
+                    pagemenuarray = that.model.get(constants.RESPONSE_BODY).get(constants.MENU_ARRAY);
 
                 $menu.append(new MenuView().render());
                 ControlViewCollection.setCurrentInstance(this.controlcollection);
@@ -46,7 +46,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
                         model: pagemenuarray
                     }).render());
                 }
-                $content.append(runFactory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
+                $content.append(runFactory(that.model.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
                 return this.el;
             },
             events: $.extend({}, {
