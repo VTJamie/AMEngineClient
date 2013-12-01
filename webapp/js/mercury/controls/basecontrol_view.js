@@ -59,12 +59,10 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'
                 }
             },
             syncScope: function () {
-                var ngcontroller = this.$el.find('[ng-controller]'),
-                    scope;
-                if (ngcontroller.size() > 0) {
-                    scope = angular.element(ngcontroller).scope();
+                var scope;
+                if (this.$el.is('[ng-controller]')) {
+                    scope = this.$el.scope();
                     scope.model = this.model.toJSON();
-
                     scope.$apply();
                 }
             },

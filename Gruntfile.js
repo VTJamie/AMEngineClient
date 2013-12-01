@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                     cssDir: 'webapp/css',
                     force: true,
                     clean: false,
-                    outputStyle: "nested",
+                    outputStyle: "compressed",
                     noLineComments: true,
                     raw: 'preferred_syntax = :sass\n' // Use `raw` since it's not directly available
                 }

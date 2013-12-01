@@ -23,7 +23,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!pagetemplate', 'factory', 'co
                 }
             },
             loadResponseBody: function () {
-                if (this.$el.closest('.ui-page-active').size() > 0) {
+                if (this.$el.closest('.ui-page-active').size() > 0 || !$.mobile.pageContainer) {
                     PageResponseBodyModel.setCurrentInstance(this.responseobject);
                 }
             },

@@ -37,7 +37,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
             template: Template,
             attributes: $.extend({}, {
                 "class": "ui-corner-all mercury-table",
-                'ng-app': 'mercuryAngularControl'
+                "ng-app": 'mercuryAngularControl',
+                "ng-controller": "gridControl"
             }, BaseControlView.prototype.attributes),
             getValue : function () {
                 return {};
@@ -92,6 +93,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'griddeleterowr
                     $scope.model.GRID_VIEW_GRID_DETAILS = $.extend($scope.model.GRID_VIEW_GRID_DETAILS, model.toJSON().RESPONSE_BODY);
                     $scope.$apply();
                     $($element).trigger("create");
+                    $($element).find('table').table("refresh");
                 });
                 return false;
             }

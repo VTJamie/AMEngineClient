@@ -43,6 +43,7 @@ define(['backbone', 'constantsrequestmodel', 'tablegroupmodel', 'collapsiblegrou
         });
 
     PageResponseBodyModel.getCurrentInstance = function () {
+        debug.log("Load active page triggered");
         App.vent.trigger('loadactivepage.mercury');
         return currentinstance;
     };

@@ -18,7 +18,8 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
                 'click .mercury-complexitemlist-delete': 'deleteItem'
             }, BaseControlView.prototype.events),
             attributes: $.extend({}, {
-                'ng-app': 'mercuryAngularControl'
+                "ng-app": 'mercuryAngularControl',
+                "ng-controller": "complexItemListControl"
             }, BaseControlView.prototype.attributes),
             getValue : function () {
                 return {};
@@ -106,6 +107,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'complex
                     debug.log(model.toJSON().RESPONSE_BODY.GRID_VIEW_DATA);
                     $scope.$apply();
                     $($element).trigger("create");
+                    $($element).find('table').table("refresh");
                 });
                 return false;
             }
