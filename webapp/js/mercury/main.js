@@ -145,6 +145,8 @@ require.config({
         'submitresponsebodymodel': './controls/button/submitresponsebody_model',
         'submitactioncollection': './controls/button/submitaction_collection',
         'submitactionmodel': './controls/button/submitaction_model',
+        'postvaluecollection': './controls/button/postvalue_collection',
+        'postvaluemodel': './controls/button/postvalue_model',
 
         'filecontrolview': './controls/filecontrol/filecontrol_view',
         'filecontroltemplate': './controls/filecontrol/filecontrol_template',

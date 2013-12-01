@@ -13,6 +13,11 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
             SUBMIT_RESPONSE_ACTION_LIST: "SUBMIT_RESPONSE_ACTION_LIST",
             SUBMIT_RESPONSE_ACTION_TYPE: "SUBMIT_RESPONSE_ACTION_TYPE",
             SUBMIT_RESPONSE_ACTION_TYPE_CLOSE: "SUBMIT_RESPONSE_ACTION_TYPE_CLOSE",
+            SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT: "SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT",
+            SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_VALUES: "SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_VALUES",
+            SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_OBJECT_NAME: "SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_OBJECT_NAME",
+            SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_PARAMETER_NAME: "SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_PARAMETER_NAME",
+            SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_PARAMETER_VALUE: "SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_PARAMETER_VALUE",
             ERRORS: "ERRORS",
             RESPONSE_BODY: "RESPONSE_BODY",
             IS_DIALOG: "IS_DIALOG",
@@ -65,11 +70,27 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'basecontrolview', 'hbs!but
                     }
                 }
                 function handleResponseActionList(responsemodel, e) {
-                    var responsebody = responsemodel.get(C.RESPONSE_BODY);
+                    var responsebody = responsemodel.get(C.RESPONSE_BODY),
+                        navigationhash = [],
+                        idx,
+                        curpostvalue;
                     if (responsebody.get(C.ERRORS).size() === 0) {
                         responsebody.get(C.SUBMIT_RESPONSE_ACTION_LIST).each(function (model) {
                             if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE) {
                                 goBack();
+                                if (event) {
+                                    event.preventDefault();
+                                }
+                            } else if (model.get(C.SUBMIT_RESPONSE_ACTION_TYPE) === C.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT) {
+
+                                navigationhash.push(model.get(C.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_OBJECT_NAME));
+                                for (idx = 0; idx < model.get(C.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_VALUES).length; idx += 1) {
+                                    curpostvalue = model.get(C.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_VALUES).at(idx);
+
+                                    navigationhash.push(curpostvalue.get(C.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_PARAMETER_NAME));
+                                    navigationhash.push(curpostvalue.get(C.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT_POST_PARAMETER_VALUE));
+                                }
+                                Backbone.history.navigate(navigationhash.join("/"), {trigger: true});
                                 if (event) {
                                     event.preventDefault();
                                 }
