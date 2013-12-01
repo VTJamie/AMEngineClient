@@ -17,7 +17,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'hbs!dialogtemplate', 'factory', '
                 ControlViewCollection.setCurrentInstance(this.controlcollection);
                 ControlViewCollection.getCurrentInstance().reset();
 
-                $content.append(runFactory(that.responseobject.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
+                $content.append(runFactory(that.model.get(constants.RESPONSE_BODY).get(constants.ROOT_OBJECT)));
                 return this.el;
             },
             getHeader: function () {
