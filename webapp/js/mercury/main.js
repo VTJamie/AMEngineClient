@@ -275,6 +275,9 @@ require.config({
         'jquery-fileupload-jquery-ui': {
             deps: ['jquery-fileupload']
         }
+        'menuview': {
+            deps: ['submenuview']
+        }
     },
     map: {
         '*': {
