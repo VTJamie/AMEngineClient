@@ -18,8 +18,6 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'logoutrequestmodel', 'hbs!
 
                 if (this.model.get(constants.MENU_ITEM_ACTION) === "" && !this.model.get(constants.MENU_ITEM_IS_LOGOUT)) {
                     this.$el.addClass('mercury-nopadding');
-                    debug.log(that.$el.html());
-
                     that.$el.find(':jqmData(role=collapsible)').append(new SubMenuView({model: that.model}).render());
                     that.$el.parent().trigger('create');
                 }
