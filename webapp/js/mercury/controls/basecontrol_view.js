@@ -38,6 +38,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'
                 var that = this;
                 if (this.model.get(C.CHANGE_TRIGGERS_REFRESH)) {
                     RefreshControlsRequestModel.request({}, function (model) {
+                        return;
                     }, {
                         fields: [
                             that.model.get(C.ID)

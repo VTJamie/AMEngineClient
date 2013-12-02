@@ -12,7 +12,8 @@ define(['backbone', 'constantsrequestmodel', 'basemodel', 'postvaluecollection']
             SUBMIT_RESPONSE_ACTION_TYPE: function (value) {
                 if (value === CM.get(constants.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE)) {
                     return constants.SUBMIT_RESPONSE_ACTION_TYPE_CLOSE;
-                } else if (value === CM.get(constants.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT)) {
+                }
+                if (value === CM.get(constants.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT)) {
                     return constants.SUBMIT_RESPONSE_ACTION_TYPE_OPEN_DATA_OBJECT;
                 }
             }
