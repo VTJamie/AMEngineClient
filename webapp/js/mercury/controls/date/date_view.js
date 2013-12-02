@@ -20,15 +20,16 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!datetempla
                 BaseControlView.prototype.initialize.apply(this, arguments);
                 this.template = Template;
             },
+            events: {
+                "change :jqmData(type=date)": "onChange"
+            },
             getValue : function () {
-
                 var valueobj = {};
                 if (this.model.get(C.IS_VISIBLE) && this.model.get(C.EDITABLE)) {
                     valueobj[this.model.get(C.ID)] = this.$el.find(':jqmData(type=date)').val().trim();
                 } else if (this.model.get(C.IS_VISIBLE)) {
                     valueobj[this.model.get(C.ID)] = this.model.get(C.CURRENT_VALUE).trim();
                 }
-
                 return valueobj;
             }
         });

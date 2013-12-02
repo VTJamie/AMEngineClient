@@ -39,7 +39,9 @@ define(['jquery', 'jquerymobile', 'backbone', 'basecontrolview', 'hbs!texttempla
             },
             events: $.extend({}, {
                 'keyup': 'stopKeyUpDefault',
-                'keydown': 'stopKeyDownDefault'
+                'keydown': 'stopKeyDownDefault',
+                'change input': 'onChange',
+                'blur textarea': 'onChange'
             }, BaseControlView.prototype.events),
             stopKeyDownDefault: function (e) {
                 if (this.model.get(C.TEXT_BOX_TYPE) === C.TEXT_BOX_TYPE_TEXT_AREA && e.keyCode === 9) {

@@ -25,6 +25,7 @@ define(['backbone', 'constantsrequestmodel', 'pageresponsebodymodel', 'baseobjec
                 dataobject[CM.get(C.REQUEST_OBJECT_NAME)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(C.OBJECT_NAME);
                 dataobject[CM.get(C.REQUEST_DATA_OBJECT_ID)] = currentpageresponsebody.get(constants.RESPONSE_BODY).get(C.ID);
                 dataobject = $.extend({}, dataobject, ControlViewCollection.getRefreshFields(options));
+                dataobject = $.extend({}, dataobject, ControlViewCollection.getFieldValues(options));
 
                 this.sendRequestWithPersist(dataobject, function (refreshmodel) {
                     success(refreshmodel);

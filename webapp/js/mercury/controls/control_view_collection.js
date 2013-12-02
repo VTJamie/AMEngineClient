@@ -18,7 +18,7 @@ define(['jquery', 'backbone', 'constantsrequestmodel', 'controlviewmodel', 'app'
                     $.extend(valueobject, model.get("view").getValue());
                 });
                 for (p in valueobject) {
-                    if (options.controlid === undefined || options.controlid === p) {
+                    if (options.controlid === undefined && options.fields === undefined || options.controlid === p || $.inArray(p, options.fields) >= 0) {
                         if (!options.withoutprefix) {
                             valueobject[CM.get(C.FIELD_PREFIX) + p] = valueobject[p];
                             delete valueobject[p];

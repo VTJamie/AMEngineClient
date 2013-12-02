@@ -1,11 +1,12 @@
 /*global $, define, require, debug, angular*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'], function ($, jqM, Backbone, ControlViewCollection, Angular) {
+define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular', 'app', 'refreshrequestmodel'], function ($, jqM, Backbone, ControlViewCollection, Angular, App, RefreshControlsRequestModel) {
     "use strict";
     angular.module('mercuryAngularControl', []);
     var C = {
             ID: "ID",
-            IS_VISIBLE: "IS_VISIBLE"
+            IS_VISIBLE: "IS_VISIBLE",
+            CHANGE_TRIGGERS_REFRESH: "CHANGE_TRIGGERS_REFRESH"
         },
         BaseControlView = Backbone.View.extend({
             initialize: function (options) {
@@ -32,6 +33,17 @@ define(['jquery', 'jquerymobile', 'backbone', 'controlviewcollection', 'angular'
             },
             attributes: {
                 'data-role': 'fieldcontain'
+            },
+            onChange: function () {
+                var that = this;
+                if (this.model.get(C.CHANGE_TRIGGERS_REFRESH)) {
+                    RefreshControlsRequestModel.request({}, function (model) {
+                    }, {
+                        fields: [
+                            that.model.get(C.ID)
+                        ]
+                    });
+                }
             },
             getValue: function () {
                 debug.log(this.model.get(C.ID), 'Control getValue not overridden');
