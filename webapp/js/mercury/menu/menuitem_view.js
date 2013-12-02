@@ -1,6 +1,6 @@
 /*global $, define, require*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'app', 'logoutrequestmodel', 'hbs!menuitemtemplate', 'submenuview'], function ($, jqM, Backbone, App, LogoutRequestModel, Template, smv) {
+define(['jquery', 'jquerymobile', 'backbone', 'app', 'logoutrequestmodel', 'hbs!menuitemtemplate', 'submenuview'], function ($, jqM, Backbone, App, LogoutRequestModel, Template, SubMenuView) {
     "use strict";
     var constants = {
             MENU_ITEM_ACTION: "MENU_ITEM_ACTION",
@@ -13,8 +13,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'app', 'logoutrequestmodel', 'hbs!
             },
             tagName: 'li',
             render: function () {
-                var that = this,
-                    SubMenuView = require('submenuview');
+                var that = this;
                 this.$el.html(this.template(this.model.toJSON()));
 
                 if (this.model.get(constants.MENU_ITEM_ACTION) === "" && !this.model.get(constants.MENU_ITEM_IS_LOGOUT)) {

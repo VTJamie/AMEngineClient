@@ -1,6 +1,6 @@
 /*global $, define, require*/
 /*jslint forin: true */
-define(['jquery', 'jquerymobile', 'backbone', 'menuitemview', 'hbs!submenutemplate', 'app'], function ($, jqM, Backbone, MenuListItemView, SubMenuTemplate, App) {
+define(['jquery', 'jquerymobile', 'backbone', 'hbs!submenutemplate', 'app'], function ($, jqM, Backbone, SubMenuTemplate, App) {
     "use strict";
     var C = {
             MENU_ITEM_SUB_LIST: "MENU_ITEM_SUB_LIST"
@@ -12,7 +12,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'menuitemview', 'hbs!submenutempla
             },
             template: SubMenuTemplate,
             render: function () {
-                var that = this, menuarray, curmodel, curview, $thisul, idx;
+                var that = this, menuarray, curmodel, curview, $thisul, idx, MenuListItemView = require('menuitemview');
 
                 that.$el.empty().html(this.template(that.model.toJSON()));
                 $thisul = that.$el.find('> ul');
