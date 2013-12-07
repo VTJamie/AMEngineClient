@@ -1,9 +1,9 @@
 /*global $, define, require, debug*/
 
-define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecontrolview', 'Handlebars', 'hbs!layouteditortemplate', 'hbs!layouteditoravailablepartialtemplate', 'hbs!layouteditordroppartialtemplate'], function ($, jqM, Backbone, CM, BaseControlView, HBS, Template, AvailablePartial, DropPartial) {
+define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecontrolview', 'Handlebars', 'hbs!layouteditortemplate', 'hbs!layouteditordroppartialtemplate'], function ($, jqM, Backbone, CM, BaseControlView, HBS, Template, DropPartial) {
     "use strict";
     HBS.registerPartial('droppartial', DropPartial);
-    HBS.registerPartial('availablepartial', AvailablePartial);
+    //HBS.registerPartial('availablepartial', AvailablePartial);
     var C = {
             ID: "ID",
             LABEL: "LABEL",
@@ -74,19 +74,19 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
             render: function () {
                 BaseControlView.prototype.render.apply(this, arguments);
 
-                this.$el.find('.available-items .drop-item').draggable({
+                this.$el.find('.drop-item').draggable({
                     connectToSortable: '.drop-area',
                     revert: "invalid",
                     helper: "clone",
                     start: function (event, ui) {
-                        if (!ui.helper.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP)) {
+                        if (ui.helper.find('.' + C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP).size() <= 0) {
                             $(this).hide();
                         }
 
                     },
 
                     stop: function (event, ui) {
-                        if (!ui.helper.data('dropped') || ui.helper.hasClass(C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP)) {
+                        if (!ui.helper.data('dropped') || ui.helper.find('.' + C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP).size() > 0 && ui.helper.closest('.available-items').size() <= 0) {
                             $(this).show();
                         } else {
                             $(this).remove();
@@ -96,6 +96,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
                 });
                 this.$el.find('.drop-area').sortable({
                     tolerance: "pointer",
+                    connectWith: '.drop-area',
                     start: function (event, ui) {
                         return;
                     },
@@ -107,7 +108,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
                     stop: function (event, ui) {
                         return;
                     }
-                });
+                }).css("background-color", "blue");
                 return this.el;
             }
         });
