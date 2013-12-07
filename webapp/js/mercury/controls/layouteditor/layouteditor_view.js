@@ -86,7 +86,7 @@ define(['jquery', 'jquerymobile', 'backbone', 'constantsrequestmodel', 'basecont
                     },
 
                     stop: function (event, ui) {
-                        if (!ui.helper.data('dropped') || ui.helper.find('.' + C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP).size() > 0 && ui.helper.closest('.available-items').size() <= 0) {
+                        if (!ui.helper.data('dropped') || (ui.helper.find('.' + C.CONTROL_LAYOUT_EDITOR_ITEM_TYPE_GROUP).size() > 0 && ui.helper.closest('.available-items').size() <= 0)) {
                             $(this).show();
                         } else {
                             $(this).remove();
