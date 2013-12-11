@@ -12,7 +12,7 @@
                 {{#ifCond TEXT_BOX_TYPE "===" "TEXT_BOX_TYPE_TEXT_BOX"}}
                     <input data-mini="true" id="control-{{{nospaces ID }}}" data-type="text" value="{{ CURRENT_VALUE }}" />
                 {{else}}
-                    <textarea data-mini="true" id="control-{{{nospaces ID }}}">{{{ CURRENT_VALUE }}}</textarea>
+                    <textarea class="control-textarea" id="control-{{{nospaces ID }}}">{{{ CURRENT_VALUE }}}</textarea>
                 {{/ifCond}}
             {{/if}}
         {{else}}
