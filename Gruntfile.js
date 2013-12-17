@@ -1,17 +1,20 @@
 module.exports = function (grunt) {
 
-    var appname = "mercury", webdestination = process.env.CATALINA_HOME + "/webapps/" + appname;
+    var appname = "mercury", webdestination = process.env.CATALINA_HOME + "/webapps/" + appname,
+        appname2 = "mercuryangular";
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            webapp: ['webapp/js/'+appname+'/**/*.js', '!**/r.js', '!webapp/js/'+appname+'/main-built.js', '!webapp/js/'+appname+'/build.js']
+            webapp: ['webapp/js/'+appname+'/**/*.js', '!**/r.js', '!webapp/js/'+appname+'/main-built.js', '!webapp/js/'+appname+'/build.js'],
+            webapp: ['webapp/js/'+appname2+'/**/*.js', '!**/r.js', '!webapp/js/'+appname2+'/main-built.js', '!webapp/js/'+appname2+'/build.js']
         },
         jslint: {// configure the task
 	    all: {
-            src: ['webapp/js/'+appname+'/**/*.js'],
-            exclude: ['**/ignore-*.js', '**/*-min.js', '**/r.js', 'webapp/js/'+appname+'/main-built.js', 'webapp/js/'+appname+'/build.js'],
+            src: ['webapp/js/'+appname+'/**/*.js', 'webapp/js/'+appname2+'/**/*.js'],
+            exclude: ['**/ignore-*.js', '**/*-min.js', '**/r.js', 'webapp/js/'+appname+'/main-built.js', 'webapp/js/'+appname+'/build.js',
+                                                                  'webapp/js/'+appname2+'/main-built.js', 'webapp/js/'+appname2+'/build.js'],
             directives: {// example directives
                 browser: true,
                 unparam: true,
@@ -65,6 +68,10 @@ module.exports = function (grunt) {
             css: {
                 files: ['webapp/**/*.scss'],
                 tasks: ['clean', 'compass', 'copy']
+            },
+            less: {
+                files: ['webapp/**/*.less'],
+                tasks: ['clean', 'less', 'copy']
             }
         },
         compass: {
@@ -91,15 +98,46 @@ module.exports = function (grunt) {
             compile: {
                 options: {
                     name: "main",
-                    baseUrl: "webapp/js/mercury",
-                    mainConfigFile: "webapp/js/mercury/main.js",
-                    out: "webapp/js/mercury/main-built.js",
+                    baseUrl: "webapp/js/"+appname,
+                    mainConfigFile: "webapp/js/"+appname+"/main.js",
+                    out: "webapp/js/"+appname+"/main-built.js",
+                    optimize: "uglify2",
+                    logLevel: 0,
+                    preserveLicenseComments: false
+                }
+            },
+            compile2: {
+                options: {
+                    name: "main",
+                    baseUrl: "webapp/js/"+appname2,
+                    mainConfigFile: "webapp/js/"+appname2+"/main.js",
+                    out: "webapp/js/"+appname2+"/main-built.js",
                     optimize: "uglify2",
                     logLevel: 0,
                     preserveLicenseComments: false
                 }
             }
+        },
+        less: {
+            compile: {
+                options: {
+                  strictMath: true
+                },
+                files: {
+                  'webapp/css/mercuryangular.css': 'webapp/less/'+appname2+'.less'
+                }
+            },
+            minify: {
+                options: {
+                    cleancss: true,
+                    report: 'min'
+                },
+                files: {
+                    'webapp/css/mercuryangular-min.css': 'webapp/css/'+appname2+'.css'
+                }
+            }
         }
+
 
     });
 
@@ -113,6 +151,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-sloc');
     grunt.loadNpmTasks('grunt-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-less');
     grunt.option('force', true);
 
     // Default task(s).

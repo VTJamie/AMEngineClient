@@ -11,6 +11,7 @@
         "grunt-contrib-clean": "*",
         "grunt-sloc": "*",
         "grunt-contrib-compass": "*",
-        "grunt-requirejs": "*"
+        "grunt-requirejs": "*",
+        "grunt-contrib-less": "*"
     }
 }
